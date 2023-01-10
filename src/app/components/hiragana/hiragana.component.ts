@@ -12,4 +12,7 @@ export class HiraganaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  back(){
+    window.history.back();
+  }
 }

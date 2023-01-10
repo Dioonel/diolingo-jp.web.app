@@ -12,4 +12,7 @@ export class KatakanaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  back(){
+    window.history.back();
+  }
 }

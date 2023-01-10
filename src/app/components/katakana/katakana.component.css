@@ -1,0 +1,31 @@
+.container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(32,33,36,255);
+}
+
+.chart{
+  width: 1240px;
+}
+
+.back{
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  top: 40px;
+  left: 40px;
+  background-color: transparent;
+  border: none;
+}
+
+.back img{
+  width: 100%;
+}
+
+.back img:hover{
+  cursor: pointer;
+  -webkit-filter: brightness(75%);
+}
