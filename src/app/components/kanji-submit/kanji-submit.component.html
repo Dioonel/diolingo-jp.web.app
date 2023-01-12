@@ -1,0 +1,42 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="submitKanji()">
+    <h1>Submit a new kanji</h1>
+      <div class="form-group">
+        <label for="kanji">Kanji</label><br/>
+        <input type="text" formControlName="kanji" class="form-control" id="kanji" placeholder="Enter kanji...">
+      </div>
+      <div class="form-group">
+        <label for="kana">Pronunciation</label><br/>
+        <input type="text" formControlName="pronunciation" class="form-control" id="pronunciation" placeholder="Enter pronunciation...">
+      </div>
+      <div class="form-group">
+        <label for="meaning">Meaning</label><br/>
+        <input type="text" formControlName="meaning" class="form-control" id="meaning" placeholder="Enter meaning...">
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label><br/>
+        <select formControlName="category" class="form-control" id="category">
+          <option value="other" selected>Other</option>
+          <option value="numbers">Numbers</option>
+          <option value="animals">Animals</option>
+          <option value="food">Food</option>
+          <option value="house">House</option>
+          <option value="time">Time</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="info">Notes / clarifications (optional)</label><br/>
+        <input type="text" formControlName="info" class="form-control" id="info" placeholder="Enter notes...">
+      </div>
+      <!-- <div class="form-group">
+        <label for="image">Image</label>
+        <input type="text" formControlName="image" class="form-control" id="image" placeholder="Enter image URL">
+      </div> -->
+      <!-- <div class="form-group">
+        <label for="audio">Audio</label>
+        <input type="text" formControlName="audio" class="form-control" id="audio" placeholder="Enter audio URL">
+      </div> -->
+      <button type="submit" class="submit">Submit</button>
+      <button type="reset" class="reset">Reset</button>
+  </form>
+</div>
