@@ -2,29 +2,38 @@
   width: 100vw;
   min-height: 100vh;
   max-height: 100%;
-  padding: 10px;
+  padding: 55px 10px 10px 10px;
   background-color: rgba(32,33,36,255);
   overflow-x: hidden;
+  text-align: center;
 }
 
 .main-div{
   padding-top: 25px;
 }
 
-a{
-  font-size: 2.1em;
+.wrapper a{
+  font-size: 2.2em;
   color: white;
 }
 
-a:hover{
+.wrapper a:hover{
   color: #00bfff;
 }
 
-h1{
+.main-div{
+  margin-top: 30px;
+}
+
+.main-div h1{
+  margin-top: 25px;
+}
+
+.main-div h1 a{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 2.5em;
+  font-size: 2.4em;
+  text-decoration: none;
   color: #202124;
-  margin-top: 15px;
   border: 2px solid transparent;
   border-radius: 8px;
   padding: 3px 8px;
@@ -32,7 +41,7 @@ h1{
   background-color: white;
 }
 
-h1:hover{
+.main-div h1 a:hover{
   color: white;
   background-color: #ea80fc;
   border: 2px solid #b64fc8;

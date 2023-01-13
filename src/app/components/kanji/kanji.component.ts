@@ -12,4 +12,7 @@ export class KanjiComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  back(){
+    window.history.back();
+  }
 }

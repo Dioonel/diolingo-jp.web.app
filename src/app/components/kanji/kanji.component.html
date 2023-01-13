@@ -1,11 +1,17 @@
+<button class="back" (click)="back()">
+  <img src="assets/images/back-btn.png">
+</button>
+
 <div class="wrapper">
   <a routerLink="submit">Click here to submit a new kanji</a>
   <div class="main-div">
-    <h1>Numbers</h1>
-    <h1>Animals</h1>
-    <h1>Food</h1>
-    <h1>House</h1>
-    <h1>Time</h1>
+    <h1><a routerLink="search">All kanjis</a></h1>
+    <h1><a routerLink="search" [queryParams]="{'category': 'numbers'}">Numbers</a></h1>
+    <h1><a routerLink="search" [queryParams]="{'category': 'animals'}">Animals</a></h1>
+    <h1><a routerLink="search" [queryParams]="{'category': 'food'}">Food</a></h1>
+    <h1><a routerLink="search" [queryParams]="{'category': 'house'}">House</a></h1>
+    <h1><a routerLink="search" [queryParams]="{'category': 'time'}">Time</a></h1>
+    <h1><a routerLink="search" [queryParams]="{'category': 'other'}">Others</a></h1>
   </div>
 </div>
 

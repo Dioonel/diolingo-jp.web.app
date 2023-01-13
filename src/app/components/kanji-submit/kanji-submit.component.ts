@@ -18,8 +18,8 @@ export class KanjiSubmitComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      kanji: ['', Validators.required],
-      pronunciation: ['', Validators.required],
+      kanji: ['', [Validators.required, Validators.pattern(/[\u4e00-\u9faf]/)]],                      // Kanji regex
+      pronunciation: ['', [Validators.required, Validators.pattern(/[\u3040-\u30ff]/)]],              // Hiragana & katakana regex
       meaning: ['', Validators.required],
       category: ['other', Validators.required],
       info: ['']
@@ -29,9 +29,19 @@ export class KanjiSubmitComponent implements OnInit {
   submitKanji() {
     if(this.form.valid){
       console.log(this.form.value);
+      // API call here later
     } else {
-      console.log(this.form.errors);
       console.log('form is not valid');
     }
+  }
+
+  markFormGroupTouched() {
+    Object.keys(this.form.controls).forEach(key => {
+      this.form.controls[key].markAsDirty();
+    });
+  }
+
+  back(){
+    window.history.back();
   }
 }

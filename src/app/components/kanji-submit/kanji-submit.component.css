@@ -19,6 +19,7 @@ h1{
 }
 
 form{
+  min-width: 400px;
   margin-top: 25px;
   background-color: #3c4042;
   padding: 15px 60px;
@@ -33,12 +34,14 @@ label{
 }
 
 .form-group{
-  margin: 20px 0px;
+  /* display: block; */
+  margin: 28px 0px;
 }
 
 .form-control{
   font-size: 1.5em;
-  margin-top: 4px;
+  margin-top: 2px;
+  margin-bottom: 2px;
   background-color: #919295;
   padding: 3px 10px;
   border: 1px solid transparent;
@@ -51,7 +54,15 @@ input::placeholder{
   color: rgb(86, 86, 86);
 }
 
-button{
+.error{
+  font-size: 1.4em;
+  font-family: Arial;
+  color: red;
+  position: absolute;
+  letter-spacing: 0.5px;
+}
+
+.submit, .reset{
   font-size: 1.8em;
   padding: 4px 9px;
   border: 1px solid transparent;

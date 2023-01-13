@@ -9,6 +9,7 @@ import { HiraganaComponent } from './components/hiragana/hiragana.component';
 import { KatakanaComponent } from './components/katakana/katakana.component';
 import { KanjiComponent } from './components/kanji/kanji.component';
 import { KanjiSubmitComponent } from './components/kanji-submit/kanji-submit.component';
+import { KanjiSearchComponent } from './components/kanji-search/kanji-search.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { KanjiSubmitComponent } from './components/kanji-submit/kanji-submit.com
     HiraganaComponent,
     KatakanaComponent,
     KanjiComponent,
-    KanjiSubmitComponent
+    KanjiSubmitComponent,
+    KanjiSearchComponent
   ],
   imports: [
     BrowserModule,

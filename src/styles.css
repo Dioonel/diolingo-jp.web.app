@@ -5,7 +5,28 @@
 }
 html {
   font-size: 62.5%;
+  overflow-x: hidden;
 }
 html, body{
   max-width: 100%;
 }
+
+.back{
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  width: 90px;
+  height: 90px;
+  top: 30px;
+  left: 30px;
+}
+
+.back img{
+  width: 100%;
+}
+
+.back img:hover{
+  cursor: pointer;
+  -webkit-filter: brightness(75%);
+}
+

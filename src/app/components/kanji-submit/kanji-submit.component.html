@@ -1,17 +1,25 @@
+<button class="back" (click)="back()">
+  <img src="assets/images/back-btn.png">
+</button>
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="submitKanji()">
     <h1>Submit a new kanji</h1>
       <div class="form-group">
         <label for="kanji">Kanji</label><br/>
         <input type="text" formControlName="kanji" class="form-control" id="kanji" placeholder="Enter kanji...">
+        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('required', 'kanji')">This field is required *</p>
+        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('pattern', 'kanji')">This field must be a kanji *</p>
       </div>
       <div class="form-group">
-        <label for="kana">Pronunciation</label><br/>
+        <label for="pronunciation">Pronunciation</label><br/>
         <input type="text" formControlName="pronunciation" class="form-control" id="pronunciation" placeholder="Enter pronunciation...">
+        <p class="error" *ngIf="form.controls['pronunciation'].dirty && form.hasError('required', 'pronunciation')">This field is required *</p>
+        <p class="error" *ngIf="form.controls['pronunciation'].dirty && form.hasError('pattern', 'pronunciation')">This field must be in Hiragana/Katakana *</p>
       </div>
       <div class="form-group">
         <label for="meaning">Meaning</label><br/>
         <input type="text" formControlName="meaning" class="form-control" id="meaning" placeholder="Enter meaning...">
+        <p class="error" *ngIf="form.controls['meaning'].dirty && form.hasError('required', 'meaning')">This field is required *</p>
       </div>
       <div class="form-group">
         <label for="category">Category</label><br/>
@@ -36,7 +44,7 @@
         <label for="audio">Audio</label>
         <input type="text" formControlName="audio" class="form-control" id="audio" placeholder="Enter audio URL">
       </div> -->
-      <button type="submit" class="submit">Submit</button>
+      <button type="submit" class="submit" (click)="markFormGroupTouched()">Submit</button>
       <button type="reset" class="reset">Reset</button>
   </form>
 </div>

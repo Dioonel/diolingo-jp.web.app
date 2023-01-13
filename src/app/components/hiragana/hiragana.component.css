@@ -21,22 +21,3 @@
 .chart-ter{
   width: 560px;
 }
-
-.back{
-  position: absolute;
-  width: 90px;
-  height: 90px;
-  top: 40px;
-  left: 40px;
-  background-color: transparent;
-  border: none;
-}
-
-.back img{
-  width: 100%;
-}
-
-.back img:hover{
-  cursor: pointer;
-  -webkit-filter: brightness(75%);
-}
