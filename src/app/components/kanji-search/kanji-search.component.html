@@ -1,1 +1,148 @@
-<p>kanji-search works!</p>
+<button class="back" (click)="back()">
+  <img src="assets/images/back-btn.png">
+</button>
+
+<div class="container">
+  <div class="filter-div">
+    <label>Filter by:</label>
+    <select [(ngModel)]="filterType" (change)="resetPrevious()">
+      <option value="0" selected>...</option>
+      <option value="1">Kanji</option>
+      <option value="2">Pronunciation</option>
+      <option value="3">Meaning</option>
+      <option value="4">Category</option>
+    </select>
+    <form (ngSubmit)="filter()">
+
+      <div class="filter-item" *ngIf="filterType === '1'">
+        <label for="f-kanji">Kanji: </label>
+        <input type="text" placeholder="Ex: 会" name="f-kanji" [formControl]="filterKanji">
+      </div>
+
+      <div class="filter-item" *ngIf="filterType === '2'">
+        <label for="f-pronunciation">Pronunciation: </label>
+        <input type="text" placeholder="Ex: とり" name="f-pronunciation" [formControl]="filterPronunciation">
+      </div>
+
+      <div class="filter-item" *ngIf="filterType === '3'">
+        <label for="f-meaning">Meaning: </label>
+        <input type="text" placeholder="Ex: house" name="f-meaning" [formControl]="filterMeaning">
+      </div>
+
+      <div class="filter-item" *ngIf="filterType === '4'">
+        <label for="f-category">Category: </label>
+        <select name="f-category" [formControl]="filterCategory">
+          <option [value]="null" selected disabled>...</option>
+          <option value="numbers">Numbers</option>
+          <option value="animals">Animals</option>
+          <option value="food">Food</option>
+          <option value="house">House</option>
+          <option value="time">Time</option>
+          <option value="other">Others</option>
+        </select>
+      </div>
+
+      <div class="submit-div" *ngIf="filterType !== '0'">
+        <button type="submit" (click)="markAsTouched()">Filter</button>
+        <span class="error" *ngIf="filterKanji.dirty && filterKanji.hasError('required')">Kanji can't be empty *</span>
+        <span class="error" *ngIf="filterKanji.dirty && filterKanji.hasError('pattern')">Input is not a kanji *</span>
+        <span class="error" *ngIf="filterPronunciation.dirty && filterPronunciation.hasError('required')">Pronunciation can't be empty *</span>
+        <span class="error" *ngIf="filterPronunciation.dirty && filterPronunciation.hasError('pattern')">Pronunciation must be in hiragana/katakana *</span>
+        <span class="error" *ngIf="filterMeaning.dirty && filterMeaning.hasError('required')">Meaning can't be empty *</span>
+        <span class="error" *ngIf="filterCategory.dirty && filterCategory.hasError('required')">Category can't be empty *</span>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="content-div">
+    <div class="kanji-div">
+      <div class="kanji">
+        <span>日</span>
+      </div>
+      <div class="pronunciation">
+        <span>にち</span>
+      </div>
+      <div class="meaning">
+        <label>Meaning: </label><span>Day</span>
+      </div>
+      <div class="category">
+        <label>Category: </label><span>Time</span>
+      </div>
+    </div>
+
+
+    <div class="kanji-div">
+      <div class="kanji">
+        <span>猫</span>
+      </div>
+      <div class="pronunciation">
+        <span>ねこ</span>
+      </div>
+      <div class="meaning">
+        <label>Meaning: </label><span>Cat</span>
+      </div>
+      <div class="category">
+        <label>Category: </label><span>Animals</span>
+      </div>
+    </div>
+
+
+
+    <div class="kanji-div">
+      <div class="kanji">
+        <span>お茶</span>
+      </div>
+      <div class="pronunciation">
+        <span>おちゃ</span>
+      </div>
+      <div class="meaning">
+        <label>Meaning: </label><span>Tea</span>
+      </div>
+      <div class="category">
+        <label>Category: </label><span>Food</span>
+      </div>
+    </div>
+
+
+
+    <div class="kanji-div">
+      <div class="kanji">
+        <span>私</span>
+      </div>
+      <div class="pronunciation">
+        <span>わたし</span>
+      </div>
+      <div class="meaning">
+        <label>Meaning: </label><span>I, me</span>
+      </div>
+      <div class="category">
+        <label>Category: </label><span>Others</span>
+      </div>
+    </div>
+
+  <div class="kanji-div">
+    <div class="kanji">
+      <span>年</span>
+    </div>
+    <div class="pronunciation">
+      <span>ねん</span>
+    </div>
+    <div class="meaning">
+      <label>Meaning: </label><span>Year</span>
+    </div>
+    <div class="category">
+      <label>Category: </label><span>Time</span>
+    </div>
+  </div>
+
+</div>
+  <nav class="nav">
+    <ul class="pagination">
+      <li *ngIf="isBack" class="page-item"><a class="page-link" (click)="backO()">Previous</a></li>
+      <li class="page-item active"><a class="page-link">Current</a></li>
+      <li *ngIf="isNext" class="page-item"><a class="page-link" (click)="next()">Next</a></li>
+    </ul>
+    <span> 5 results. </span>
+  </nav>
+</div>

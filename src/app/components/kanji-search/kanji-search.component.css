@@ -1,0 +1,159 @@
+.container{
+  width: 100vw;
+  min-height: 100vh;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  background-color: rgba(32,33,36,255);
+  overflow-x: hidden;
+}
+
+.filter-div{
+  margin-top: 50px;
+  width: 300px;
+}
+
+.filter-div label{
+  font-size: 1.8em;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-right: 6px;
+}
+
+.filter-div input, .filter-div select{
+  font-size: 1.8em;
+  color: white;
+  background-color: #3c4042;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 3px 8px;
+  width: min-content;
+  margin-right: 10px;
+}
+
+.filter-div .filter-item{
+  margin: 10px 0px;
+}
+
+.filter-div .filter-item input{
+  width: 150px;
+}
+
+.submit-div{
+  margin-top: 20px;
+}
+
+.submit-div button{
+  font-size: 1.8em;
+  color: white;
+  background-color: #3c4042;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 3px 8px;
+  width: min-content;
+  margin-right: 10px;
+}
+
+.submit-div button:hover{
+  cursor: pointer;
+  background-color: #ea80fc;
+  border: 2px solid #b64fc8;
+}
+
+.submit-div .error{
+  color: red;
+  font-size: 1.35em;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0.4px;
+  position: absolute;
+  margin-top: 8px;
+}
+
+.content-div{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  width: 69%;
+  margin-top: 50px;
+  border: 1px solid red;
+  padding: 10px;
+  gap: 20px;
+}
+
+.content-div .kanji-div{
+  border: 1px solid yellow;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+  width: 100%;
+  height: 300px;
+  background-color: #3c4042;
+  border-radius: 15px;
+}
+
+.kanji-div .kanji{
+  padding-top: 10px;
+  text-align: center;
+  font-size: 5.5em;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 10px;
+}
+
+.kanji-div .pronunciation, .kanji-div .meaning, .kanji-div .category{
+  text-align: center;
+  font-size: 1.8em;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 10px;
+}
+
+.kanji-div label{
+  color: rgb(169, 169, 169);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.37rem;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #3167eb;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+.page-link:hover {
+  z-index: 2;
+  color: #1244bd;
+  text-decoration: none;
+  background-color: #e4e4e4;
+  border-color: #dee2e6;
+}
+.page-link:focus {
+  z-index: 2;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(49, 103, 235, 0.25);
+}
+
+.nav{
+  display: block;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.nav span{
+  font-size: 1.2em;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
