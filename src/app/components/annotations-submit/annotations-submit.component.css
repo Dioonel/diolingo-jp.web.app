@@ -93,3 +93,12 @@ input::placeholder{
   cursor: pointer;
 }
 
+.form-group .file-input{
+  color: #989898;
+}
+
+.form-group span{
+  font-size: 1.4em;
+  font-family: Arial;
+  color: #989898;
+}

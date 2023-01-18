@@ -7,6 +7,8 @@ import { KatakanaComponent } from './components/katakana/katakana.component';
 import { KanjiComponent } from './components/kanji/kanji.component';
 import { KanjiSubmitComponent } from './components/kanji-submit/kanji-submit.component';
 import { KanjiSearchComponent } from './components/kanji-search/kanji-search.component';
+import { AnnotationsComponent } from './components/annotations/annotations.component';
+import { AnnotationsSubmitComponent } from './components/annotations-submit/annotations-submit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'kanji', component: KanjiComponent },
   { path: 'kanji/submit', component: KanjiSubmitComponent },
   { path: 'kanji/search', component: KanjiSearchComponent },
+  { path: 'annotations', component: AnnotationsComponent },
+  { path: 'annotations/submit', component: AnnotationsSubmitComponent },
   // { path: 'login', component: LoginComponent }
 ];
 

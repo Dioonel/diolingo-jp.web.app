@@ -1,0 +1,26 @@
+<button class="back" (click)="back()">
+  <img src="assets/images/back-btn.png">
+</button>
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="submitAnnotation()">
+    <h1>Submit a new annotation</h1>
+      <div class="form-group">
+        <label for="annotation">Annotation</label><br/>
+        <span>The annotation must be an image file *</span><br/><br/>
+        <input type="file" accept="image/*" formControlName="annotation" class="file-input" id="annotation">
+        <p class="error" *ngIf="form.controls['annotation'].dirty && form.hasError('required', 'annotation')">You didn't submit any file *</p>
+        <p class="error" *ngIf="form.controls['annotation'].dirty && form.hasError('pattern', 'annotation')">The file must be an image *</p>
+      </div>
+      <div class="form-group">
+        <label for="group">Group</label><br/>
+        <select formControlName="group" class="form-control" id="group">
+          <option value="misc" selected>Misc</option>
+          <option value="sentence">Sentences</option>
+          <option value="word">Words</option>
+          <option value="kanji">Kanji</option>
+        </select>
+      </div>
+      <button type="submit" class="submit" (click)="markFormGroupTouched()">Submit</button>
+      <button type="reset" class="reset">Reset</button>
+  </form>
+</div>
