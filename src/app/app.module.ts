@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { KanjiSubmitComponent } from './components/kanji-submit/kanji-submit.com
 import { KanjiSearchComponent } from './components/kanji-search/kanji-search.component';
 import { AnnotationsComponent } from './components/annotations/annotations.component';
 import { AnnotationsSubmitComponent } from './components/annotations-submit/annotations-submit.component';
+import { LoginComponent } from './components/login/login.component';
+import { MyInterceptor } from './interceptors/interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,15 +27,19 @@ import { AnnotationsSubmitComponent } from './components/annotations-submit/anno
     KanjiSubmitComponent,
     KanjiSearchComponent,
     AnnotationsComponent,
-    AnnotationsSubmitComponent
+    AnnotationsSubmitComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
