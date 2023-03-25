@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs';
 
 import { LoginUser } from './../models/user';
+import { Kanji, KanjiCreateDTO } from '../models/kanji';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,9 @@ export class DataService {
         return null;
       }
     }));
+  }
+
+  createKanji(kanji: KanjiCreateDTO) {
+    return this.http.post<Kanji>(`${this.url}/kanji`, kanji);
   }
 }
