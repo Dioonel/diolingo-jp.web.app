@@ -16,6 +16,7 @@ import { AnnotationsComponent } from './components/annotations/annotations.compo
 import { AnnotationsSubmitComponent } from './components/annotations-submit/annotations-submit.component';
 import { LoginComponent } from './components/login/login.component';
 import { MyInterceptor } from './interceptors/interceptor.interceptor';
+import { WordSubmitComponent } from './components/word-submit/word-submit.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MyInterceptor } from './interceptors/interceptor.interceptor';
     KanjiSearchComponent,
     AnnotationsComponent,
     AnnotationsSubmitComponent,
-    LoginComponent
+    LoginComponent,
+    WordSubmitComponent
   ],
   imports: [
     BrowserModule,

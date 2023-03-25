@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { DataService } from './../../../app/services/data.service';
 
 @Component({
-  selector: 'app-kanji-submit',
-  templateUrl: './kanji-submit.component.html',
-  styleUrls: ['./kanji-submit.component.css']
+  selector: 'app-word-submit',
+  templateUrl: './word-submit.component.html',
+  styleUrls: ['./word-submit.component.css']
 })
-export class KanjiSubmitComponent implements OnInit {
+export class WordSubmitComponent implements OnInit {
+
   form!: FormGroup;
   status: 'init' | 'loading' | 'success' | 'error' = 'init';
   errorInfo: string = '';
@@ -20,25 +21,25 @@ export class KanjiSubmitComponent implements OnInit {
     this.buildForm();
     // update DOM changes
     setTimeout(() => {
-      this.form.controls['kanji'].markAsTouched();
+      this.form.controls['word'].markAsTouched();
     }, 0);
   }
 
   private buildForm() {
     this.form = this.fb.group({
-      kanji: ['', [Validators.required, Validators.maxLength(1), Validators.pattern(/[\u4e00-\u9faf]/)]],           // Kanji regex
+      word: ['', [Validators.required, Validators.maxLength(64), Validators.pattern(/[\ぁ-んァ-ン一-龠]/)]],
       meaning: this.fb.array([this.fb.control('', [Validators.required, Validators.maxLength(64)])]),
-      pronunciation: this.fb.array([this.fb.control('', [Validators.required, Validators.maxLength(64), Validators.pattern(/[\u3040-\u30ff]/)])]),
+      pronunciation: this.fb.array([this.fb.control('', [Validators.required, Validators.maxLength(64), Validators.pattern(/[\ぁ-んァ-ン]/)])]),
       notes: []
       //category: ['other', Validators.required],
     });
   }
 
-  submitKanji() {
+  submitWord() {
     this.status = 'loading';
     if(this.form.valid){
       console.log(this.form.value);
-      this.dataService.createKanji(this.form.value).subscribe({
+      this.dataService.createWord(this.form.value).subscribe({
         next: (data) => {
           console.log(data);
           this.resetForm();
@@ -66,7 +67,7 @@ export class KanjiSubmitComponent implements OnInit {
 
   addArrayEl(array: FormArray, flag: boolean = false) {
     if(flag){
-      array.push(this.fb.control('', [Validators.required, Validators.maxLength(64), Validators.pattern(/[\ぁ-んァ-ン]/)]));
+      array.push(this.fb.control('', [Validators.required, Validators.maxLength(64), Validators.pattern(/[\u3040-\u30ff]/)]));
     } else {
       array.push(this.fb.control('', [Validators.required, Validators.maxLength(64)]));
     }
@@ -99,4 +100,5 @@ export class KanjiSubmitComponent implements OnInit {
     this.addArrayEl(this.meaningFormArray);
     this.addArrayEl(this.pronunciationFormArray, true);
   }
+
 }

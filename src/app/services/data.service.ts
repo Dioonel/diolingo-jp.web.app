@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 
 import { LoginUser } from './../models/user';
 import { Kanji, KanjiCreateDTO } from '../models/kanji';
+import { Word, WordCreateDTO } from '../models/word';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,9 @@ export class DataService {
 
   createKanji(kanji: KanjiCreateDTO) {
     return this.http.post<Kanji>(`${this.url}/kanji`, kanji);
+  }
+
+  createWord(word: WordCreateDTO) {
+    return this.http.post<Word>(`${this.url}/words`, word);
   }
 }
