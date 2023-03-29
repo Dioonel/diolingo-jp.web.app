@@ -8,9 +8,9 @@
       <div class="form-group">
         <label for="kanji">Kanji</label><br/>
         <input type="text" formControlName="kanji" class="form-control" id="kanji" placeholder="e.g. 日">
-        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('required', 'kanji')">This field is required *</p>
-        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('pattern', 'kanji')">This field must be a kanji *</p>
-        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('maxlength', 'kanji')">Single kanjis only *</p>
+        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('required', 'kanji')" data-testid="kanji-required-error">This field is required *</p>
+        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('pattern', 'kanji')" data-testid="kanji-pattern-error">This field must be a kanji *</p>
+        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('maxlength', 'kanji')" data-testid="kanji-length-error">Single kanjis only *</p>
       </div>
 
       <div class="form-group">
@@ -18,17 +18,17 @@
         <div formArrayName="meaning">
           <div *ngFor="let meaningControl of meaningFormArray.controls; let i = index;">
             <div class="input-btn-div">
-              <input type="text" class="form-control" [formControlName]="i" placeholder="e.g. Day">
-              <button type="button" class="btn btn-remove" (click)="removeArrayEl(meaningFormArray, i)" [disabled]="meaningFormArray.controls.length <= 1">
+              <input type="text" class="form-control" [formControlName]="i" [id]="'meaning' + i" placeholder="e.g. Day">
+              <button type="button" class="btn btn-remove" [id]="'meaning-remove' + i" (click)="removeArrayEl(meaningFormArray, i)" [disabled]="meaningFormArray.controls.length <= 1">
                 X
               </button>
             </div>
             <div *ngIf="meaningControl.invalid && meaningControl.dirty">
-              <p class="error" *ngIf="meaningControl.errors?.['required']">Meaning is required *</p>
-              <p class="error" *ngIf="meaningControl.errors?.['maxlength']">Meaning is too long *</p>
+              <p class="error" [id]="'meaning-required-error' + i" *ngIf="meaningControl.errors?.['required']">Meaning is required *</p>
+              <p class="error" [id]="'meaning-length-error' + i" *ngIf="meaningControl.errors?.['maxlength']">Meaning is too long *</p>
             </div>
           </div>
-          <button type="button" class="btn btn-add" (click)="addArrayEl(meaningFormArray)">
+          <button type="button" class="btn btn-add" data-testid="meaning-add" (click)="addArrayEl(meaningFormArray)">
             Add
           </button>
         </div>
@@ -39,34 +39,22 @@
         <div formArrayName="pronunciation">
           <div *ngFor="let pronunciationControl of pronunciationFormArray.controls; let i = index;">
             <div class="input-btn-div">
-              <input type="text" class="form-control" [formControlName]="i" placeholder="e.g. にち">
-              <button type="button" class="btn btn-remove" (click)="removeArrayEl(pronunciationFormArray, i)" [disabled]="pronunciationFormArray.controls.length <= 1">
+              <input type="text" class="form-control" [formControlName]="i" [id]="'pronunciation' + i" placeholder="e.g. にち">
+              <button type="button" class="btn btn-remove" [id]="'pronunciation-remove' + i" (click)="removeArrayEl(pronunciationFormArray, i)" [disabled]="pronunciationFormArray.controls.length <= 1">
               X
               </button>
             </div>
             <div *ngIf="pronunciationControl.invalid && pronunciationControl.dirty">
-              <p class="error" *ngIf="pronunciationControl.errors?.['required']">Pronunciation is required *</p>
-              <p class="error" *ngIf="pronunciationControl.errors?.['maxlength']">Pronunciation is too long *</p>
-              <p class="error" *ngIf="pronunciationControl.errors?.['pattern']">Must be in hiragana / katakana *</p>
+              <p class="error" [id]="'pronunciation-required-error' + i" *ngIf="pronunciationControl.errors?.['required']">Pronunciation is required *</p>
+              <p class="error" [id]="'pronunciation-length-error' + i" *ngIf="pronunciationControl.errors?.['maxlength']">Pronunciation is too long *</p>
+              <p class="error" [id]="'pronunciation-pattern-error' + i" *ngIf="pronunciationControl.errors?.['pattern']">Must be in hiragana / katakana *</p>
             </div>
           </div>
-          <button type="button" class="btn btn-add" (click)="addArrayEl(pronunciationFormArray, true)">
+          <button type="button" class="btn btn-add" data-testid="pronunciation-add" (click)="addArrayEl(pronunciationFormArray, true)">
             Add
           </button>
         </div>
       </div>
-
-      <!-- <div class="form-group">
-        <label for="category">Category</label><br/>
-        <select formControlName="category" class="form-control" id="category">
-          <option value="other" selected>Other</option>
-          <option value="numbers">Numbers</option>
-          <option value="animals">Animals</option>
-          <option value="food">Food</option>
-          <option value="house">House</option>
-          <option value="time">Time</option>
-        </select>
-      </div> -->
 
       <div class="form-group">
         <label for="notes">Notes / extra data (optional)</label><br/>
