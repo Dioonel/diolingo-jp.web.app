@@ -8,9 +8,9 @@
       <div class="form-group">
         <label for="word">Word</label><br/>
         <input type="text" formControlName="word" class="form-control" id="word" placeholder="e.g. お疲れ">
-        <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('required', 'word')" data-testid="word-required-error">This field is required *</p>
-        <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('pattern', 'word')" data-testid="word-pattern-error">This field must be in japanese *</p>
-        <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('maxlength', 'word')" data-testid="word-length-error">Word is too long *</p>
+        <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('required', 'word')" id="word-required-error">This field is required *</p>
+        <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('pattern', 'word')" id="word-pattern-error">This field must be in japanese *</p>
+        <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('maxlength', 'word')" id="word-length-error">Word is too long *</p>
       </div>
 
       <div class="form-group">
@@ -28,7 +28,7 @@
               <p class="error" [id]="'meaning-length-error' + i" *ngIf="meaningControl.errors?.['maxlength']">Meaning is too long *</p>
             </div>
           </div>
-          <button type="button" class="btn btn-add" data-testid="meaning-add" (click)="addArrayEl(meaningFormArray)">
+          <button type="button" class="btn btn-add" id="meaning-add" (click)="addArrayEl(meaningFormArray)">
             Add
           </button>
         </div>
@@ -50,7 +50,7 @@
               <p class="error" [id]="'pronunciation-pattern-error' + i" *ngIf="pronunciationControl.errors?.['pattern']">Must be in hiragana / katakana *</p>
             </div>
           </div>
-          <button type="button" class="btn btn-add" data-testid="pronunciation-add" (click)="addArrayEl(pronunciationFormArray, true)">
+          <button type="button" class="btn btn-add" id="pronunciation-add" (click)="addArrayEl(pronunciationFormArray, true)">
             Add
           </button>
         </div>
@@ -62,7 +62,7 @@
       </div>
 
       <button type="submit" class="submit" (click)="markFormGroupTouched()">Submit</button>
-      <button type="reset" (click)="resetForm(); status = 'init'" class="reset">Reset</button>
+      <button type="reset" class="reset" (click)="resetForm(); status = 'init'">Reset</button>
   </form>
   <br/>
   <p class="success" *ngIf="status === 'success'">Word submitted!</p>

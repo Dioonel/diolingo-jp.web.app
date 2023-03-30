@@ -36,7 +36,7 @@ export class KanjiSubmitComponent implements OnInit {
 
   submitKanji() {
     this.status = 'loading';
-    if(this.form.valid){
+    if(this.form.valid && this.validateArrayLength(this.meaningFormArray) && this.validateArrayLength(this.pronunciationFormArray)){
       console.log(this.form.value);
       this.dataService.createKanji(this.form.value).subscribe({
         next: (data) => {
@@ -51,8 +51,8 @@ export class KanjiSubmitComponent implements OnInit {
         }
       })
     } else {
-      console.log('form is not valid');
       this.status = 'error';
+      this.errorInfo = 'Form is not valid';
     }
   }
 
@@ -74,6 +74,10 @@ export class KanjiSubmitComponent implements OnInit {
 
   removeArrayEl(array: FormArray, i: number) {
     array.removeAt(i);
+  }
+
+  validateArrayLength(array: FormArray) {
+    return array.controls.length > 0;
   }
 
   markFormGroupTouched() {

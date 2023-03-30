@@ -37,11 +37,9 @@ export class WordSubmitComponent implements OnInit {
 
   submitWord() {
     this.status = 'loading';
-    if(this.form.valid){
-      console.log(this.form.value);
+    if(this.form.valid && this.validateArrayLength(this.meaningFormArray) && this.validateArrayLength(this.pronunciationFormArray)){
       this.dataService.createWord(this.form.value).subscribe({
         next: (data) => {
-          console.log(data);
           this.resetForm();
           this.status = 'success';
         },
@@ -52,8 +50,8 @@ export class WordSubmitComponent implements OnInit {
         }
       })
     } else {
-      console.log('form is not valid');
       this.status = 'error';
+      this.errorInfo = 'Form is not valid';
     }
   }
 
@@ -75,6 +73,10 @@ export class WordSubmitComponent implements OnInit {
 
   removeArrayEl(array: FormArray, i: number) {
     array.removeAt(i);
+  }
+
+  validateArrayLength(array: FormArray) {
+    return array.controls.length > 0;
   }
 
   markFormGroupTouched() {

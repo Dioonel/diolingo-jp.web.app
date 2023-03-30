@@ -8,9 +8,9 @@
       <div class="form-group">
         <label for="kanji">Kanji</label><br/>
         <input type="text" formControlName="kanji" class="form-control" id="kanji" placeholder="e.g. 日">
-        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('required', 'kanji')" data-testid="kanji-required-error">This field is required *</p>
-        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('pattern', 'kanji')" data-testid="kanji-pattern-error">This field must be a kanji *</p>
-        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('maxlength', 'kanji')" data-testid="kanji-length-error">Single kanjis only *</p>
+        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('required', 'kanji')" id="kanji-required-error">This field is required *</p>
+        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('pattern', 'kanji')"id="kanji-pattern-error">This field must be a kanji *</p>
+        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('maxlength', 'kanji')" id="kanji-length-error">Single kanjis only *</p>
       </div>
 
       <div class="form-group">
@@ -28,7 +28,7 @@
               <p class="error" [id]="'meaning-length-error' + i" *ngIf="meaningControl.errors?.['maxlength']">Meaning is too long *</p>
             </div>
           </div>
-          <button type="button" class="btn btn-add" data-testid="meaning-add" (click)="addArrayEl(meaningFormArray)">
+          <button type="button" class="btn btn-add" id="meaning-add" (click)="addArrayEl(meaningFormArray)">
             Add
           </button>
         </div>
@@ -50,7 +50,7 @@
               <p class="error" [id]="'pronunciation-pattern-error' + i" *ngIf="pronunciationControl.errors?.['pattern']">Must be in hiragana / katakana *</p>
             </div>
           </div>
-          <button type="button" class="btn btn-add" data-testid="pronunciation-add" (click)="addArrayEl(pronunciationFormArray, true)">
+          <button type="button" class="btn btn-add" id="pronunciation-add" (click)="addArrayEl(pronunciationFormArray, true)">
             Add
           </button>
         </div>

@@ -1,20 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { WordSubmitComponent } from './word-submit.component';
 import { DataService } from './../../../app/services/data.service';
-import { query, getText, setInputValue, clickElement } from './../../../testing/helpers';
+import { query, getText, setInputValue, clickElement, mockObservable } from './../../../testing/helpers';
 
 fdescribe('WordSubmitComponent', () => {
   let component: WordSubmitComponent;
   let fixture: ComponentFixture<WordSubmitComponent>;
   let de: DebugElement;
+  let service: jasmine.SpyObj<DataService>;                                           // spy step 1
 
   beforeEach(async () => {
+    const spy = jasmine.createSpyObj('DataService', ['createWord']);                  // spy step 2
+
     await TestBed.configureTestingModule({
       declarations: [WordSubmitComponent],
       imports: [
@@ -22,7 +24,9 @@ fdescribe('WordSubmitComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
       ],
-      providers: [DataService],
+      providers: [
+        { provide: DataService, useValue: spy },                                      // spy step 3
+      ],
     })
     .compileComponents();
   });
@@ -31,6 +35,7 @@ fdescribe('WordSubmitComponent', () => {
     fixture = TestBed.createComponent(WordSubmitComponent);
     component = fixture.componentInstance;
     de = fixture.debugElement;
+    service = TestBed.inject(DataService) as jasmine.SpyObj<DataService>;             // spy step 4
     fixture.detectChanges();
   });
 
@@ -41,8 +46,8 @@ fdescribe('WordSubmitComponent', () => {
   describe('initial form state', () => {
 
     it('should have an empty "word" input', () => {
-      const wordInput = de.query(By.css('#word')).nativeElement;
-      expect(wordInput.value).toEqual('');
+      const wordInput = query(fixture, '#word');
+      expect(wordInput.nativeElement.value).toEqual('');
     });
 
     it('should have a "meaning" array', () => {
@@ -54,8 +59,8 @@ fdescribe('WordSubmitComponent', () => {
     });
 
     it('should have an empty "notes" input', () => {
-      const notesInput = de.query(By.css('#notes')).nativeElement;
-      expect(notesInput.value).toEqual('');
+      const notesInput = query(fixture, '#notes');
+      expect(notesInput.nativeElement.value).toEqual('');
     });
 
   });
@@ -67,26 +72,28 @@ fdescribe('WordSubmitComponent', () => {
 
       describe('word', () => {
 
+        let wordInput: AbstractControl;
+
+        beforeEach(() => {
+          wordInput = component.form.controls?.['word'];
+        });
+
         it('should be invalid if "word" input is empty', () => {
-          const wordInput = component.form.controls?.['word'];
           wordInput.setValue('');
-          expect(wordInput.errors?.['required']).toBeTruthy();
+          expect(wordInput.hasError('required')).toBeTruthy();
         });
 
         it('should be invalid if "word" input is longer than 64 charactes', () => {
-          const wordInput = component.form.controls?.['word'];
           wordInput.setValue('日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語');
-          expect(wordInput.errors?.['maxlength']).toBeTruthy();
+          expect(wordInput.hasError('maxlength')).toBeTruthy();
         });
 
         it('should be invalid if "word" input is not a in japanese', () => {
-          const wordInput = component.form.controls?.['word'];
           wordInput.setValue('Hello');
-          expect(wordInput.errors?.['pattern']).toBeTruthy();
+          expect(wordInput.hasError('pattern')).toBeTruthy();
         });
 
         it('should be valid', () => {
-          const wordInput = component.form.controls?.['word'];
           wordInput.setValue('日本語');
           expect(wordInput.valid).toBeTruthy();
         });
@@ -95,29 +102,31 @@ fdescribe('WordSubmitComponent', () => {
 
       describe('meaning', () => {
 
+        let meaningInput0: AbstractControl;
+
+        beforeEach(() => {
+          meaningInput0 = component.meaningFormArray.controls[0];
+        });
+
         it('should be invalid if "meaning" array has any empty values', () => {
-          const meaningInput = component.meaningFormArray.controls[0];
-          meaningInput.setValue('');
-          expect(meaningInput.errors?.['required']).toBeTruthy();
+          meaningInput0.setValue('');
+          expect(meaningInput0.hasError('required')).toBeTruthy();
         });
 
         it('should be invalid if "meaning" array has any values longer than 64 characters', () => {
-          const meaningInput = component.meaningFormArray.controls[0];
-          meaningInput.setValue('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis orci non tellus maximus, in rutrum velit hendrerit.');
-          expect(meaningInput.errors?.['maxlength']).toBeTruthy();
+          meaningInput0.setValue('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis orci non tellus maximus, in rutrum velit hendrerit.');
+          expect(meaningInput0.hasError('maxlength')).toBeTruthy();
         });
 
         it('should be valid if "meaning" array has a valid meaning', () => {
-          const meaningInput = component.meaningFormArray.controls[0];
-          meaningInput.setValue('park');
-          expect(meaningInput.valid).toBeTruthy();
+          meaningInput0.setValue('park');
+          expect(meaningInput0.valid).toBeTruthy();
           expect(component.meaningFormArray.valid).toBeTruthy();
         });
 
         it('should be valid if "meaning" array has multiple valid meanings', () => {
           component.addArrayEl(component.meaningFormArray);
           component.addArrayEl(component.meaningFormArray);
-          const meaningInput0 = component.meaningFormArray.controls[0];
           const meaningInput1 = component.meaningFormArray.controls[1];
           const meaningInput2 = component.meaningFormArray.controls[2];
           meaningInput0.setValue('park');
@@ -132,7 +141,6 @@ fdescribe('WordSubmitComponent', () => {
         it('should be invalid if "meaning" array has at least one invalid meaning', () => {
           component.addArrayEl(component.meaningFormArray);
           component.addArrayEl(component.meaningFormArray);
-          const meaningInput0 = component.meaningFormArray.controls[0];
           const meaningInput1 = component.meaningFormArray.controls[1];
           const meaningInput2 = component.meaningFormArray.controls[2];
           meaningInput0.setValue('park');
@@ -149,7 +157,7 @@ fdescribe('WordSubmitComponent', () => {
           component.addArrayEl(component.meaningFormArray);
           component.addArrayEl(component.meaningFormArray);
           component.addArrayEl(component.meaningFormArray);
-          const meaningInput0 = component.meaningFormArray.controls[0];
+          const meaningInput0 = component.meaningFormArray.controls[0];         // define again because the array has changed
           const meaningInput1 = component.meaningFormArray.controls[1];
           const meaningInput2 = component.meaningFormArray.controls[2];
           meaningInput0.setValue('にち');
@@ -182,35 +190,36 @@ fdescribe('WordSubmitComponent', () => {
 
       describe('pronunciation', () => {
 
+        let pronunciationInput0: AbstractControl;
+
+        beforeEach(() => {
+          pronunciationInput0 = component.pronunciationFormArray.controls[0];
+        });
+
         it('should be invalid if "pronunciation" array has any empty values', () => {
-          const pronunciationInput = component.pronunciationFormArray.controls[0];
-          pronunciationInput.setValue('');
-          expect(pronunciationInput.errors?.['required']).toBeTruthy();
+          pronunciationInput0.setValue('');
+          expect(pronunciationInput0.hasError('required')).toBeTruthy();
         });
 
         it('should be invalid if "pronunciation" array has any values with non japanese characters', () => {
-          const pronunciationInput = component.pronunciationFormArray.controls[0];
-          pronunciationInput.setValue('ABC');
-          expect(pronunciationInput.errors?.['pattern']).toBeTruthy();
+          pronunciationInput0.setValue('ABC');
+          expect(pronunciationInput0.hasError('pattern')).toBeTruthy();
         });
 
         it('should be invalid if "pronunciation" array has any values longer than 64 characters', () => {
-          const pronunciationInput = component.pronunciationFormArray.controls[0];
-          pronunciationInput.setValue('亜英欧亜叡王積んンんンンンハハハハハはああああああああああああいいいいおいおいおいおいおいおいおいおいおいおいおいおいおいおいおいおいおいいおいおえいおえいおえいおあいえおあいおえいあおえいおあいえおいうあえおいうあおえいうあいおえうあおいえうあおいうえおい');
-          expect(pronunciationInput.errors?.['maxlength']).toBeTruthy();
+          pronunciationInput0.setValue('亜英欧亜叡王積んンんンンンハハハハハはああああああああああああいいいいおいおいおいおいおいおいおいおいおいおいおいおいおいおいおいおいおいいおいおえいおえいおえいおあいえおあいおえいあおえいおあいえおいうあえおいうあおえいうあいおえうあおいえうあおいうえおい');
+          expect(pronunciationInput0.hasError('maxlength')).toBeTruthy();
         });
 
         it('should be valid if "pronunciation" array has a valid meaning', () => {
-          const pronunciationInput = component.pronunciationFormArray.controls[0];
-          pronunciationInput.setValue('にち');
-          expect(pronunciationInput.valid).toBeTruthy();
+          pronunciationInput0.setValue('にち');
+          expect(pronunciationInput0.valid).toBeTruthy();
           expect(component.pronunciationFormArray.valid).toBeTruthy();
         });
 
         it('should be valid if "pronunciation" array has multiple valid pronunciations', () => {
           component.addArrayEl(component.pronunciationFormArray, true);
           component.addArrayEl(component.pronunciationFormArray, true);
-          const pronunciationInput0 = component.pronunciationFormArray.controls[0];
           const pronunciationInput1 = component.pronunciationFormArray.controls[1];
           const pronunciationInput2 = component.pronunciationFormArray.controls[2];
           pronunciationInput0.setValue('にち');
@@ -225,7 +234,6 @@ fdescribe('WordSubmitComponent', () => {
         it('should be invalid if "pronunciation" array has at least one invalid pronunciation', () => {
           component.addArrayEl(component.pronunciationFormArray, true);
           component.addArrayEl(component.pronunciationFormArray, true);
-          const pronunciationInput0 = component.pronunciationFormArray.controls[0];
           const pronunciationInput1 = component.pronunciationFormArray.controls[1];
           const pronunciationInput2 = component.pronunciationFormArray.controls[2];
           pronunciationInput0.setValue('にち');
@@ -275,14 +283,18 @@ fdescribe('WordSubmitComponent', () => {
 
       describe('notes', () => {
 
+        let notesInput: AbstractControl;
+
+        beforeEach(() => {
+          notesInput = component.form.controls?.['notes'];
+        });
+
         it('should be valid if notes is empty', () => {
-          const notesInput = component.form.controls?.['notes'];
           notesInput.setValue('');
           expect(notesInput.valid).toBeTruthy();
         });
 
         it('should be valid if notes is filled', () => {
-          const notesInput = component.form.controls?.['notes'];
           notesInput.setValue('Example: 私の名前はゆいです。(My name is Yui)');
           expect(notesInput.valid).toBeTruthy();
         });
@@ -291,70 +303,68 @@ fdescribe('WordSubmitComponent', () => {
 
       describe('full form', () => {
 
+        let wordInput: AbstractControl;
+        let meaningInput0: AbstractControl;
+        let pronunciationInput0: AbstractControl;
+        let notesInput: AbstractControl;
+
+        beforeEach(() => {
+          wordInput = component.form.controls?.['word'];
+          meaningInput0 = component.meaningFormArray.controls[0];
+          pronunciationInput0 = component.pronunciationFormArray.controls[0];
+          notesInput = component.form.controls?.['notes'];
+        });
+
         it('should be invalid if form is empty', () => {
           expect(component.form.invalid).toBeTruthy();
         });
 
         it('should be invalid CASE 1', () => {
-          const wordInput = component.form.controls?.['word'];
-          const meaningInput = component.meaningFormArray.controls[0];
           component.addArrayEl(component.pronunciationFormArray, true);
-          const pronunciationInput0 = component.pronunciationFormArray.controls[0];
           const pronunciationInput1 = component.pronunciationFormArray.controls[1];
           wordInput.setValue('日本語');
-          meaningInput.setValue('day');
+          meaningInput0.setValue('day');
           pronunciationInput0.setValue('にち');
           pronunciationInput1.setValue('hola');
           expect(component.form.invalid).toBeTruthy();
+          expect(pronunciationInput1.invalid).toBeTruthy();
         });
 
         it('should be invalid CASE 2', () => {
-          const wordInput = component.form.controls?.['word'];
-          const meaningInput = component.meaningFormArray.controls[0];
-          const pronunciationInput0 = component.pronunciationFormArray.controls[0];
           wordInput.setValue('お誕生日');
-          meaningInput.setValue('');
+          meaningInput0.setValue('');
           pronunciationInput0.setValue('にち');
           expect(component.form.invalid).toBeTruthy();
+          expect(meaningInput0.invalid).toBeTruthy();
         });
 
         it('should be invalid CASE 3', () => {
-          const wordInput = component.form.controls?.['word'];
-          const meaningInput = component.meaningFormArray.controls[0];
-          const pronunciationInput0 = component.pronunciationFormArray.controls[0];
           wordInput.setValue('How');
-          meaningInput.setValue('Day');
+          meaningInput0.setValue('Day');
           pronunciationInput0.setValue('にち');
           expect(component.form.invalid).toBeTruthy();
+          expect(wordInput.invalid).toBeTruthy();
         });
 
         it('should be valid CASE 1', () => {
-          const wordInput = component.form.controls?.['word'];
-          const meaningInput = component.meaningFormArray.controls[0];
-          const pronunciationInput0 = component.pronunciationFormArray.controls[0];
-          const notesInput = component.form.controls?.['notes'];
           wordInput.setValue('金曜日');
-          meaningInput.setValue('Day');
+          meaningInput0.setValue('Day');
           pronunciationInput0.setValue('にち');
           notesInput.setValue('Test');
           expect(component.form.valid).toBeTruthy();
         });
 
         it('should be valid CASE 2', () => {
-          const wordInput = component.form.controls?.['word'];
           component.addArrayEl(component.meaningFormArray);
           component.addArrayEl(component.meaningFormArray);
-          const meaningInput0 = component.meaningFormArray.controls[0];
           const meaningInput1 = component.meaningFormArray.controls[1];
           const meaningInput2 = component.meaningFormArray.controls[2];
           component.addArrayEl(component.pronunciationFormArray, true);
           component.addArrayEl(component.pronunciationFormArray, true);
           component.addArrayEl(component.pronunciationFormArray, true);
-          const pronunciationInput0 = component.pronunciationFormArray.controls[0];
           const pronunciationInput1 = component.pronunciationFormArray.controls[1];
           const pronunciationInput2 = component.pronunciationFormArray.controls[2];
           const pronunciationInput3 = component.pronunciationFormArray.controls[3];
-          const notesInput = component.form.controls?.['notes'];
           wordInput.setValue('中国人');
           meaningInput0.setValue('Day');
           meaningInput1.setValue('Sun');
@@ -368,12 +378,8 @@ fdescribe('WordSubmitComponent', () => {
         });
 
         it('should be valid CASE 3', () => {
-          const wordInput = component.form.controls?.['word'];
           component.addArrayEl(component.meaningFormArray);
-          const meaningInput0 = component.meaningFormArray.controls[0];
           const meaningInput1 = component.meaningFormArray.controls[1];
-          const pronunciationInput0 = component.pronunciationFormArray.controls[0];
-          const notesInput = component.form.controls?.['notes'];
           wordInput.setValue('うどん');
           meaningInput0.setValue('You');
           meaningInput1.setValue('Mr.');
@@ -393,10 +399,9 @@ fdescribe('WordSubmitComponent', () => {
         it('should be invalid pattern', () => {
           setInputValue(fixture, '#word', 'Sup');
           fixture.detectChanges();
-          const textError = getText(fixture, 'word-pattern-error', true);
+          const textError = getText(fixture, '#word-pattern-error');
 
           expect(component.form.invalid).toBeTruthy();
-          expect(component.form.controls?.['word'].invalid).toBeTruthy();
           expect(component.form.hasError('pattern', 'word')).toBeTruthy();
           expect(textError).toContain('japanese');
         });
@@ -404,10 +409,9 @@ fdescribe('WordSubmitComponent', () => {
         it('should be invalid required', () => {
           setInputValue(fixture, '#word', '');
           fixture.detectChanges();
-          const textError = getText(fixture, 'word-required-error', true);
+          const textError = getText(fixture, '#word-required-error');
 
           expect(component.form.invalid).toBeTruthy();
-          expect(component.form.controls?.['word'].invalid).toBeTruthy();
           expect(component.form.hasError('required', 'word')).toBeTruthy();
           expect(textError).toContain('required');
         });
@@ -415,10 +419,9 @@ fdescribe('WordSubmitComponent', () => {
         it('should be invalid length', () => {
           setInputValue(fixture, '#word', '月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日月曜日');
           fixture.detectChanges();
-          const textError = getText(fixture, 'word-length-error', true);
+          const textError = getText(fixture, '#word-length-error');
 
           expect(component.form.invalid).toBeTruthy();
-          expect(component.form.controls?.['word'].invalid).toBeTruthy();
           expect(component.form.hasError('maxlength', 'word')).toBeTruthy();
           expect(textError).toContain('*');
         });
@@ -439,16 +442,16 @@ fdescribe('WordSubmitComponent', () => {
           const textError = getText(fixture, '#meaning-required-error0');
 
           expect(component.form.invalid).toBeTruthy();
-          expect(component.meaningFormArray.controls[0].invalid).toBeTruthy();
           expect(component.meaningFormArray.controls[0].hasError('required')).toBeTruthy();
+          expect(component.meaningFormArray.invalid).toBeTruthy();
           expect(textError).toContain('required');
         });
 
         it('should be invalid required multiple', () => {
           setInputValue(fixture, '#meaning0', 'Day');
-          clickElement(fixture, 'meaning-add', true);
-          clickElement(fixture, 'meaning-add', true);
-          clickElement(fixture, 'meaning-add', true);
+          clickElement(fixture, '#meaning-add');
+          clickElement(fixture, '#meaning-add');
+          clickElement(fixture, '#meaning-add');
           fixture.detectChanges();
           setInputValue(fixture, '#meaning1', '');
           setInputValue(fixture, '#meaning2', 'Sun');
@@ -458,10 +461,9 @@ fdescribe('WordSubmitComponent', () => {
           const textError3 = getText(fixture, '#meaning-required-error3');
 
           expect(component.form.invalid).toBeTruthy();
-          expect(component.meaningFormArray.controls[1].invalid).toBeTruthy();
+          expect(component.meaningFormArray.invalid).toBeTruthy();
           expect(component.meaningFormArray.controls[1].hasError('required')).toBeTruthy();
           expect(textError1).toContain('required');
-          expect(component.meaningFormArray.controls[3].invalid).toBeTruthy();
           expect(component.meaningFormArray.controls[3].hasError('required')).toBeTruthy();
           expect(textError3).toContain('required');
           expect(component.meaningFormArray.controls[0].valid).toBeTruthy();
@@ -474,25 +476,24 @@ fdescribe('WordSubmitComponent', () => {
           const textError = getText(fixture, '#meaning-length-error0');
 
           expect(component.form.invalid).toBeTruthy();
-          expect(component.meaningFormArray.controls[0].invalid).toBeTruthy();
           expect(component.meaningFormArray.controls[0].hasError('maxlength')).toBeTruthy();
+          expect(component.meaningFormArray.invalid).toBeTruthy();
           expect(textError).toContain('long');
         });
 
         it('should be valid', () => {
           setInputValue(fixture, '#meaning0', 'Day');
-          clickElement(fixture, 'meaning-add', true);
+          clickElement(fixture, '#meaning-add');
           fixture.detectChanges();
           setInputValue(fixture, '#meaning1', 'Sun');
           fixture.detectChanges();
-          expect(component.meaningFormArray.controls[0].valid).toBeTruthy();
-          expect(component.meaningFormArray.controls[1].valid).toBeTruthy();
+
           expect(component.meaningFormArray.valid).toBeTruthy();
         });
 
         it('should test remove btns', () => {
           setInputValue(fixture, '#meaning0', 'Day');
-          clickElement(fixture, 'meaning-add', true);
+          clickElement(fixture, '#meaning-add');
           fixture.detectChanges();
           setInputValue(fixture, '#meaning1', 'Sun');
           fixture.detectChanges();
@@ -515,16 +516,16 @@ fdescribe('WordSubmitComponent', () => {
           const textError = getText(fixture, '#pronunciation-required-error0');
 
           expect(component.form.invalid).toBeTruthy();
-          expect(component.pronunciationFormArray.controls[0].invalid).toBeTruthy();
           expect(component.pronunciationFormArray.controls[0].hasError('required')).toBeTruthy();
+          expect(component.pronunciationFormArray.invalid).toBeTruthy();
           expect(textError).toContain('required');
         });
 
         it('should be invalid required multiple', () => {
           setInputValue(fixture, '#pronunciation0', 'にち');
-          clickElement(fixture, 'pronunciation-add', true);
-          clickElement(fixture, 'pronunciation-add', true);
-          clickElement(fixture, 'pronunciation-add', true);
+          clickElement(fixture, '#pronunciation-add');
+          clickElement(fixture, '#pronunciation-add');
+          clickElement(fixture, '#pronunciation-add');
           fixture.detectChanges();
           setInputValue(fixture, '#pronunciation1', '');
           setInputValue(fixture, '#pronunciation2', 'がつ');
@@ -534,10 +535,9 @@ fdescribe('WordSubmitComponent', () => {
           const textError3 = getText(fixture, '#pronunciation-required-error3');
 
           expect(component.form.invalid).toBeTruthy();
-          expect(component.pronunciationFormArray.controls[1].invalid).toBeTruthy();
+          expect(component.pronunciationFormArray.invalid).toBeTruthy();
           expect(component.pronunciationFormArray.controls[1].hasError('required')).toBeTruthy();
           expect(textError1).toContain('required');
-          expect(component.pronunciationFormArray.controls[3].invalid).toBeTruthy();
           expect(component.pronunciationFormArray.controls[3].hasError('required')).toBeTruthy();
           expect(textError3).toContain('required');
           expect(component.pronunciationFormArray.controls[0].valid).toBeTruthy();
@@ -550,8 +550,8 @@ fdescribe('WordSubmitComponent', () => {
           const textError = getText(fixture, '#pronunciation-length-error0');
 
           expect(component.form.invalid).toBeTruthy();
-          expect(component.pronunciationFormArray.controls[0].invalid).toBeTruthy();
           expect(component.pronunciationFormArray.controls[0].hasError('maxlength')).toBeTruthy();
+          expect(component.pronunciationFormArray.invalid).toBeTruthy();
           expect(textError).toContain('long');
         });
 
@@ -561,14 +561,14 @@ fdescribe('WordSubmitComponent', () => {
           const textError = getText(fixture, '#pronunciation-pattern-error0');
 
           expect(component.form.invalid).toBeTruthy();
-          expect(component.pronunciationFormArray.controls[0].invalid).toBeTruthy();
           expect(component.pronunciationFormArray.controls[0].hasError('pattern')).toBeTruthy();
+          expect(component.pronunciationFormArray.invalid).toBeTruthy();
           expect(textError).toContain('hiragana');
         });
 
         it('should be valid', () => {
           setInputValue(fixture, '#pronunciation0', 'にち');
-          clickElement(fixture, 'pronunciation-add', true);
+          clickElement(fixture, '#pronunciation-add');
           fixture.detectChanges();
           setInputValue(fixture, '#pronunciation1', 'がつ');
           fixture.detectChanges();
@@ -580,7 +580,7 @@ fdescribe('WordSubmitComponent', () => {
 
         it('should test remove btns', () => {
           setInputValue(fixture, '#pronunciation0', 'にち');
-          clickElement(fixture, 'pronunciation-add', true);
+          clickElement(fixture, '#pronunciation-add');
           fixture.detectChanges();
           setInputValue(fixture, '#pronunciation1', 'がつ');
           fixture.detectChanges();
@@ -613,22 +613,36 @@ fdescribe('WordSubmitComponent', () => {
 
       });
 
-      describe('full form', () => {
+      describe('full form + submit + spy service', () => {
 
         it('should be valid 1', () => {
           setInputValue(fixture, '#word', '日曜日');
           setInputValue(fixture, '#meaning0', 'Day');
-          clickElement(fixture, 'meaning-add', true);
+          clickElement(fixture, '#meaning-add');
           fixture.detectChanges();
           setInputValue(fixture, '#meaning1', 'Sun');
           setInputValue(fixture, '#pronunciation0', 'にち');
-          clickElement(fixture, 'pronunciation-add', true);
+          clickElement(fixture, '#pronunciation-add');
           fixture.detectChanges();
           setInputValue(fixture, '#pronunciation1', 'がつ');
           setInputValue(fixture, '#notes', 'Hello my notes uwu');
           fixture.detectChanges();
 
           expect(component.form.valid).toBeTruthy();
+
+          service.createWord.and.returnValue(mockObservable({
+            id: 1,
+            word: '日曜日',
+            meaning: ['Day', 'Sun'],
+            pronunciation: ['にち', 'がつ'],
+            notes: 'Hello my notes uwu',
+            created_at: new Date()
+          }));
+
+          clickElement(fixture, '.submit');
+          fixture.detectChanges();
+
+          expect(service.createWord).toHaveBeenCalled();
         });
 
         it('should be valid 2', () => {
@@ -639,6 +653,20 @@ fdescribe('WordSubmitComponent', () => {
           fixture.detectChanges();
 
           expect(component.form.valid).toBeTruthy();
+
+          service.createWord.and.returnValue(mockObservable({
+            id: 2,
+            word: '水曜日',
+            meaning: ['Day'],
+            pronunciation: ['にち'],
+            notes: '',
+            created_at: new Date()
+          }));
+
+          clickElement(fixture, '.submit');
+          fixture.detectChanges();
+
+          expect(service.createWord).toHaveBeenCalled();
         });
 
       });
@@ -648,11 +676,11 @@ fdescribe('WordSubmitComponent', () => {
         it('should reset', () => {
           setInputValue(fixture, '#word', 'てすと');
           setInputValue(fixture, '#meaning0', 'Day');
-          clickElement(fixture, 'meaning-add', true);
+          clickElement(fixture, '#meaning-add');
           fixture.detectChanges();
           setInputValue(fixture, '#meaning1', 'Sun');
           setInputValue(fixture, '#pronunciation0', 'にち');
-          clickElement(fixture, 'pronunciation-add', true);
+          clickElement(fixture, '#pronunciation-add');
           fixture.detectChanges();
           setInputValue(fixture, '#pronunciation1', 'がつ');
           setInputValue(fixture, '#notes', 'Hello my notes uwu');
