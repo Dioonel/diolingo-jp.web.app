@@ -44,7 +44,6 @@ export class WordSubmitComponent implements OnInit {
           this.status = 'success';
         },
         error: (err) => {
-          console.log(err);
           this.status = 'error';
           this.errorInfo = err.error;
         }

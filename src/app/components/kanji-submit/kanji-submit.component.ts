@@ -37,15 +37,12 @@ export class KanjiSubmitComponent implements OnInit {
   submitKanji() {
     this.status = 'loading';
     if(this.form.valid && this.validateArrayLength(this.meaningFormArray) && this.validateArrayLength(this.pronunciationFormArray)){
-      console.log(this.form.value);
       this.dataService.createKanji(this.form.value).subscribe({
         next: (data) => {
-          console.log(data);
           this.resetForm();
           this.status = 'success';
         },
         error: (err) => {
-          console.log(err);
           this.status = 'error';
           this.errorInfo = err.error;
         }

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -6,7 +6,7 @@ import { DebugElement } from '@angular/core';
 
 import { WordSubmitComponent } from './word-submit.component';
 import { DataService } from './../../../app/services/data.service';
-import { query, getText, setInputValue, clickElement, mockObservable } from './../../../testing/helpers';
+import { query, getText, setInputValue, clickElement, mockObservable, asyncError } from './../../../testing/helpers';
 
 fdescribe('WordSubmitComponent', () => {
   let component: WordSubmitComponent;
@@ -668,6 +668,34 @@ fdescribe('WordSubmitComponent', () => {
 
           expect(service.createWord).toHaveBeenCalled();
         });
+
+        it('should be valid but rejected', fakeAsync(() => {
+          setInputValue(fixture, '#word', '日曜日');
+          setInputValue(fixture, '#meaning0', 'Day');
+          setInputValue(fixture, '#pronunciation0', 'にち');
+          setInputValue(fixture, '#notes', '');
+          fixture.detectChanges();
+
+          expect(component.form.valid).toBeTruthy();
+
+          service.createWord.and.returnValue(asyncError({
+            word: '日曜日',
+            meaning: ['Day'],
+            pronunciation: ['にち'],
+            notes: '',
+          }))
+
+          clickElement(fixture, '.submit');
+          fixture.detectChanges();
+
+          expect(component.status).toEqual('loading');
+
+          tick();
+          fixture.detectChanges();
+
+          expect(service.createWord).toHaveBeenCalled();
+          expect(component.status).toEqual('error');
+        }));
 
       });
 
