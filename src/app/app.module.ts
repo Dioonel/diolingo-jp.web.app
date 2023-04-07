@@ -12,11 +12,11 @@ import { KatakanaComponent } from './components/katakana/katakana.component';
 import { KanjiComponent } from './components/kanji/kanji.component';
 import { KanjiSubmitComponent } from './components/kanji-submit/kanji-submit.component';
 import { KanjiSearchComponent } from './components/kanji-search/kanji-search.component';
-import { AnnotationsComponent } from './components/annotations/annotations.component';
-import { AnnotationsSubmitComponent } from './components/annotations-submit/annotations-submit.component';
 import { LoginComponent } from './components/login/login.component';
 import { MyInterceptor } from './interceptors/interceptor.interceptor';
 import { WordSubmitComponent } from './components/word-submit/word-submit.component';
+import { GridComponent } from './components/grid/grid.component';
+import { WordComponent } from './components/word/word.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +27,10 @@ import { WordSubmitComponent } from './components/word-submit/word-submit.compon
     KanjiComponent,
     KanjiSubmitComponent,
     KanjiSearchComponent,
-    AnnotationsComponent,
-    AnnotationsSubmitComponent,
     LoginComponent,
-    WordSubmitComponent
+    WordSubmitComponent,
+    GridComponent,
+    WordComponent,
   ],
   imports: [
     BrowserModule,

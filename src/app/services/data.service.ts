@@ -13,6 +13,10 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
+  awakeHeroku() {
+    this.http.get(this.url);
+  }
+
   login(user: LoginUser) {
     return this.http.post<LoginData>(`${this.url}/auth/login`, user);
   }
@@ -23,5 +27,13 @@ export class DataService {
 
   createWord(word: WordCreateDTO) {
     return this.http.post<Word>(`${this.url}/words`, word);
+  }
+
+  getKanji() {
+    return this.http.get<Kanji[]>(`${this.url}/kanji`);
+  }
+
+  getWords() {
+    return this.http.get<Word[]>(`${this.url}/words`);
   }
 }

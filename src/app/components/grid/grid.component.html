@@ -1,0 +1,8 @@
+<div class="grid-container">
+  <div class="grid-item" *ngFor="let item of items">
+    <div class="value">{{ item?.kanji || item?.word }}</div>
+    <div class="meaning">{{ item.meaning.join(', ') }}</div>
+    <div class="pronunciation">{{ item.pronunciation.join(', ') }}</div>
+    <div class="notes">{{ item.notes }}</div>
+  </div>
+</div>
