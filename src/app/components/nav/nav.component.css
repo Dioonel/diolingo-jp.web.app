@@ -1,0 +1,102 @@
+.nav {
+  font-family: 'Inter';
+  height: 60px;
+  width: 100%;
+  background-color: #3c4042;
+  position: relative;
+}
+
+.nav > .nav-header {
+  display: inline;
+}
+
+/* .nav > .nav-header > .nav-title {
+  display: inline-block;
+  padding: 10px;
+}
+
+.nav > .nav-header > .nav-title > img {
+  height: 40px;
+} */
+
+.nav > .nav-btn {
+  display: none;
+}
+
+.nav > .nav-links {
+  display: inline;
+  float: right;
+  font-size: 1.8em;
+}
+
+.nav > .nav-links > a {
+  display: inline-block;
+  padding: 19px 20px;
+  text-decoration: none;
+  color: #efefef;
+}
+
+.nav > .nav-links > a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.nav > #nav-check {
+  display: none;
+}
+
+@media (max-width:600px) {
+  .nav > .nav-btn {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+  .nav > .nav-btn > label {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    padding: 18px;
+  }
+  .nav > .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 2px solid #eee;
+  }
+  .nav > .nav-links {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: #3c4042;
+    height: 0px;
+    transition: all 0.3s ease-in;
+    overflow-y: hidden;
+    top: 60px;
+    left: 0px;
+    z-index: 999;
+  }
+  .nav > .nav-links > a {
+    display: block;
+    width: 100%;
+  }
+  .nav > #nav-check:not(:checked) ~ .nav-links {
+    height: 0px;
+  }
+  .nav > #nav-check:checked ~ .nav-links {
+    height: calc(100vh - 60px);
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+  }
+  .nav-expanded {
+    z-index: 999;
+    min-height: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+  }
+}

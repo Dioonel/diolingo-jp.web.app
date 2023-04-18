@@ -18,8 +18,4 @@ export class KanjiComponent implements OnInit {
       this.kanji = kanji;
     });
   }
-
-  back(){
-    window.history.back();
-  }
 }

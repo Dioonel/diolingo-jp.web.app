@@ -90,10 +90,6 @@ export class WordSubmitComponent implements OnInit {
     });
   }
 
-  back(){
-    window.history.back();
-  }
-
   resetForm(){
     this.form.reset();
     this.meaningFormArray.clear();

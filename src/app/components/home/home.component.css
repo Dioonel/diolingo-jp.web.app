@@ -4,6 +4,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  max-height: calc(100vh - 60px);
 }
 
 a{

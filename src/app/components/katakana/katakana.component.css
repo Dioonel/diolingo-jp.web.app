@@ -21,3 +21,10 @@
 .chart-ter{
   width: 560px;
 }
+
+@media (max-width: 1240px) {
+  .container{
+    overflow-x: scroll;
+    display: block;
+  }
+}

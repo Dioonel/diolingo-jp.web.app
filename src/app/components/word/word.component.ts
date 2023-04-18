@@ -19,8 +19,4 @@ export class WordComponent implements OnInit {
       this.words = words;
     });
   }
-
-  back(){
-    window.history.back();
-  }
 }

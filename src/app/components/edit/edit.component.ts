@@ -118,10 +118,6 @@ export class EditComponent implements OnInit {
     });
   }
 
-  back(){
-    window.history.back();
-  }
-
   resetForm(){
     this.form.reset();
     this.meaningFormArray.clear();

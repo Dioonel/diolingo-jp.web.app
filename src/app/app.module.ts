@@ -19,6 +19,7 @@ import { WordSubmitComponent } from './components/word-submit/word-submit.compon
 import { GridComponent } from './components/grid/grid.component';
 import { WordComponent } from './components/word/word.component';
 import { EditComponent } from './components/edit/edit.component';
+import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { EditComponent } from './components/edit/edit.component';
     GridComponent,
     WordComponent,
     EditComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,

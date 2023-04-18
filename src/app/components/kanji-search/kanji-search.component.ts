@@ -112,8 +112,4 @@ export class KanjiSearchComponent implements OnInit {
       this.filterCategory.markAsDirty();
     }
   }
-
-  back(){
-    window.history.back();
-  }
 }

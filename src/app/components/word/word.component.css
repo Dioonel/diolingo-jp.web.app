@@ -1,6 +1,6 @@
 .wrapper{
   width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   max-height: 100%;
   padding: 55px 10px 10px 10px;
   background-color: rgba(32,33,36,255);
