@@ -30,3 +30,8 @@ html, body{
   -webkit-filter: brightness(75%);
 }
 
+@media (max-width: 700px) {
+  .back{
+    display: none;
+  }
+}

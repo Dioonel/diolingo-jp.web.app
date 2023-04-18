@@ -1,5 +1,5 @@
 export interface Word {
-  id: any;
+  _id: string;
   word: string;
   meaning: string[];
   pronunciation: string[];

@@ -1,5 +1,5 @@
 export interface Kanji {
-  id: any;
+  _id: string;
   kanji: string;
   meaning: string[];
   pronunciation: string[];

@@ -1,5 +1,6 @@
 <div class="grid-container">
   <div class="grid-item" *ngFor="let item of items">
+    <button class="edit-button" (click)="goToEditPage(item._id)"><fa-icon [icon]="faPencil" size="xl"></fa-icon></button>
     <div class="value">{{ item?.kanji || item?.word }}</div>
     <div class="meaning">{{ item.meaning.join(', ') }}</div>
     <div class="pronunciation">{{ item.pronunciation.join(', ') }}</div>

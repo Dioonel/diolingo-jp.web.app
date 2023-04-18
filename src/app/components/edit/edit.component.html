@@ -1,16 +1,24 @@
 <button class="back" (click)="back()">
   <img src="assets/images/back-btn.png">
 </button>
-<div class="container">
-  <form [formGroup]="form" (ngSubmit)="submitWord()">
-    <h1>Submit a new word</h1>
+<div class="container" *ngIf="form">
+  <form [formGroup]="form" (ngSubmit)="update()">
+    <h1>Update {{ type }}</h1>
 
       <div class="form-group">
-        <label for="word">Word</label><br/>
-        <input type="text" formControlName="word" class="form-control" id="word" placeholder="e.g. お疲れ">
-        <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('required', 'word')" id="word-required-error">This field is required *</p>
-        <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('pattern', 'word')" id="word-pattern-error">This field must be in japanese *</p>
-        <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('maxlength', 'word')" id="word-length-error">Word is too long *</p>
+        <label [for]="type">{{ (type === 'kanji') ? 'Kanji' : 'Word' }}</label><br/>
+        <input type="text" [formControlName]="type" class="form-control" [id]="type">
+        <div *ngIf="type === 'kanji'">
+          <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('required', 'kanji')" id="kanji-required-error">This field is required *</p>
+          <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('pattern', 'kanji')"id="kanji-pattern-error">This field must be a kanji *</p>
+          <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('maxlength', 'kanji')" id="kanji-length-error">Single kanjis only *</p>
+        </div>
+        <div *ngIf="type === 'word'">
+          <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('required', 'word')" id="word-required-error">This field is required *</p>
+          <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('pattern', 'word')" id="word-pattern-error">This field must be in japanese *</p>
+          <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('maxlength', 'word')" id="word-length-error">Word is too long *</p>
+        </div>
+
       </div>
 
       <div class="form-group">
@@ -18,7 +26,7 @@
         <div formArrayName="meaning">
           <div *ngFor="let meaningControl of meaningFormArray.controls; let i = index;">
             <div class="input-btn-div">
-              <input type="text" class="form-control" [formControlName]="i" [id]="'meaning' + i" placeholder="e.g. Good work">
+              <input type="text" class="form-control" [formControlName]="i" [id]="'meaning' + i" placeholder="e.g. Day">
               <button type="button" class="btn btn-remove" [id]="'meaning-remove' + i" (click)="removeArrayEl(meaningFormArray, i)" [disabled]="meaningFormArray.controls.length <= 1">
                 X
               </button>
@@ -39,7 +47,7 @@
         <div formArrayName="pronunciation">
           <div *ngFor="let pronunciationControl of pronunciationFormArray.controls; let i = index;">
             <div class="input-btn-div">
-              <input type="text" class="form-control" [formControlName]="i" [id]="'pronunciation' + i" placeholder="e.g. おつかれ">
+              <input type="text" class="form-control" [formControlName]="i" [id]="'pronunciation' + i" placeholder="e.g. にち">
               <button type="button" class="btn btn-remove" [id]="'pronunciation-remove' + i" (click)="removeArrayEl(pronunciationFormArray, i)" [disabled]="pronunciationFormArray.controls.length <= 1">
               X
               </button>
@@ -62,10 +70,11 @@
       </div>
 
       <button type="submit" class="submit" (click)="markFormGroupTouched()">Submit</button>
-      <button type="reset" class="reset" (click)="resetForm(); status = 'init'">Reset</button>
+      <button type="reset" (click)="resetForm(); status = 'init'" class="reset">Reset</button>
   </form>
   <br/>
-  <p class="success" *ngIf="status === 'success'">Word submitted!</p>
-  <a class="return-a" href="/words" *ngIf="status === 'success'">Return to words timeline</a>
+  <p class="success" *ngIf="status === 'success'">Updated successfully!</p>
+  <a class="return-a" (click)="timeline()" *ngIf="status === 'success'">Return to timeline</a>
   <p class="error" *ngIf="status === 'error'">{{ errorInfo }}</p>
 </div>
+

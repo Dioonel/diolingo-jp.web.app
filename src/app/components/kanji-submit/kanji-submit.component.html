@@ -66,5 +66,6 @@
   </form>
   <br/>
   <p class="success" *ngIf="status === 'success'">Kanji submitted!</p>
+  <a class="return-a" href="/kanji" *ngIf="status === 'success'">Return to kanji timeline</a>
   <p class="error" *ngIf="status === 'error'">{{ errorInfo }}</p>
 </div>

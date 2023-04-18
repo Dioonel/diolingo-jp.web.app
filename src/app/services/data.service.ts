@@ -36,4 +36,16 @@ export class DataService {
   getWords() {
     return this.http.get<Word[]>(`${this.url}/words`);
   }
+
+  getGenericById<T>(id: string, type: 'kanji' | 'words') {
+    return this.http.get<T>(`${this.url}/${type}/${id}`);
+  }
+
+  updateKanji(kanji: Kanji, id: string) {
+    return this.http.patch<Kanji>(`${this.url}/kanji/${id}`, kanji);
+  }
+
+  updateWord(word: Word, id: string) {
+    return this.http.patch<Word>(`${this.url}/words/${id}`, word);
+  }
 }

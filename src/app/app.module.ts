@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { MyInterceptor } from './interceptors/interceptor.interceptor';
 import { WordSubmitComponent } from './components/word-submit/word-submit.component';
 import { GridComponent } from './components/grid/grid.component';
 import { WordComponent } from './components/word/word.component';
+import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -31,13 +33,15 @@ import { WordComponent } from './components/word/word.component';
     WordSubmitComponent,
     GridComponent,
     WordComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true

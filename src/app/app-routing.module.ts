@@ -9,6 +9,7 @@ import { KanjiSubmitComponent } from './components/kanji-submit/kanji-submit.com
 import { WordComponent } from './components/word/word.component';
 import { WordSubmitComponent } from './components/word-submit/word-submit.component';
 import { KanjiSearchComponent } from './components/kanji-search/kanji-search.component';
+import { EditComponent } from './components/edit/edit.component';
 import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'words', component: WordComponent },
   { path: 'words/submit', component: WordSubmitComponent },
   { path: 'login', component: LoginComponent },
+  { path: ':type/edit/:id', component: EditComponent }
 ];
 
 @NgModule({
