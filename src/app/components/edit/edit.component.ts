@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 import { DataService } from './../../../app/services/data.service';
 import { Kanji } from './../../../app/models/kanji';
@@ -18,6 +19,7 @@ export class EditComponent implements OnInit {
   type!: 'kanji' | 'word';
   obj!: Kanji | Word;
   validators: Validators[] = [];
+  faTrashCan = faTrashCan;
 
   constructor(private fb: FormBuilder, private dataService: DataService, private activeRoute: ActivatedRoute, private router: Router) { }
 
@@ -69,6 +71,11 @@ export class EditComponent implements OnInit {
       this.status = 'error';
       this.errorInfo = 'Form is not valid';
     }
+  }
+
+  delete() {
+    this.status = 'loading';
+    this.executeDelete();
   }
 
   get meaningFormArray() {
@@ -128,7 +135,6 @@ export class EditComponent implements OnInit {
 
   executeUpdate() {
     if(this.type === 'kanji') {
-      console.log('update kanji');
       console.log(this.form.value);
       this.dataService.updateKanji(this.form.value, this.obj._id).subscribe({
         next: (data) => {
@@ -141,12 +147,43 @@ export class EditComponent implements OnInit {
         }
       });
     } else {
-      console.log('update word');
       console.log(this.form.value);
       this.dataService.updateWord(this.form.value, this.obj._id).subscribe({
         next: (data) => {
           this.resetForm();
           this.status = 'success';
+        },
+        error: (err) => {
+          this.status = 'error';
+          this.errorInfo = err.error;
+        }
+      });
+    }
+  }
+
+  executeDelete() {
+    if(this.type === 'kanji') {
+      this.dataService.deleteKanji(this.obj._id).subscribe({
+        next: (data) => {
+          this.resetForm();
+          this.status = 'success';
+          setTimeout(() => {
+            this.router.navigate(['/kanji']);
+          }, 1500);
+        },
+        error: (err) => {
+          this.status = 'error';
+          this.errorInfo = err.error;
+        }
+      });
+    } else {
+      this.dataService.deleteWord(this.obj._id).subscribe({
+        next: (data) => {
+          this.resetForm();
+          this.status = 'success';
+          setTimeout(() => {
+            this.router.navigate(['/words']);
+          }, 1000);
         },
         error: (err) => {
           this.status = 'error';

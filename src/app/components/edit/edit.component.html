@@ -1,5 +1,6 @@
 <div class="container" *ngIf="form">
   <form [formGroup]="form" (ngSubmit)="update()">
+    <button class="delete-btn" type="button" (click)="delete()"><fa-icon [icon]="faTrashCan" size="2x"></fa-icon></button>
     <h1>Update {{ type }}</h1>
 
       <div class="form-group">

@@ -24,6 +24,7 @@ form{
   background-color: #3c4042;
   padding: 15px 60px;
   border-radius: 15px;
+  position: relative;
 }
 
 label{
@@ -159,4 +160,29 @@ input::placeholder{
 .return-a:hover{
   color: #00bfff;
   cursor: pointer;
+}
+
+.delete-btn{
+  padding: 4px 6px;
+  color: white;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.delete-btn:hover{
+  background-color: #b64fc8;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 430px){
+  form{
+    width: 100%;
+    padding: 15px 20px;
+  }
 }

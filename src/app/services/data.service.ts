@@ -48,4 +48,12 @@ export class DataService {
   updateWord(word: Word, id: string) {
     return this.http.patch<Word>(`${this.url}/words/${id}`, word);
   }
+
+  deleteKanji(id: string) {
+    return this.http.delete(`${this.url}/kanji/${id}`);
+  }
+
+  deleteWord(id: string) {
+    return this.http.delete(`${this.url}/words/${id}`);
+  }
 }
