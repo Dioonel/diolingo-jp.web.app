@@ -1,0 +1,36 @@
+<div class="dialog">
+
+  <!-- Close button -->
+  <button class="close" (click)="closeDialog()">
+    <fa-icon [icon]="faX" size="xl"></fa-icon>
+  </button>
+
+  <!-- Details mode -->
+  <div *ngIf="!editToggle" class="detail-mode">
+    <h1 class="title"> {{ data.type }} detail </h1>
+    <p class="main-value"> {{ data.type + ': ' + data.item[data.type.toLowerCase()] }} </p>
+    <p class="pronunciation-container">
+      Pronuncations:
+      <span class="pronunciation" *ngFor="let pr of data.item.pronunciation; let i = index">
+        {{ pr }}{{ i == data.item.pronunciation.length - 1 ? '' : ', ' }}
+      </span>
+    </p>
+    <p class="meaning-container">
+      Meanings:
+      <span class="meaning" *ngFor="let mean of data.item.meaning; let i = index">
+        {{ mean }}{{ i == data.item.meaning.length - 1 ? '' : ', ' }}
+      </span>
+    </p>
+    <p class="notes"> Notes: {{ data.item.notes || '-' }} </p>
+  </div>
+
+  <!-- Edit mode  -->
+  <div *ngIf="editToggle">
+    <app-edit-form [data]="data" (toggle)="toggleBack($event)"></app-edit-form>
+  </div>
+
+  <!-- Edit button toggle -->
+  <button *ngIf="!editToggle" type="button" class="toggle-btn" (click)="editToggle = true">
+    <fa-icon [icon]="faEdit" size="xl"></fa-icon>Edit
+  </button>
+</div>

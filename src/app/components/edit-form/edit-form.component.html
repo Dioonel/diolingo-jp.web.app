@@ -1,0 +1,99 @@
+<form [formGroup]="form" class="edit-mode" (ngSubmit)="update()">
+  <h1 class="title"> Edit {{ data.type }} </h1>
+  <!-- <label class="main-value"> {{ data.type + ': ' }} </label>
+  <input>
+  <p class="pronunciation-container">
+    Pronuncations:
+  <span class="pronunciation" *ngFor="let pr of data.item.pronunciation; let i = index">
+    {{ pr }}{{ i == data.item.pronunciation.length - 1 ? '' : ', ' }}
+  </span>
+  </p>
+  <p class="meaning-container">
+    Meanings:
+    <span class="meaning" *ngFor="let mean of data.item.meaning; let i = index">
+      {{ mean }}{{ i == data.item.meaning.length - 1 ? '' : ', ' }}
+    </span>
+  </p>
+  <p class="notes"> Notes: {{ data.item.notes || '-' }} </p> -->
+
+  <div class="form-group">
+    <label class="subtitle" [for]="type">{{ (type === 'kanji') ? 'Kanji' : 'Word' }}:</label><br/>
+    <input type="text" [formControlName]="type" class="form-control" [id]="type">
+    <div *ngIf="type === 'kanji'">
+      <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('required', 'kanji')" id="kanji-required-error">This field is required *</p>
+      <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('pattern', 'kanji')"id="kanji-pattern-error">This field must be a kanji *</p>
+      <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('maxlength', 'kanji')" id="kanji-length-error">Single kanjis only *</p>
+    </div>
+    <div *ngIf="type === 'word'">
+      <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('required', 'word')" id="word-required-error">This field is required *</p>
+      <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('pattern', 'word')" id="word-pattern-error">This field must be in japanese *</p>
+      <p class="error" *ngIf="form.controls['word'].dirty && form.hasError('maxlength', 'word')" id="word-length-error">Word is too long *</p>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label class="subtitle" for="meaning">Meaning:</label><br/>
+    <div formArrayName="meaning">
+      <div *ngFor="let meaningControl of meaningFormArray.controls; let i = index;">
+        <div class="input-btn-div">
+          <input type="text" class="form-control" [formControlName]="i" [id]="'meaning' + i" placeholder="e.g. Day">
+          <button type="button" class="btn btn-remove" [id]="'meaning-remove' + i" (click)="removeArrayEl(meaningFormArray, i)" [disabled]="meaningFormArray.controls.length <= 1">
+            <fa-icon [icon]="faX" size="sm"></fa-icon>
+          </button>
+        </div>
+        <div *ngIf="meaningControl.invalid && meaningControl.dirty">
+          <p class="error" [id]="'meaning-required-error' + i" *ngIf="meaningControl.errors?.['required']">Meaning is required *</p>
+          <p class="error" [id]="'meaning-length-error' + i" *ngIf="meaningControl.errors?.['maxlength']">Meaning is too long *</p>
+        </div>
+      </div>
+      <button type="button" class="btn btn-add" id="meaning-add" (click)="addArrayEl(meaningFormArray)">
+        Add
+      </button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="subtitle" for="pronunciation">Pronunciation:</label><br/>
+    <div formArrayName="pronunciation">
+      <div *ngFor="let pronunciationControl of pronunciationFormArray.controls; let i = index;">
+        <div class="pronunciation-non-editable" *ngIf="pronunciation[i].isNew === false">
+          <p>{{ pronunciationControl.value }}</p>
+          <button type="button" class="btn btn-remove" [id]="'pronunciation-remove' + i" (click)="removeArrayEl(pronunciationFormArray, i)" [disabled]="pronunciationFormArray.controls.length <= 1">
+            <fa-icon [icon]="faX" size="sm"></fa-icon>
+          </button>
+        </div>
+        <div class="input-btn-div" *ngIf="pronunciation[i].isNew === true">
+          <input type="text" class="form-control" [formControlName]="i" [id]="'pronunciation' + i" placeholder="e.g. にち">
+          <button type="button" class="btn btn-remove" [id]="'pronunciation-remove' + i" (click)="removeArrayEl(pronunciationFormArray, i)" [disabled]="pronunciationFormArray.controls.length <= 1">
+            <fa-icon [icon]="faX" size="sm"></fa-icon>
+          </button>
+        </div>
+        <div *ngIf="pronunciationControl.invalid && pronunciationControl.dirty">
+          <p class="error" [id]="'pronunciation-required-error' + i" *ngIf="pronunciationControl.errors?.['required']">Pronunciation is required *</p>
+          <p class="error" [id]="'pronunciation-length-error' + i" *ngIf="pronunciationControl.errors?.['maxlength']">Pronunciation is too long *</p>
+          <p class="error" [id]="'pronunciation-pattern-error' + i" *ngIf="pronunciationControl.errors?.['pattern']">Must be in hiragana / katakana *</p>
+        </div>
+      </div>
+      <button type="button" class="btn btn-add" id="pronunciation-add" (click)="addArrayEl(pronunciationFormArray, true, true)">
+        Add
+      </button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="subtitle" for="notes">Notes:</label><br/>
+    <input type="text" formControlName="notes" class="form-control" id="notes" placeholder="Enter notes...">
+  </div>
+
+  <div class="btns-div">
+    <button type="button" class="toggle-btn" (click)="cancel()" [disabled]="status === 'loading'">
+      <fa-icon [icon]="faBackward" size="xl"></fa-icon>Cancel
+    </button>
+
+    <button type="submit" class="submit-btn" (click)="markFormGroupTouched()" [disabled]="status === 'loading'">
+      <fa-icon [icon]="faSave" size="xl"></fa-icon>Save
+    </button>
+  </div>
+
+</form>

@@ -1,0 +1,96 @@
+@import url('./../dialog/dialog.component.css');
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.subtitle {
+  font-family: 'Inter';
+  font-size: 1.8em;
+}
+
+.form-control {
+  font-family: 'Inter';
+  font-size: 1.8em;
+  border: 1px solid rgba(32,33,36,255);
+  border-radius: 4px;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.input-btn-div, .pronunciation-non-editable {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.pronunciation-non-editable p {
+  font-family: 'Inter';
+  font-size: 1.8em;
+  height: 33px;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.btn-remove, .btn-add {
+  background-color: transparent;
+  color: black;
+  font-size: 1.8em;
+  padding: 4px 9px;
+  border: 1px solid black;
+  margin-top: 5px;
+  border-radius: 4px;
+  height: 33px;
+}
+
+.btn-remove:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.btn-add:hover {
+  cursor: pointer;
+  color: green;
+}
+
+.submit-btn, .cancel-btn {
+  font-family: 'Inter';
+  color: rgba(32,33,36,255);
+  font-size: 1.8em;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  align-self: end;
+  width: auto;
+  height: auto;
+  padding: 6px 12px;
+}
+
+.submit-btn:hover, .cancel-btn:hover {
+  cursor: pointer;
+  background-color: aqua;
+  border-radius: 4px;
+}
+
+.error{
+  font-size: 1.4em;
+  font-family: Arial;
+  font-weight: 500;
+  color: red;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.btns-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

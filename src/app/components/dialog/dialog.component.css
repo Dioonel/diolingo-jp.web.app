@@ -1,0 +1,81 @@
+.dialog, .detail-mode, .edit-mode {
+  font-family: 'Inter';
+  background-color: white;
+  border-radius: 5px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.edit-mode {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.title {
+  font-size: 2.6em;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.main-value {
+  font-size: 1.9em;
+  font-weight: 400;
+}
+
+.pronunciation-container, .meaning-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.8em;
+  font-weight: 400;
+}
+
+.notes {
+  font-size: 1.8em;
+}
+
+.close {
+  position: absolute;
+  align-self: end;
+  background-color: transparent;
+  border: none;
+  width: 30px;
+  height: 30px;
+  color: rgba(32,33,36,255);
+  font-weight: bold;
+  font-size: large;
+}
+
+.close:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.close:focus {
+  outline: none;
+}
+
+.toggle-btn {
+  font-family: 'Inter';
+  color: rgba(32,33,36,255);
+  font-size: 1.8em;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  align-self: end;
+  width: auto;
+  height: auto;
+  padding: 6px 12px;
+}
+
+.toggle-btn:hover {
+  cursor: pointer;
+  background-color: aqua;
+  border-radius: 4px;
+}

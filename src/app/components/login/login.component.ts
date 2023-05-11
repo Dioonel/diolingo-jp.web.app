@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         next: (data) => {
           console.log(data);
           this.status = 'success';
-          sessionStorage.setItem('jwt', data.token);
+          localStorage.setItem('jwt', data.token);
           this.router.navigate(['/']);
         },
         error: (error) => {

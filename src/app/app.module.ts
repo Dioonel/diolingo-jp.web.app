@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DialogModule } from '@angular/cdk/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,8 +19,9 @@ import { MyInterceptor } from './interceptors/interceptor.interceptor';
 import { WordSubmitComponent } from './components/word-submit/word-submit.component';
 import { GridComponent } from './components/grid/grid.component';
 import { WordComponent } from './components/word/word.component';
-import { EditComponent } from './components/edit/edit.component';
 import { NavComponent } from './components/nav/nav.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { EditFormComponent } from './components/edit-form/edit-form.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +36,9 @@ import { NavComponent } from './components/nav/nav.component';
     WordSubmitComponent,
     GridComponent,
     WordComponent,
-    EditComponent,
     NavComponent,
+    DialogComponent,
+    EditFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { NavComponent } from './components/nav/nav.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    DialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true

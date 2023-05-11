@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { DataService } from './../../services/data.service';
 import { Kanji } from './../../models/kanji';
@@ -11,11 +12,22 @@ import { Kanji } from './../../models/kanji';
 export class KanjiComponent implements OnInit {
   kanji: Kanji[] = [];
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit(): void {
     this.dataService.getKanji().subscribe((kanji: Kanji[]) => {
       this.kanji = kanji;
+    });
+
+    this.dataService.shouldUpdateKanji$.subscribe((shouldUpdate: boolean) => {
+      if(shouldUpdate) this.reload();
+    });
+  }
+
+  reload() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
     });
   }
 }

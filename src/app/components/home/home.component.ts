@@ -12,10 +12,9 @@ export class HomeComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    if(!sessionStorage.getItem('session')){
-      console.log('awake heroku');
+    if(!localStorage.getItem('session')){
       this.dataService.awakeHeroku();
-      sessionStorage.setItem('session', 'true');
+      localStorage.setItem('session', 'true');
     }
   }
 }

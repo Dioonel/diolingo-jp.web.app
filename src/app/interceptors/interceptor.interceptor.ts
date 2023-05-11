@@ -20,7 +20,7 @@ export class MyInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    let token = sessionStorage.getItem('jwt');
+    let token = localStorage.getItem('jwt');
     if(token !== null && token !== '' && token !== 'null'){
       let reqAuth = req.clone({
         setHeaders:{

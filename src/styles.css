@@ -1,3 +1,5 @@
+@import '@angular/cdk/overlay-prebuilt.css';
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -28,6 +30,24 @@ html, body{
 .back img:hover{
   cursor: pointer;
   -webkit-filter: brightness(75%);
+}
+
+.panel-class {
+  width: 50vw;
+  height: auto;
+  min-height: 300px;
+}
+
+@media screen and (max-width: 1000px) {
+  .panel-class {
+    width: 70vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .panel-class {
+    width: 90vw;
+  }
 }
 
 @media (max-width: 700px) {
