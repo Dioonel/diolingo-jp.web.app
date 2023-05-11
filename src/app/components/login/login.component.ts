@@ -30,10 +30,8 @@ export class LoginComponent implements OnInit {
         username: this.form.get('username')?.value,
         password: this.form.get('password')?.value
       };
-      console.log(user);
       this.dataService.login(user).subscribe({
         next: (data) => {
-          console.log(data);
           this.status = 'success';
           localStorage.setItem('jwt', data.token);
           this.router.navigate(['/']);

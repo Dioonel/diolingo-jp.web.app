@@ -28,7 +28,6 @@ export class DialogComponent implements OnInit {
   constructor(private dialogRef: DialogRef<Data>, @Inject(DIALOG_DATA) data: Data, private dataService: DataService, private router: Router) {
     this.data = data;
     this.data.type === 'kanji' ? this.data.type = 'Kanji': this.data.type = 'Word';
-    console.log(this.data.type);
   }
 
   ngOnInit(): void {
@@ -38,7 +37,6 @@ export class DialogComponent implements OnInit {
       this.subscription = this.dataService.shouldUpdateKanji$.subscribe((shouldUpdate: boolean) => {
         if(shouldUpdate) {
           this.dataService.getOneKanji(this.data.item._id).subscribe((item: any) => {
-            console.log('updated dialog', item);
             this.data.item = item;
           });
         }
@@ -47,7 +45,6 @@ export class DialogComponent implements OnInit {
       this.subscription = this.dataService.shouldUpdateWords$.subscribe((shouldUpdate: boolean) => {
         if(shouldUpdate) {
           this.dataService.getOneWord(this.data.item._id).subscribe((item: any) => {
-            console.log('updated dialog', item);
             this.data.item = item;
           });
         }

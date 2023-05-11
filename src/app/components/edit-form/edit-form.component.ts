@@ -38,8 +38,6 @@ export class EditFormComponent implements OnInit {
     this.patchArrays();
 
     this.status = 'init';
-    console.log(this.data);
-
   }
 
   private buildForm() {
@@ -54,9 +52,7 @@ export class EditFormComponent implements OnInit {
 
   update() {
     this.status = 'loading';
-    console.log('[edit-form.component.ts] update() starting...');
     if(this.form.valid && this.validateArrayLength(this.meaningFormArray) && this.validateArrayLength(this.pronunciationFormArray)){
-      console.log('[edit-form.component.ts] executeUpdate() starting...');
       this.executeUpdate();
     } else {
       this.status = 'error';
@@ -91,8 +87,6 @@ export class EditFormComponent implements OnInit {
   removeArrayEl(array: FormArray, i: number) {
     array.removeAt(i);
     if(this.pronunciation.length > this.pronunciationFormArray.length) this.pronunciation.splice(i, 1);
-    console.log(this.pronunciation.length);
-    console.log(this.pronunciationFormArray.length);
   }
 
   validateArrayLength(array: FormArray) {
@@ -125,12 +119,10 @@ export class EditFormComponent implements OnInit {
 
   executeUpdate() {
     if(this.type === 'kanji') {
-      console.log(this.form.value);
       this.dataService.updateKanji(this.form.value, this.data.item._id).subscribe({
         next: (data) => {
           this.status = 'success';
           this.toggle.emit({ toggle: false, update: true });
-          console.log('timeout');
         },
         error: (err) => {
           this.status = 'error';
@@ -138,7 +130,6 @@ export class EditFormComponent implements OnInit {
         }
       });
     } else {
-      console.log(this.form.value);
       this.dataService.updateWord(this.form.value, this.data.item._id).subscribe({
         next: (data) => {
           this.status = 'success';
