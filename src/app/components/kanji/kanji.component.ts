@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
 import { DataService } from './../../services/data.service';
 import { Kanji } from './../../models/kanji';
@@ -11,6 +12,9 @@ import { Kanji } from './../../models/kanji';
 })
 export class KanjiComponent implements OnInit {
   kanji: Kanji[] = [];
+
+  faAngleDown = faAngleDown;
+  faAngleUp = faAngleUp;
 
   constructor(private dataService: DataService, private router: Router) { }
 
@@ -29,5 +33,9 @@ export class KanjiComponent implements OnInit {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate([currentUrl]);
     });
+  }
+
+  pushNewKanji(kanji: Kanji) {
+    this.kanji.push(kanji);
   }
 }

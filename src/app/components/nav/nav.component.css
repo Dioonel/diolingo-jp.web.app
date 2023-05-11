@@ -40,7 +40,7 @@
   display: none;
 }
 
-@media (max-width:610px) {
+@media (max-width:620px) {
   .nav > .nav-btn {
     display: inline-block;
     position: absolute;

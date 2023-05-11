@@ -6,6 +6,7 @@
   height: calc(100vh - 60px);
   width: 100vw;
   overflow-x: hidden;
+  background-color: rgba(32,33,36,255);
 }
 
 .box {
@@ -18,13 +19,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
 }
 
 .title {
   font-size: 2rem;
   font-weight: 500;
   font-family: 'Inter';
+  padding: 10px 0px;
 }
 
 .input {
@@ -40,7 +42,7 @@ input {
   border: none;
   border-bottom: 1px solid #000;
   outline: none;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-family: 'Inter';
 }
 
@@ -66,6 +68,7 @@ input {
   background-color: #fff;
   color: #000;
   border: 1px solid #000;
+  transition: 0.3s;
 }
 
 .span-error{

@@ -1,68 +1,78 @@
 <div class="container">
-  <form [formGroup]="form" (ngSubmit)="submitKanji()">
-    <h1>Submit a new kanji</h1>
+  <form class="form" [formGroup]="form" (ngSubmit)="submitKanji()">
+    <h1 class="title">Submit a new kanji</h1>
 
-      <div class="form-group">
-        <label for="kanji">Kanji</label><br/>
-        <input type="text" formControlName="kanji" class="form-control" id="kanji" placeholder="e.g. 日">
-        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('required', 'kanji')" id="kanji-required-error">This field is required *</p>
-        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('pattern', 'kanji')"id="kanji-pattern-error">This field must be a kanji *</p>
-        <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('maxlength', 'kanji')" id="kanji-length-error">Single kanjis only *</p>
-      </div>
+    <div class="form-group">
+      <label for="kanji">Kanji</label>
+      <input type="text" formControlName="kanji" class="form-control" id="kanji" placeholder="e.g. 日" autocomplete="off">
+      <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('required', 'kanji')" id="kanji-required-error">This field is required *</p>
+      <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('pattern', 'kanji')"id="kanji-pattern-error">This field must be a kanji *</p>
+      <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('maxlength', 'kanji')" id="kanji-length-error">Single kanjis only *</p>
+    </div>
 
-      <div class="form-group">
-        <label for="meaning">Meaning</label><br/>
-        <div formArrayName="meaning">
-          <div *ngFor="let meaningControl of meaningFormArray.controls; let i = index;">
-            <div class="input-btn-div">
-              <input type="text" class="form-control" [formControlName]="i" [id]="'meaning' + i" placeholder="e.g. Day">
-              <button type="button" class="btn btn-remove" [id]="'meaning-remove' + i" (click)="removeArrayEl(meaningFormArray, i)" [disabled]="meaningFormArray.controls.length <= 1">
-                X
-              </button>
-            </div>
-            <div *ngIf="meaningControl.invalid && meaningControl.dirty">
-              <p class="error" [id]="'meaning-required-error' + i" *ngIf="meaningControl.errors?.['required']">Meaning is required *</p>
-              <p class="error" [id]="'meaning-length-error' + i" *ngIf="meaningControl.errors?.['maxlength']">Meaning is too long *</p>
-            </div>
-          </div>
-          <button type="button" class="btn btn-add" id="meaning-add" (click)="addArrayEl(meaningFormArray)">
-            Add
-          </button>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="pronunciation">Pronunciation</label><br/>
-        <div formArrayName="pronunciation">
-          <div *ngFor="let pronunciationControl of pronunciationFormArray.controls; let i = index;">
-            <div class="input-btn-div">
-              <input type="text" class="form-control" [formControlName]="i" [id]="'pronunciation' + i" placeholder="e.g. にち">
-              <button type="button" class="btn btn-remove" [id]="'pronunciation-remove' + i" (click)="removeArrayEl(pronunciationFormArray, i)" [disabled]="pronunciationFormArray.controls.length <= 1">
+    <div class="form-group">
+      <label for="meaning">Meaning</label>
+      <div formArrayName="meaning">
+        <div *ngFor="let meaningControl of meaningFormArray.controls; let i = index;">
+          <div class="input-btn-div">
+            <input type="text" class="form-control" [formControlName]="i" [id]="'meaning' + i" placeholder="e.g. Day" autocomplete="off">
+            <button type="button" class="btn btn-remove" [id]="'meaning-remove' + i" (click)="removeArrayEl(meaningFormArray, i)" [disabled]="meaningFormArray.controls.length <= 1">
               X
-              </button>
-            </div>
-            <div *ngIf="pronunciationControl.invalid && pronunciationControl.dirty">
-              <p class="error" [id]="'pronunciation-required-error' + i" *ngIf="pronunciationControl.errors?.['required']">Pronunciation is required *</p>
-              <p class="error" [id]="'pronunciation-length-error' + i" *ngIf="pronunciationControl.errors?.['maxlength']">Pronunciation is too long *</p>
-              <p class="error" [id]="'pronunciation-pattern-error' + i" *ngIf="pronunciationControl.errors?.['pattern']">Must be in hiragana / katakana *</p>
-            </div>
+            </button>
           </div>
-          <button type="button" class="btn btn-add" id="pronunciation-add" (click)="addArrayEl(pronunciationFormArray, true)">
-            Add
-          </button>
+          <div *ngIf="meaningControl.invalid && meaningControl.dirty">
+            <p class="error" [id]="'meaning-required-error' + i" *ngIf="meaningControl.errors?.['required']">Meaning is required *</p>
+            <p class="error" [id]="'meaning-length-error' + i" *ngIf="meaningControl.errors?.['maxlength']">Meaning is too long *</p>
+          </div>
         </div>
+        <button type="button" class="btn btn-add" id="meaning-add" (click)="addArrayEl(meaningFormArray)">
+          Add
+        </button>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="notes">Notes / extra data (optional)</label><br/>
-        <input type="text" formControlName="notes" class="form-control" id="notes" placeholder="Enter notes...">
+    <div class="form-group">
+      <label for="pronunciation">Pronunciation</label>
+      <div formArrayName="pronunciation">
+        <div *ngFor="let pronunciationControl of pronunciationFormArray.controls; let i = index;">
+          <div class="input-btn-div">
+            <input type="text" class="form-control" [formControlName]="i" [id]="'pronunciation' + i" placeholder="e.g. にち" autocomplete="off">
+            <button type="button" class="btn btn-remove" [id]="'pronunciation-remove' + i" (click)="removeArrayEl(pronunciationFormArray, i)" [disabled]="pronunciationFormArray.controls.length <= 1">
+            X
+            </button>
+          </div>
+          <div *ngIf="pronunciationControl.invalid && pronunciationControl.dirty">
+            <p class="error" [id]="'pronunciation-required-error' + i" *ngIf="pronunciationControl.errors?.['required']">Pronunciation is required *</p>
+            <p class="error" [id]="'pronunciation-length-error' + i" *ngIf="pronunciationControl.errors?.['maxlength']">Pronunciation is too long *</p>
+            <p class="error" [id]="'pronunciation-pattern-error' + i" *ngIf="pronunciationControl.errors?.['pattern']">Must be in hiragana / katakana *</p>
+          </div>
+        </div>
+        <button type="button" class="btn btn-add" id="pronunciation-add" (click)="addArrayEl(pronunciationFormArray, true)">
+          Add
+        </button>
       </div>
+    </div>
 
-      <button type="submit" class="submit" (click)="markFormGroupTouched()">Submit</button>
-      <button type="reset" (click)="resetForm(); status = 'init'" class="reset">Reset</button>
+    <div class="form-group">
+      <label for="notes">Notes / extra data (optional)</label>
+      <input type="text" formControlName="notes" class="form-control" id="notes" placeholder="Enter notes..." autocomplete="off">
+    </div>
+
+    <br/>
+
+    <div class="btns-div">
+      <button class="reset-btn" type="button" (click)="resetForm(); status = 'init'">
+        <fa-icon [icon]="faTrash" size="xl"></fa-icon>
+        Reset
+      </button>
+      <button class="submit-btn" type="submit" (click)="markFormGroupTouched()">
+        <fa-icon [icon]="faSave" size="xl"></fa-icon>
+        Submit
+      </button>
+    </div>
+
   </form>
-  <br/>
-  <p class="success" *ngIf="status === 'success'">Kanji submitted!</p>
-  <a class="return-a" href="/kanji" *ngIf="status === 'success'">Return to kanji timeline</a>
-  <p class="error" *ngIf="status === 'error'">{{ errorInfo }}</p>
+
+  <p class="success-general" *ngIf="status === 'success'">Kanji submitted!</p>
+  <p class="error-general" *ngIf="status === 'error'">{{ errorInfo }}</p>
 </div>

@@ -25,25 +25,31 @@
   margin-top: 30px;
 }
 
-.main-div h1{
-  margin-top: 25px;
-}
-
-.main-div h1 a{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.accordion-btn {
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-around;
+  gap: 20px;
+  align-items: center;
   font-size: 2.4em;
+  font-family: 'Inter';
+  color: #fff;
   text-decoration: none;
-  color: #202124;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  padding: 3px 8px;
-  width: min-content;
-  background-color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 2px solid #fff;
+  text-align: center;
+  background-color: transparent;
 }
 
-.main-div h1 a:hover{
-  color: white;
-  background-color: #ea80fc;
-  border: 2px solid #b64fc8;
+.accordion-btn:hover{
   cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  transition: 0.3s;
 }
+
+.form-container {
+  margin-top: 20px;
+}
+

@@ -87,8 +87,12 @@
   </div>
 
   <div class="btns-div">
-    <button type="button" class="toggle-btn" (click)="cancel()" [disabled]="status === 'loading'">
+    <button type="button" class="cancel-btn" (click)="cancel()" [disabled]="status === 'loading'">
       <fa-icon [icon]="faBackward" size="xl"></fa-icon>Cancel
+    </button>
+
+    <button type="button" class="delete-btn" (click)="delete()" [disabled]="status === 'loading'">
+      <fa-icon [icon]="faTrash" size="xl"></fa-icon>Delete
     </button>
 
     <button type="submit" class="submit-btn" (click)="markFormGroupTouched()" [disabled]="status === 'loading'">

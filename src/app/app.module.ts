@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DialogModule } from '@angular/cdk/dialog';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,7 +48,8 @@ import { EditFormComponent } from './components/edit-form/edit-form.component';
     FormsModule,
     HttpClientModule,
     FontAwesomeModule,
-    DialogModule
+    DialogModule,
+    CdkAccordionModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true

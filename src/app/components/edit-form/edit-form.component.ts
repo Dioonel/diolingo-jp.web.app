@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { DataService } from './../../services/data.service';
-import { faX, faSave, faBackward } from '@fortawesome/free-solid-svg-icons';
+import { faX, faSave, faBackward, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-edit-form',
@@ -23,6 +23,7 @@ export class EditFormComponent implements OnInit {
   faX = faX;
   faSave = faSave;
   faBackward = faBackward;
+  faTrash = faTrash;
 
   constructor(private fb: FormBuilder, private dataService: DataService) { }
 
@@ -62,7 +63,11 @@ export class EditFormComponent implements OnInit {
 
   delete() {
     this.status = 'loading';
-    this.executeDelete();
+    if(confirm('Are you sure you want to delete this item? This cannot be reverted.')){
+      this.executeDelete();
+    } else {
+      this.status = 'init';
+    }
   }
 
   get meaningFormArray() {
@@ -133,9 +138,7 @@ export class EditFormComponent implements OnInit {
       this.dataService.updateWord(this.form.value, this.data.item._id).subscribe({
         next: (data) => {
           this.status = 'success';
-          setTimeout(() => {
-            this.toggle.emit({ toggle: false, update: true });
-          }, 100);
+          this.toggle.emit({ toggle: false, update: true });
         },
         error: (err) => {
           this.status = 'error';
@@ -150,9 +153,7 @@ export class EditFormComponent implements OnInit {
       this.dataService.deleteKanji(this.data.item._id).subscribe({
         next: (data) => {
           this.status = 'success';
-          setTimeout(() => {
-            this.toggle.emit({ toggle: false, update: true });
-          }, 100);
+          location.reload();
         },
         error: (err) => {
           this.status = 'error';
@@ -164,9 +165,7 @@ export class EditFormComponent implements OnInit {
       this.dataService.deleteWord(this.data.item._id).subscribe({
         next: (data) => {
           this.status = 'success';
-          setTimeout(() => {
-            this.toggle.emit({ toggle: false, update: true });
-          }, 100);
+          location.reload();
         },
         error: (err) => {
           this.status = 'error';

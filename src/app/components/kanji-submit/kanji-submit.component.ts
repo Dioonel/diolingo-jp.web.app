@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Kanji } from './../../../app/models/kanji';
 
 import { DataService } from './../../../app/services/data.service';
 
@@ -10,18 +12,19 @@ import { DataService } from './../../../app/services/data.service';
   styleUrls: ['./kanji-submit.component.css']
 })
 export class KanjiSubmitComponent implements OnInit {
+  @Output() newKanji = new EventEmitter<Kanji>();
+
   form!: FormGroup;
   status: 'init' | 'loading' | 'success' | 'error' = 'init';
   errorInfo: string = '';
+
+  faSave = faSave;
+  faTrash = faTrash;
 
   constructor(private fb: FormBuilder, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.buildForm();
-    // update DOM changes
-    setTimeout(() => {
-      this.form.controls['kanji'].markAsTouched();
-    }, 0);
   }
 
   private buildForm() {
@@ -41,6 +44,7 @@ export class KanjiSubmitComponent implements OnInit {
         next: (data) => {
           this.resetForm();
           this.status = 'success';
+          this.newKanji.emit(data);
         },
         error: (err) => {
           this.status = 'error';

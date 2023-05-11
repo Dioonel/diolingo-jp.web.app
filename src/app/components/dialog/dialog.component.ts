@@ -16,7 +16,7 @@ interface Data {
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css']
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent implements OnInit, OnDestroy {
   data: Data;
   subscription!: Subscription;
   editToggle = false;

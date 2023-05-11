@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Word } from './../../../app/models/word';
 
 import { DataService } from './../../../app/services/data.service';
 
@@ -10,19 +12,19 @@ import { DataService } from './../../../app/services/data.service';
   styleUrls: ['./word-submit.component.css']
 })
 export class WordSubmitComponent implements OnInit {
+  @Output() newWord = new EventEmitter<Word>();
 
   form!: FormGroup;
   status: 'init' | 'loading' | 'success' | 'error' = 'init';
   errorInfo: string = '';
 
+  faSave = faSave;
+  faTrash = faTrash;
+
   constructor(private fb: FormBuilder, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.buildForm();
-    // update DOM changes
-    setTimeout(() => {
-      this.form.controls['word'].markAsTouched();
-    }, 0);
   }
 
   private buildForm() {
@@ -42,6 +44,7 @@ export class WordSubmitComponent implements OnInit {
         next: (data) => {
           this.resetForm();
           this.status = 'success';
+          this.newWord.emit(data);
         },
         error: (err) => {
           this.status = 'error';
@@ -97,5 +100,4 @@ export class WordSubmitComponent implements OnInit {
     this.addArrayEl(this.meaningFormArray);
     this.addArrayEl(this.pronunciationFormArray, true);
   }
-
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
 import { DataService } from './../../services/data.service';
 import { Word } from './../../models/word';
@@ -11,6 +12,9 @@ import { Word } from './../../models/word';
 })
 export class WordComponent implements OnInit {
   words: Word[] = [];
+
+  faAngleDown = faAngleDown;
+  faAngleUp = faAngleUp;
 
   constructor(private dataService: DataService, private router: Router) { }
 
@@ -29,5 +33,9 @@ export class WordComponent implements OnInit {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate([currentUrl]);
     });
+  }
+
+  pushNewWord(word: Word) {
+    this.words.push(word);
   }
 }

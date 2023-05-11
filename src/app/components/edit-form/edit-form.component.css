@@ -58,7 +58,12 @@
   color: green;
 }
 
-.submit-btn, .cancel-btn {
+.btn-remove:disabled {
+  color: grey;
+  cursor: not-allowed;
+}
+
+.submit-btn, .cancel-btn, .delete-btn {
   font-family: 'Inter';
   color: rgba(32,33,36,255);
   font-size: 1.8em;
@@ -80,6 +85,12 @@
   border-radius: 4px;
 }
 
+.delete-btn:hover {
+  cursor: pointer;
+  background-color: rgba(255, 57, 57, 0.574);
+  border-radius: 4px;
+}
+
 .error{
   font-size: 1.4em;
   font-family: Arial;
@@ -93,4 +104,19 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 500px) {
+  .btns-div {
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+    gap: 20px;
+  }
+
+  .submit-btn, .cancel-btn, .delete-btn {
+    width: 100%;
+    align-self: center;
+    justify-content: center;
+  }
 }

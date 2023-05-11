@@ -16,10 +16,8 @@ const routes: Routes = [
   { path: 'hiragana', component: HiraganaComponent },
   { path: 'katakana', component: KatakanaComponent },
   { path: 'kanji', component: KanjiComponent },
-  { path: 'kanji/submit', component: KanjiSubmitComponent },
   { path: 'kanji/search', component: KanjiSearchComponent },
   { path: 'words', component: WordComponent },
-  { path: 'words/submit', component: WordSubmitComponent },
   { path: 'login', component: LoginComponent },
 ];
 
