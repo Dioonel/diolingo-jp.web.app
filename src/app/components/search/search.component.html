@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="filter-div">
+    <form (ngSubmit)="filter()">
+    <select [(ngModel)]="filterType" name="select" (change)="resetPrevious()">
+      <option [value]="pageType" selected>{{ pageType == 'kanji' ? 'Kanji' : 'Word' }}</option>
+      <option value="pronunciation">Pronunciation</option>
+      <option value="meaning">Meaning</option>
+    </select>
+
+      <input type="text" class="input-search" name="input-search" *ngIf="filterDic[filterType]" [formControl]="filterDic[filterType]" autocomplete="off" placeholder="Search...">
+      <button class="submit-btn" type="submit" (click)="markAsTouched()">
+        <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+        <span class="device-only">Search</span>
+      </button>
+      <button class="reset-btn" type="button" (click)="resetFilters()">
+        <fa-icon [icon]="faRotateLeft"></fa-icon>
+        <span class="device-only">Reset</span>
+      </button>
+    </form>
+
+    <div *ngIf="filterKanji.dirty && filterKanji.invalid" class="error-div">
+      <span class="error" *ngIf="filterKanji.hasError('required')">Kanji can't be empty *</span>
+      <span class="error" *ngIf="filterKanji.hasError('pattern')">Input is not a kanji *</span>
+      <span class="error" *ngIf="filterKanji.hasError('maxlength')">Single kanjis only *</span>
+    </div>
+    <div *ngIf="filterWord.dirty && filterWord.invalid" class="error-div">
+      <span class="error" *ngIf="filterWord.hasError('required')">Word can't be empty *</span>
+      <span class="error" *ngIf="filterWord.hasError('pattern')">Input is not in japanese *</span>
+      <span class="error" *ngIf="filterWord.hasError('maxlength')">Word is too long *</span>
+    </div>
+    <div *ngIf="filterPronunciation.dirty && filterPronunciation.invalid" class="error-div">
+      <span class="error" *ngIf="filterPronunciation.hasError('required')">Pronunciation can't be empty *</span>
+      <span class="error" *ngIf="filterPronunciation.hasError('pattern')">Pronunciation must be in hiragana/katakana *</span>
+      <span class="error" *ngIf="filterPronunciation.hasError('maxlength')">Pronunciation is too long *</span>
+    </div>
+    <div *ngIf="filterMeaning.dirty && filterMeaning.invalid" class="error-div">
+      <span class="error" *ngIf="filterMeaning.hasError('required')">Meaning can't be empty *</span>
+      <span class="error" *ngIf="filterMeaning.hasError('maxlength')">Meaning is too long *</span>
+    </div>
+  </div>
+</div>

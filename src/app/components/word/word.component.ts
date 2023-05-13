@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
 import { DataService } from './../../services/data.service';
@@ -16,11 +16,16 @@ export class WordComponent implements OnInit {
   faAngleDown = faAngleDown;
   faAngleUp = faAngleUp;
 
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(private dataService: DataService, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   ngOnInit(): void {
-    this.dataService.getWords().subscribe((words: Word[]) => {
-      this.words = words;
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.dataService.getWords(params).subscribe(data => {
+        this.words = data;
+        // this.loading = false;
+      });
     });
 
     this.dataService.shouldUpdateWords$.subscribe((shouldUpdate: boolean) => {
@@ -29,10 +34,7 @@ export class WordComponent implements OnInit {
   }
 
   reload() {
-    let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate([currentUrl]);
-    });
+    this.router.navigateByUrl(this.router.url);
   }
 
   pushNewWord(word: Word) {

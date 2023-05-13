@@ -21,6 +21,10 @@ export class GridComponent implements OnInit {
   }
 
   openDialog(item: any) {
+    let type = '';
+    if(location.pathname == '/kanji') type = 'kanji';
+    else type = 'word';
+
     this.clickDialog.emit(true);
     scrollTo(0, 0);
     this.dialog.open(DialogComponent,
@@ -29,7 +33,7 @@ export class GridComponent implements OnInit {
         minWidth: '340px',
         data: {
           item: item,
-          type: this.router.url.split('/')[1]
+          type: type
         },
         panelClass: 'panel-class'
       });

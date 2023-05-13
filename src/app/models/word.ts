@@ -10,3 +10,9 @@ export interface Word {
 export interface WordCreateDTO extends Omit<Word, 'id' | 'created_at'> {}
 
 export interface WordUpdateDTO extends Omit<Word, 'id' | 'created_at'> {}
+
+export interface WordFilter {
+  word?: string;
+  meaning?: string;
+  pronunciation?: string;
+}

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, tap } from 'rxjs';
 
 import { LoginUser, LoginData } from './../models/user';
-import { Kanji, KanjiCreateDTO } from '../models/kanji';
-import { Word, WordCreateDTO } from '../models/word';
+import { Kanji, KanjiCreateDTO, KanjiFilter } from '../models/kanji';
+import { Word, WordCreateDTO, WordFilter } from '../models/word';
 
 @Injectable({
   providedIn: 'root'
@@ -35,28 +35,52 @@ export class DataService {
     return this.http.post<Word>(`${this.url}/words`, word);
   }
 
-  getKanji() {
-    let smt = this.http.get<Kanji[]>(`${this.url}/kanji`);
-    this.shouldUpdateKanji.next(false);
-    return smt;
+  getKanji(params?: KanjiFilter) {
+    if(params) {
+      let query = new HttpParams();
+
+      if(params.meaning) query = query.append('meaning', params.meaning);
+      if(params.pronunciation) query = query.append('pronunciation', params.pronunciation);
+      if(params.kanji) query = query.append('kanji', params.kanji);
+
+      let res = this.http.get<Kanji[]>(`${this.url}/kanji`, { params: query });
+      this.shouldUpdateKanji.next(false);
+      return res;
+    } else {
+      let res = this.http.get<Kanji[]>(`${this.url}/kanji`);
+      this.shouldUpdateKanji.next(false);
+      return res;
+    }
   }
 
   getOneKanji(id: string) {
-    let smt = this.http.get<Kanji>(`${this.url}/kanji/${id}`)
+    let res = this.http.get<Kanji>(`${this.url}/kanji/${id}`)
     this.shouldUpdateKanji.next(false)
-    return smt;
+    return res;
   }
 
-  getWords() {
-    let smt = this.http.get<Word[]>(`${this.url}/words`)
-    this.shouldUpdateWords.next(false)
-    return smt;
+  getWords(params?: WordFilter) {
+    if(params) {
+      let query = new HttpParams();
+
+      if(params.meaning) query = query.append('meaning', params.meaning);
+      if(params.pronunciation) query = query.append('pronunciation', params.pronunciation);
+      if(params.word) query = query.append('word', params.word);
+
+      let res = this.http.get<Word[]>(`${this.url}/words`, { params: query });
+      this.shouldUpdateWords.next(false);
+      return res;
+    } else {
+      let res = this.http.get<Word[]>(`${this.url}/words`)
+      this.shouldUpdateWords.next(false)
+      return res;
+    }
   }
 
   getOneWord(id: string) {
-    let smt = this.http.get<Word>(`${this.url}/words/${id}`);
+    let res = this.http.get<Word>(`${this.url}/words/${id}`);
     this.shouldUpdateWords.next(false);
-    return smt;
+    return res;
   }
 
   getGenericById<T>(id: string, type: 'kanji' | 'words') {
