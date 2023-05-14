@@ -1,27 +1,12 @@
-# Japanese
+Front-end for a personal project that I'll use to save notes, vocabulary and help me study Japanese overall.
+The API I'm using is also mine, here's the repo: https://github.com/Dioonel/Japanese-Backend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
+**Important note:**
+Right now this app is only for my **personal use**, the words and kanjis are public, but POST, PUT and DELETE operations require an **admin access**. In the future, I might expand this app with a complete user system to make it usable for anyone else.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+**ToDo:** 
+- Pagination via infinite scroll (this will requiere a back-end update also).
+- Add categories to both kanjis and words.
+- Add functionalities or "small games" to excercise the saved kanjis and words (similar to Anki).
+- User system.
