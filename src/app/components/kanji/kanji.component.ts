@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
 
 import { DataService } from './../../services/data.service';
 import { Kanji } from './../../models/kanji';
@@ -11,6 +12,7 @@ import { Kanji } from './../../models/kanji';
   styleUrls: ['./kanji.component.css']
 })
 export class KanjiComponent implements OnInit {
+  suscription!: Subscription;
   kanji: Kanji[] = [];
 
   faAngleDown = faAngleDown;
@@ -28,13 +30,14 @@ export class KanjiComponent implements OnInit {
       });
     });
 
-    this.dataService.shouldUpdateKanji$.subscribe((shouldUpdate: boolean) => {
+    this.suscription = this.dataService.shouldUpdateKanji$.subscribe((shouldUpdate: boolean) => {
       if(shouldUpdate) this.reload();
     });
   }
 
 
   reload() {
+    this.suscription.unsubscribe();
     this.router.navigateByUrl(this.router.url);
   }
 

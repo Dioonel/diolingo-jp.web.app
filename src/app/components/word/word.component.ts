@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
 
 import { DataService } from './../../services/data.service';
 import { Word } from './../../models/word';
@@ -11,6 +12,7 @@ import { Word } from './../../models/word';
   styleUrls: ['./word.component.css']
 })
 export class WordComponent implements OnInit {
+  suscription!: Subscription;
   words: Word[] = [];
 
   faAngleDown = faAngleDown;
@@ -28,12 +30,13 @@ export class WordComponent implements OnInit {
       });
     });
 
-    this.dataService.shouldUpdateWords$.subscribe((shouldUpdate: boolean) => {
+    this.suscription = this.dataService.shouldUpdateWords$.subscribe((shouldUpdate: boolean) => {
       if(shouldUpdate) this.reload();
     });
   }
 
   reload() {
+    this.suscription.unsubscribe();
     this.router.navigateByUrl(this.router.url);
   }
 
