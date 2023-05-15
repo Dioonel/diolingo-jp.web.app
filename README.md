@@ -9,4 +9,5 @@ Right now this app is only for my **personal use**, the words and kanjis are pub
 - Pagination via infinite scroll (this will requiere a back-end update also).
 - Add categories to both kanjis and words.
 - Add functionalities or "small games" to excercise the saved kanjis and words (similar to Anki).
+- Improve styling.
 - User system.

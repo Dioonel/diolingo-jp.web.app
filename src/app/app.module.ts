@@ -6,6 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DialogModule } from '@angular/cdk/dialog';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { EditFormComponent } from './components/edit-form/edit-form.component';
 import { SearchComponent } from './components/search/search.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { SearchComponent } from './components/search/search.component';
     DialogComponent,
     EditFormComponent,
     SearchComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ import { SearchComponent } from './components/search/search.component';
     HttpClientModule,
     FontAwesomeModule,
     DialogModule,
-    CdkAccordionModule
+    CdkAccordionModule,
+    MatProgressSpinnerModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true

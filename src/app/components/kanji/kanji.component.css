@@ -52,3 +52,10 @@
 .form-container {
   margin-top: 20px;
 }
+
+.spinner-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}

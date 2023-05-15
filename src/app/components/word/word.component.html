@@ -1,15 +1,21 @@
 <div class="wrapper">
-  <cdk-accordion>
-    <cdk-accordion-item #accordionMenu="cdkAccordionItem">
-      <button class="accordion-btn" type="button" (click)="accordionMenu.toggle()">Create a new word
-        <fa-icon [icon]="accordionMenu.expanded ? faAngleUp : faAngleDown" size="xl"></fa-icon>
-      </button>
-      <div class="form-container" [style.display]="accordionMenu.expanded ? '' : 'none'">
-        <app-word-submit (newWord)="pushNewWord($event)"></app-word-submit>
-      </div>
-    </cdk-accordion-item>
-  </cdk-accordion>
-  <div class="main-div">
-    <app-grid [items]="words" (clickDialog)="accordionMenu.expanded ? accordionMenu.close() : null"></app-grid>
+  <div *ngIf="status == 'loading'" class="spinner-div">
+    <app-spinner></app-spinner>
+  </div>
+
+  <div *ngIf="status == 'success'">
+    <cdk-accordion>
+      <cdk-accordion-item #accordionMenu="cdkAccordionItem">
+        <button class="accordion-btn" type="button" (click)="accordionMenu.toggle()">Create a new word
+          <fa-icon [icon]="accordionMenu.expanded ? faAngleUp : faAngleDown" size="xl"></fa-icon>
+        </button>
+        <div class="form-container" [style.display]="accordionMenu.expanded ? '' : 'none'">
+          <app-word-submit (newWord)="pushNewWord($event)"></app-word-submit>
+        </div>
+      </cdk-accordion-item>
+    </cdk-accordion>
+    <div class="main-div">
+      <app-grid [items]="words" (clickDialog)="accordionMenu.expanded ? accordionMenu.close() : null"></app-grid>
+    </div>
   </div>
 </div>

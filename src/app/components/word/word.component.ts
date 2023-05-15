@@ -12,6 +12,7 @@ import { Word } from './../../models/word';
   styleUrls: ['./word.component.css']
 })
 export class WordComponent implements OnInit {
+  status: 'init' | 'loading' | 'success' | 'error' = 'init';
   suscription!: Subscription;
   words: Word[] = [];
 
@@ -23,10 +24,11 @@ export class WordComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.status = 'loading';
     this.activatedRoute.queryParams.subscribe(params => {
       this.dataService.getWords(params).subscribe(data => {
         this.words = data;
-        // this.loading = false;
+        this.status = 'success';
       });
     });
 

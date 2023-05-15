@@ -12,6 +12,7 @@ import { Kanji } from './../../models/kanji';
   styleUrls: ['./kanji.component.css']
 })
 export class KanjiComponent implements OnInit {
+  status: 'init' | 'loading' | 'success' | 'error' = 'init';
   suscription!: Subscription;
   kanji: Kanji[] = [];
 
@@ -23,10 +24,11 @@ export class KanjiComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.status = 'loading';
     this.activatedRoute.queryParams.subscribe(params => {
       this.dataService.getKanji(params).subscribe(data => {
         this.kanji = data;
-        // this.loading = false;
+        this.status = 'success';
       });
     });
 
