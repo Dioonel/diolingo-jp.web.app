@@ -33,7 +33,6 @@ export class KanjiComponent implements OnInit {
   ngOnInit(): void {
     this.status = 'loading';
     this.loadMore();
-    this.status = 'success';
 
     this.suscription = this.dataService.shouldUpdateKanji$.subscribe((shouldUpdate: boolean) => {
       if(shouldUpdate) this.reload();
@@ -51,6 +50,7 @@ export class KanjiComponent implements OnInit {
       this.dataService.getKanji({...params, limit: this.limit, skip: this.skip}).subscribe(data => {
         this.loadMoreStatus = 'success';
         this.kanji.push(...data);
+        if(this.skip === 0) this.status = 'success';
         this.skip++;
         if(data.length < this.limit) this.noMore = true;
       });
