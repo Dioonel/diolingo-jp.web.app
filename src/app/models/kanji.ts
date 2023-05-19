@@ -15,4 +15,6 @@ export interface KanjiFilter {
   kanji?: string;
   meaning?: string;
   pronunciation?: string;
+  limit?: number;
+  skip?: number;
 }

@@ -2,6 +2,7 @@
   <div *ngIf="status == 'loading'" class="spinner-div">
     <app-spinner></app-spinner>
   </div>
+
   <div *ngIf="status == 'success'">
     <cdk-accordion>
       <cdk-accordion-item #accordionMenu="cdkAccordionItem">
@@ -9,12 +10,14 @@
           <fa-icon [icon]="accordionMenu.expanded ? faAngleUp : faAngleDown" size="xl"></fa-icon>
         </button>
         <div class="form-container" [style.display]="accordionMenu.expanded ? '' : 'none'">
-          <app-kanji-submit (newKanji)="pushNewKanji($event)"></app-kanji-submit>
+          <!-- <app-kanji-submit (newKanji)="pushNewKanji($event)"></app-kanji-submit> -->
+          <app-kanji-submit></app-kanji-submit>
         </div>
       </cdk-accordion-item>
     </cdk-accordion>
     <div class="main-div">
       <app-grid [items]="kanji" (clickDialog)="accordionMenu.expanded ? accordionMenu.close() : null"></app-grid>
+      <button *ngIf="kanji.length % limit === 0 && !noMore" type="button" class="load-more" (click)="loadMore()" [disabled]="loadMoreStatus === 'loading'">Load more...</button>
     </div>
   </div>
 </div>

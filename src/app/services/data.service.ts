@@ -42,6 +42,8 @@ export class DataService {
       if(params.meaning) query = query.append('meaning', params.meaning);
       if(params.pronunciation) query = query.append('pronunciation', params.pronunciation);
       if(params.kanji) query = query.append('kanji', params.kanji);
+      if(params.limit) query = query.append('limit', params.limit.toString());
+      if(params.skip && params.skip !== 0) query = query.append('skip', params.skip.toString());
 
       let res = this.http.get<Kanji[]>(`${this.url}/kanji`, { params: query });
       this.shouldUpdateKanji.next(false);
@@ -66,6 +68,8 @@ export class DataService {
       if(params.meaning) query = query.append('meaning', params.meaning);
       if(params.pronunciation) query = query.append('pronunciation', params.pronunciation);
       if(params.word) query = query.append('word', params.word);
+      if(params.limit) query = query.append('limit', params.limit.toString());
+      if(params.skip && params.skip !== 0) query = query.append('skip', params.skip.toString());
 
       let res = this.http.get<Word[]>(`${this.url}/words`, { params: query });
       this.shouldUpdateWords.next(false);

@@ -12,7 +12,7 @@ import { DataService } from './../../../app/services/data.service';
   styleUrls: ['./kanji-submit.component.css']
 })
 export class KanjiSubmitComponent implements OnInit {
-  @Output() newKanji = new EventEmitter<Kanji>();
+  // @Output() newKanji = new EventEmitter<Kanji>();
 
   form!: FormGroup;
   status: 'init' | 'loading' | 'success' | 'error' = 'init';
@@ -44,7 +44,7 @@ export class KanjiSubmitComponent implements OnInit {
         next: (data) => {
           this.resetForm();
           this.status = 'success';
-          this.newKanji.emit(data);
+          // this.newKanji.emit(data);
         },
         error: (err) => {
           this.status = 'error';

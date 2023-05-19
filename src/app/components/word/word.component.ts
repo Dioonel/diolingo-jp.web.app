@@ -13,24 +13,27 @@ import { Word } from './../../models/word';
 })
 export class WordComponent implements OnInit {
   status: 'init' | 'loading' | 'success' | 'error' = 'init';
+  loadMoreStatus: 'init' | 'loading' | 'success' | 'error' = 'init';
   suscription!: Subscription;
   words: Word[] = [];
+  limit = 0;
+  skip = 0;
+  noMore = false;
 
   faAngleDown = faAngleDown;
   faAngleUp = faAngleUp;
 
   constructor(private dataService: DataService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    if(window.innerWidth >= 955) this.limit = 30;
+    else if(window.innerWidth >= 655) this.limit = 20;
+    else this.limit = 10;
   }
 
   ngOnInit(): void {
     this.status = 'loading';
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.dataService.getWords(params).subscribe(data => {
-        this.words = data;
-        this.status = 'success';
-      });
-    });
+    this.loadMore();
+    this.status = 'success';
 
     this.suscription = this.dataService.shouldUpdateWords$.subscribe((shouldUpdate: boolean) => {
       if(shouldUpdate) this.reload();
@@ -42,7 +45,19 @@ export class WordComponent implements OnInit {
     this.router.navigateByUrl(this.router.url);
   }
 
-  pushNewWord(word: Word) {
-    this.words.push(word);
+  loadMore() {
+    this.loadMoreStatus = 'loading';
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.dataService.getWords({...params, limit: this.limit, skip: this.skip}).subscribe(data => {
+        this.loadMoreStatus = 'success';
+        this.words.push(...data);
+        this.skip++;
+        if(data.length < this.limit) this.noMore = true;
+      });
+    });
   }
+
+  // pushNewWord(word: Word) {
+  //   this.words.push(word);
+  // }
 }

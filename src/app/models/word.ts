@@ -15,4 +15,6 @@ export interface WordFilter {
   word?: string;
   meaning?: string;
   pronunciation?: string;
+  limit?: number;
+  skip?: number;
 }
