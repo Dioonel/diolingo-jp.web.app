@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faPencil, faA, faAsterisk, faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
 import { Dialog } from '@angular/cdk/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -14,8 +14,14 @@ export class GridComponent implements OnInit {
   @Output() clickDialog = new EventEmitter(false);
 
   faPencil = faPencil;
+  faA = faA;
+  faAsterisk = faAsterisk;
+  faWandMagicSparkles = faWandMagicSparkles;
+  switch!: 'japanese' | 'meaning' | 'all';
 
-  constructor(private router: Router, private dialog: Dialog) { }
+  constructor(private router: Router, private dialog: Dialog) {
+    this.switch = sessionStorage.getItem('switch') as 'japanese' | 'meaning' | 'all' || 'all';
+  }
 
   ngOnInit(): void {
   }
@@ -37,5 +43,10 @@ export class GridComponent implements OnInit {
         },
         panelClass: 'panel-class'
       });
+  }
+
+  doSwitch(type: 'japanese' | 'meaning' | 'all') {
+    this.switch = type;
+    sessionStorage.setItem('switch', type);
   }
 }
