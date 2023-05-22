@@ -2,6 +2,11 @@
   <app-search></app-search>
   <div class="switch-container">
     <div class="switch">
+      <button type="button" (click)="randomize()">
+        <fa-icon [icon]="faDiceSix" size="2x"></fa-icon>
+      </button>
+    </div>
+    <div class="switch">
       <button *ngIf="switch === 'all'" type="button" (click)="doSwitch('japanese')">
         <fa-icon [icon]="faWandMagicSparkles" size="2x"></fa-icon>
       </button>
