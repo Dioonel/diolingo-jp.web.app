@@ -1,4 +1,4 @@
-.container{
+.container {
   width: 100vw;
   height: 100%;
   display: flex;
@@ -6,25 +6,25 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(37,38,41,255);
+  background-color: rgba(37, 38, 41, 255);
   overflow-x: hidden;
-  
+
 }
 
-.chart{
+.chart {
   width: 1240px;
 }
 
-.chart-sec{
+.chart-sec {
   width: 800px;
 }
 
-.chart-ter{
+.chart-ter {
   width: 560px;
 }
 
 @media (max-width: 1240px) {
-  .container{
+  .container {
     overflow-x: scroll;
     display: block;
   }

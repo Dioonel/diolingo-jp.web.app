@@ -16,7 +16,8 @@
     </cdk-accordion>
     <div class="main-div">
       <app-grid [items]="words" (clickDialog)="accordionMenu.expanded ? accordionMenu.close() : null"></app-grid>
-      <button *ngIf="words.length % limit === 0 && !noMore" type="button" class="load-more" (click)="loadMore()" [disabled]="loadMoreStatus === 'loading'">Load more...</button>
+      <button *ngIf="words.length % limit === 0 && !noMore" type="button" class="load-more" (click)="loadMore()"
+        [disabled]="loadMoreStatus === 'loading'">Load more...</button>
     </div>
   </div>
 </div>

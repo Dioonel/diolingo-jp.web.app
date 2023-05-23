@@ -6,7 +6,7 @@
   height: calc(100vh - 60px);
   width: 100vw;
   overflow-x: hidden;
-  background-color: rgba(32,33,36,255);
+  background-color: rgba(32, 33, 36, 255);
 }
 
 .box {
@@ -64,14 +64,14 @@ input {
   cursor: pointer;
 }
 
-.button button:hover{
+.button button:hover {
   background-color: #fff;
   color: #000;
   border: 1px solid #000;
   transition: 0.3s;
 }
 
-.span-error{
+.span-error {
   font-family: 'Inter';
   font-size: 1.2em;
   font-weight: 500;
@@ -79,7 +79,7 @@ input {
   text-shadow: 0px 0px 10px white, 0px 0px 10px white;
 }
 
-.span-loading{
+.span-loading {
   font-family: 'Inter';
   font-size: 1.2em;
   font-weight: 500;

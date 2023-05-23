@@ -21,10 +21,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  login(){
-    if(this.form.valid){
+  login() {
+    if (this.form.valid) {
       this.status = 'loading';
       let user: LoginUser = {
         username: this.form.get('username')?.value,

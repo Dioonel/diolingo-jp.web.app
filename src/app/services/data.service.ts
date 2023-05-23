@@ -17,7 +17,7 @@ export class DataService {
   shouldUpdateKanji$ = this.shouldUpdateKanji.asObservable();
   shouldUpdateWords$ = this.shouldUpdateWords.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   awakeHeroku() {
     this.http.get(this.url);
@@ -36,14 +36,14 @@ export class DataService {
   }
 
   getKanji(params?: KanjiFilter) {
-    if(params) {
+    if (params) {
       let query = new HttpParams();
 
-      if(params.meaning) query = query.append('meaning', params.meaning);
-      if(params.pronunciation) query = query.append('pronunciation', params.pronunciation);
-      if(params.kanji) query = query.append('kanji', params.kanji);
-      if(params.limit) query = query.append('limit', params.limit.toString());
-      if(params.skip && params.skip !== 0) query = query.append('skip', params.skip.toString());
+      if (params.meaning) query = query.append('meaning', params.meaning);
+      if (params.pronunciation) query = query.append('pronunciation', params.pronunciation);
+      if (params.kanji) query = query.append('kanji', params.kanji);
+      if (params.limit) query = query.append('limit', params.limit.toString());
+      if (params.skip && params.skip !== 0) query = query.append('skip', params.skip.toString());
 
       let res = this.http.get<Kanji[]>(`${this.url}/kanji`, { params: query });
       this.shouldUpdateKanji.next(false);
@@ -62,14 +62,14 @@ export class DataService {
   }
 
   getWords(params?: WordFilter) {
-    if(params) {
+    if (params) {
       let query = new HttpParams();
 
-      if(params.meaning) query = query.append('meaning', params.meaning);
-      if(params.pronunciation) query = query.append('pronunciation', params.pronunciation);
-      if(params.word) query = query.append('word', params.word);
-      if(params.limit) query = query.append('limit', params.limit.toString());
-      if(params.skip && params.skip !== 0) query = query.append('skip', params.skip.toString());
+      if (params.meaning) query = query.append('meaning', params.meaning);
+      if (params.pronunciation) query = query.append('pronunciation', params.pronunciation);
+      if (params.word) query = query.append('word', params.word);
+      if (params.limit) query = query.append('limit', params.limit.toString());
+      if (params.skip && params.skip !== 0) query = query.append('skip', params.skip.toString());
 
       let res = this.http.get<Word[]>(`${this.url}/words`, { params: query });
       this.shouldUpdateWords.next(false);
@@ -93,16 +93,16 @@ export class DataService {
 
   updateKanji(kanji: Kanji, id: string) {
     return this.http.patch<Kanji>(`${this.url}/kanji/${id}`, kanji)
-    .pipe(
-      tap(() => this.shouldUpdateKanji.next(true))
-    )
+      .pipe(
+        tap(() => this.shouldUpdateKanji.next(true))
+      )
   }
 
   updateWord(word: Word, id: string) {
     return this.http.patch<Word>(`${this.url}/words/${id}`, word)
-    .pipe(
-      tap(() => this.shouldUpdateWords.next(true))
-    )
+      .pipe(
+        tap(() => this.shouldUpdateWords.next(true))
+      )
   }
 
   deleteKanji(id: string) {

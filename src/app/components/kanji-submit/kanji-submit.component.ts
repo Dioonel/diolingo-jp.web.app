@@ -12,7 +12,6 @@ import { DataService } from './../../../app/services/data.service';
   styleUrls: ['./kanji-submit.component.css']
 })
 export class KanjiSubmitComponent implements OnInit {
-  // @Output() newKanji = new EventEmitter<Kanji>();
 
   form!: FormGroup;
   status: 'init' | 'loading' | 'success' | 'error' = 'init';
@@ -39,12 +38,11 @@ export class KanjiSubmitComponent implements OnInit {
 
   submitKanji() {
     this.status = 'loading';
-    if(this.form.valid && this.validateArrayLength(this.meaningFormArray) && this.validateArrayLength(this.pronunciationFormArray)){
+    if (this.form.valid && this.validateArrayLength(this.meaningFormArray) && this.validateArrayLength(this.pronunciationFormArray)) {
       this.dataService.createKanji(this.form.value).subscribe({
         next: (data) => {
           this.resetForm();
           this.status = 'success';
-          // this.newKanji.emit(data);
         },
         error: (err) => {
           this.status = 'error';
@@ -66,7 +64,7 @@ export class KanjiSubmitComponent implements OnInit {
   }
 
   addArrayEl(array: FormArray, flag: boolean = false) {
-    if(flag){
+    if (flag) {
       array.push(this.fb.control('', [Validators.required, Validators.maxLength(64), Validators.pattern(/[\ぁ-んァ-ン]/)]));
     } else {
       array.push(this.fb.control('', [Validators.required, Validators.maxLength(64)]));
@@ -93,7 +91,7 @@ export class KanjiSubmitComponent implements OnInit {
     });
   }
 
-  resetForm(){
+  resetForm() {
     this.form.reset();
     this.meaningFormArray.clear();
     this.pronunciationFormArray.clear();

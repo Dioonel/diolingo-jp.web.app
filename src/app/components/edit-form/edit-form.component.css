@@ -14,7 +14,7 @@
 .form-control {
   font-family: 'Inter';
   font-size: 1.8em;
-  border: 1px solid rgba(32,33,36,255);
+  border: 1px solid rgba(32, 33, 36, 255);
   border-radius: 4px;
   padding: 5px;
   margin-top: 5px;
@@ -65,7 +65,7 @@
 
 .submit-btn, .cancel-btn, .delete-btn {
   font-family: 'Inter';
-  color: rgba(32,33,36,255);
+  color: rgba(32, 33, 36, 255);
   font-size: 1.8em;
   background-color: transparent;
   border: none;
@@ -91,7 +91,7 @@
   border-radius: 4px;
 }
 
-.error{
+.error {
   font-size: 1.4em;
   font-family: Arial;
   font-weight: 500;
@@ -116,8 +116,6 @@
 @media screen and (max-width: 500px) {
   .btns-div {
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
     gap: 20px;
   }
 

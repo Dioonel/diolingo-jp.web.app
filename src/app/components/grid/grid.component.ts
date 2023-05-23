@@ -29,7 +29,7 @@ export class GridComponent implements OnInit {
 
   openDialog(item: any) {
     let type = '';
-    if(location.pathname == '/kanji') type = 'kanji';
+    if (location.pathname == '/kanji') type = 'kanji';
     else type = 'word';
 
     this.clickDialog.emit(true);

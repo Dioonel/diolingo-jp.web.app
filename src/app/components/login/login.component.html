@@ -6,13 +6,17 @@
       </div>
       <div class="input">
         <input type="text" placeholder="Username..." formControlName="username" />
-        <span *ngIf="form.controls['username'].dirty && form.hasError('required', 'username')" class="span-error">Username is required</span>
-        <span *ngIf="form.controls['username'].dirty && form.hasError('maxlength', 'username')" class="span-error">Username is too long</span>
+        <span *ngIf="form.controls['username'].dirty && form.hasError('required', 'username')"
+          class="span-error">Username is required</span>
+        <span *ngIf="form.controls['username'].dirty && form.hasError('maxlength', 'username')"
+          class="span-error">Username is too long</span>
       </div>
       <div class="input">
         <input type="password" placeholder="Password..." formControlName="password" />
-        <span *ngIf="form.controls['password'].dirty && form.hasError('required', 'password')" class="span-error">Password is required</span>
-        <span *ngIf="form.controls['password'].dirty && form.hasError('maxlength', 'password')" class="span-error">Password is too long</span>
+        <span *ngIf="form.controls['password'].dirty && form.hasError('required', 'password')"
+          class="span-error">Password is required</span>
+        <span *ngIf="form.controls['password'].dirty && form.hasError('maxlength', 'password')"
+          class="span-error">Password is too long</span>
       </div>
       <div class="button">
         <button type="submit" [disabled]="status === 'loading'" (click)="markFormGroupTouched()">Login</button>

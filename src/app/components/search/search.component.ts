@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
   faRotateLeft = faRotateLeft;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-    if(location.pathname == '/kanji') this.pageType = 'kanji';
+    if (location.pathname == '/kanji') this.pageType = 'kanji';
     else this.pageType = 'word';
     this.filterType = this.pageType;
   }
@@ -31,26 +31,26 @@ export class SearchComponent implements OnInit {
 
   filter() {
     let params: Params = {};
-    if(this.filterType === 'kanji'){
-      if(this.filterKanji.valid) {
+    if (this.filterType === 'kanji') {
+      if (this.filterKanji.valid) {
         params['kanji'] = this.filterKanji.value;
         this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: params });
         params = {};
       }
-    } else if(this.filterType === 'word'){
-      if(this.filterWord.valid) {
+    } else if (this.filterType === 'word') {
+      if (this.filterWord.valid) {
         params['word'] = this.filterWord.value;
         this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: params });
         params = {};
       }
-    } else if(this.filterType === 'pronunciation'){
-      if(this.filterPronunciation.valid) {
+    } else if (this.filterType === 'pronunciation') {
+      if (this.filterPronunciation.valid) {
         params['pronunciation'] = this.filterPronunciation.value;
         this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: params });
         params = {};
       }
-    } else if(this.filterType === 'meaning'){
-      if(this.filterMeaning.valid) {
+    } else if (this.filterType === 'meaning') {
+      if (this.filterMeaning.valid) {
         params['meaning'] = this.filterMeaning.value;
         this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: params });
         params = {};
@@ -76,9 +76,9 @@ export class SearchComponent implements OnInit {
   }
 
   markAsTouched() {
-    if(this.filterType === 'kanji') this.filterKanji.markAsDirty();
-    else if(this.filterType === 'word') this.filterWord.markAsDirty();
-    else if(this.filterType === 'pronunciation') this.filterPronunciation.markAsDirty();
-    else if(this.filterType === 'meaning') this.filterMeaning.markAsDirty();
+    if (this.filterType === 'kanji') this.filterKanji.markAsDirty();
+    else if (this.filterType === 'word') this.filterWord.markAsDirty();
+    else if (this.filterType === 'pronunciation') this.filterPronunciation.markAsDirty();
+    else if (this.filterType === 'meaning') this.filterMeaning.markAsDirty();
   }
 }

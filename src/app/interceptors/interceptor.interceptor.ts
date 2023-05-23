@@ -13,7 +13,7 @@ export class MyInterceptor implements HttpInterceptor {
   constructor() { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if(req.headers.has('skip')){
+    if (req.headers.has('skip')) {
       req = req.clone({
         headers: req.headers.delete('skip')
       });
@@ -21,9 +21,9 @@ export class MyInterceptor implements HttpInterceptor {
     }
 
     let token = localStorage.getItem('jwt');
-    if(token !== null && token !== '' && token !== 'null'){
+    if (token !== null && token !== '' && token !== 'null') {
       let reqAuth = req.clone({
-        setHeaders:{
+        setHeaders: {
           'Authorization': `Bearer ${token}`
         }
       });

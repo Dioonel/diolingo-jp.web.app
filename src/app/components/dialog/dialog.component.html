@@ -7,21 +7,19 @@
 
   <!-- Details mode -->
   <div *ngIf="!editToggle" class="detail-mode">
-    <h1 class="title"> {{ data.type }} detail </h1>
-    <p class="main-value"> {{ data.type + ': ' + data.item[data.type.toLowerCase()] }} </p>
+    <p class="main-value">{{ data.item[data.type.toLowerCase()] }}</p>
     <p class="pronunciation-container">
-      Pronuncations:
+      <!-- Pronuncations: -->
       <span class="pronunciation" *ngFor="let pr of data.item.pronunciation; let i = index">
-        {{ pr }}{{ i == data.item.pronunciation.length - 1 ? '' : ', ' }}
+        {{ pr }}
       </span>
     </p>
     <p class="meaning-container">
-      Meanings:
       <span class="meaning" *ngFor="let mean of data.item.meaning; let i = index">
         {{ mean }}{{ i == data.item.meaning.length - 1 ? '' : ', ' }}
       </span>
     </p>
-    <p class="notes"> Notes: {{ data.item.notes || '-' }} </p>
+    <p *ngIf="data.item?.notes?.trim()" class="notes">{{ data.item.notes.trim() }} </p>
   </div>
 
   <!-- Edit mode  -->

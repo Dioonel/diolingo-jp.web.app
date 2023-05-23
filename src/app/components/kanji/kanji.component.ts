@@ -25,8 +25,8 @@ export class KanjiComponent implements OnInit {
 
   constructor(private dataService: DataService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    if(window.innerWidth >= 955) this.limit = 30;
-    else if(window.innerWidth >= 655) this.limit = 20;
+    if (window.innerWidth >= 955) this.limit = 30;
+    else if (window.innerWidth >= 655) this.limit = 20;
     else this.limit = 10;
   }
 
@@ -35,7 +35,7 @@ export class KanjiComponent implements OnInit {
     this.loadMore();
 
     this.suscription = this.dataService.shouldUpdateKanji$.subscribe((shouldUpdate: boolean) => {
-      if(shouldUpdate) this.reload();
+      if (shouldUpdate) this.reload();
     });
   }
 
@@ -44,21 +44,16 @@ export class KanjiComponent implements OnInit {
     this.router.navigateByUrl(this.router.url);
   }
 
-  loadMore(){
+  loadMore() {
     this.loadMoreStatus = 'loading';
     this.activatedRoute.queryParams.subscribe(params => {
-      this.dataService.getKanji({...params, limit: this.limit, skip: this.skip}).subscribe(data => {
+      this.dataService.getKanji({ ...params, limit: this.limit, skip: this.skip }).subscribe(data => {
         this.loadMoreStatus = 'success';
         this.kanji.push(...data);
-        if(this.skip === 0) this.status = 'success';
+        if (this.skip === 0) this.status = 'success';
         this.skip++;
-        if(data.length < this.limit) this.noMore = true;
+        if (data.length < this.limit) this.noMore = true;
       });
     });
   }
-
-  // pushNewKanji(kanji: Kanji) {
-  //   this.kanji.push(kanji);
-  //   this.newElements++;
-  // }
 }

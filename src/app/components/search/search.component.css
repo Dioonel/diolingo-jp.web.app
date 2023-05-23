@@ -1,18 +1,18 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(32,33,36,255);
+  background-color: rgba(32, 33, 36, 255);
   margin-bottom: 30px;
 }
 
-.filter-div form{
+.filter-div form {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.filter-div form .input-search, .filter-div form select{
+.filter-div form .input-search, .filter-div form select {
   font-size: 1.8em;
   color: white;
   background-color: #3c4042;
@@ -30,7 +30,7 @@
   font-family: Arial;
 }
 
-.submit-btn, .reset-btn{
+.submit-btn, .reset-btn {
   font-size: 1.8em;
   color: white;
   background-color: #3c4042;
@@ -44,7 +44,7 @@
   width: 60px;
 }
 
-.submit-btn:hover, .reset-btn:hover{
+.submit-btn:hover, .reset-btn:hover {
   cursor: pointer;
   background-color: #ea80fc;
   border: 2px solid #b64fc8;
@@ -59,7 +59,7 @@
 
 }
 
-.error-div .error{
+.error-div .error {
   font-family: Arial;
   font-size: 1.5em;
   font-weight: 500;
@@ -68,29 +68,29 @@
   margin-bottom: 2px;
 }
 
-.device-only{
+.device-only {
   display: none;
 }
 
-@media screen and (max-width: 620px){
-  .filter-div form{
+@media screen and (max-width: 620px) {
+  .filter-div form {
     flex-direction: column;
     align-items: center;
   }
 
-  .filter-div form .input-search, .filter-div form select{
+  .filter-div form .input-search, .filter-div form select {
     margin-bottom: 10px;
     width: 100%;
     height: 38px;
   }
 
-  .submit-btn, .reset-btn{
+  .submit-btn, .reset-btn {
     margin-bottom: 10px;
     width: 100%;
     height: 38px;
   }
 
-  .device-only{
+  .device-only {
     display: inline;
     margin-left: 10px;
   }

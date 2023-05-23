@@ -1,4 +1,4 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,13 +7,13 @@
   gap: 15px;
 }
 
-.title{
+.title {
   font-size: 2.6em;
   margin-bottom: 15px;
   font-weight: 500;
 }
 
-.form{
+.form {
   width: 500px;
   background-color: white;
   padding: 20px 50px;
@@ -23,21 +23,21 @@
   gap: 20px;
 }
 
-label{
+label {
   font-size: 1.8em;
 }
 
-.form-group{
+.form-group {
   display: flex;
   flex-direction: column;
   text-align: left;
   gap: 4px;
 }
 
-.form-control{
+.form-control {
   font-family: 'Inter';
   font-size: 1.8em;
-  border: 1px solid rgba(32,33,36,255);
+  border: 1px solid rgba(32, 33, 36, 255);
   border-radius: 4px;
   padding: 5px;
   margin-top: 5px;
@@ -45,11 +45,11 @@ label{
   width: 100%;
 }
 
-.form-control::placeholder{
+.form-control::placeholder {
   color: rgb(146, 146, 146);
 }
 
-.error{
+.error {
   font-size: 1.4em;
   font-family: Arial;
   color: red;
@@ -66,7 +66,7 @@ label{
 
 .submit-btn, .reset-btn {
   font-family: 'Inter';
-  color: rgba(32,33,36,255);
+  color: rgba(32, 33, 36, 255);
   font-size: 1.8em;
   background-color: transparent;
   border: none;
@@ -111,13 +111,13 @@ label{
   cursor: not-allowed;
 }
 
-.input-btn-div{
+.input-btn-div {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.return-a{
+.return-a {
   font-size: 1.4em;
   font-family: Arial;
   color: white;
@@ -127,7 +127,7 @@ label{
   text-decoration: solid underline;
 }
 
-.return-a:hover{
+.return-a:hover {
   color: #00bfff;
   cursor: pointer;
 }
@@ -139,16 +139,16 @@ label{
   letter-spacing: 0.5px;
 }
 
-.success-general{
+.success-general {
   color: green;
 }
 
-.error-general{
+.error-general {
   color: red;
 }
 
-@media screen and (max-width: 560px){
-  .form{
+@media screen and (max-width: 560px) {
+  .form {
     width: 100%;
     padding: 20px 20px;
   }

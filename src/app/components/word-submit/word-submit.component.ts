@@ -39,7 +39,7 @@ export class WordSubmitComponent implements OnInit {
 
   submitWord() {
     this.status = 'loading';
-    if(this.form.valid && this.validateArrayLength(this.meaningFormArray) && this.validateArrayLength(this.pronunciationFormArray)){
+    if (this.form.valid && this.validateArrayLength(this.meaningFormArray) && this.validateArrayLength(this.pronunciationFormArray)) {
       this.dataService.createWord(this.form.value).subscribe({
         next: (data) => {
           this.resetForm();
@@ -66,7 +66,7 @@ export class WordSubmitComponent implements OnInit {
   }
 
   addArrayEl(array: FormArray, flag: boolean = false) {
-    if(flag){
+    if (flag) {
       array.push(this.fb.control('', [Validators.required, Validators.maxLength(64), Validators.pattern(/[\u3040-\u30ff]/)]));
     } else {
       array.push(this.fb.control('', [Validators.required, Validators.maxLength(64)]));
@@ -93,7 +93,7 @@ export class WordSubmitComponent implements OnInit {
     });
   }
 
-  resetForm(){
+  resetForm() {
     this.form.reset();
     this.meaningFormArray.clear();
     this.pronunciationFormArray.clear();

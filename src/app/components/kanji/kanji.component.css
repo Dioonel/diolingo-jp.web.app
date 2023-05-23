@@ -1,27 +1,27 @@
-.wrapper{
+.wrapper {
   width: 100vw;
   min-height: calc(100vh - 60px);
   max-height: 100%;
   padding: 55px 10px 10px 10px;
-  background-color: rgba(32,33,36,255);
+  background-color: rgba(32, 33, 36, 255);
   overflow-x: hidden;
   text-align: center;
 }
 
-.main-div{
+.main-div {
   padding-top: 25px;
 }
 
-.wrapper a{
+.wrapper a {
   font-size: 2.2em;
   color: white;
 }
 
-.wrapper a:hover{
+.wrapper a:hover {
   color: #00bfff;
 }
 
-.main-div{
+.main-div {
   margin-top: 30px;
 }
 
@@ -42,7 +42,7 @@
   background-color: transparent;
 }
 
-.accordion-btn:hover{
+.accordion-btn:hover {
   cursor: pointer;
   background-color: #fff;
   color: #000;
@@ -53,14 +53,14 @@
   margin-top: 20px;
 }
 
-.spinner-div{
+.spinner-div {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
 }
 
-.load-more{
+.load-more {
   margin: 20px auto;
   font-size: 2.6em;
   font-family: 'Inter';
@@ -74,7 +74,7 @@
   background-color: transparent;
 }
 
-.load-more:hover{
+.load-more:hover {
   background-color: #fff;
   color: #000;
   transition: 0.3s;
@@ -87,13 +87,13 @@
   }
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
   .load-more {
     width: 50%;
   }
 }
 
-@media screen and (max-width: 480px){
+@media screen and (max-width: 480px) {
   .load-more {
     width: 70%;
   }

@@ -30,9 +30,9 @@ export class EditFormComponent implements OnInit {
   ngOnInit(): void {
     this.status = 'loading';
     this.type = this.data.type.toLowerCase() as 'kanji' | 'word';
-    this.data.item.pronunciation.forEach((pr: any) => this.pronunciation.push({pronunciation: pr, isNew: false}));
+    this.data.item.pronunciation.forEach((pr: any) => this.pronunciation.push({ pronunciation: pr, isNew: false }));
 
-    if(this.type === 'kanji') this.validators = [Validators.required, Validators.maxLength(1), Validators.pattern(/[\u4e00-\u9faf]/)];
+    if (this.type === 'kanji') this.validators = [Validators.required, Validators.maxLength(1), Validators.pattern(/[\u4e00-\u9faf]/)];
     else this.validators = [Validators.required, Validators.maxLength(64), Validators.pattern(/[\ぁ-んァ-ン一-龠]/)];
     this.buildForm();
     this.form.patchValue(this.data.item);
@@ -53,7 +53,8 @@ export class EditFormComponent implements OnInit {
 
   update() {
     this.status = 'loading';
-    if(this.form.valid && this.validateArrayLength(this.meaningFormArray) && this.validateArrayLength(this.pronunciationFormArray)){
+    if (this.form.valid && this.validateArrayLength(this.meaningFormArray) && this.validateArrayLength(this.pronunciationFormArray)) {
+      if (this.form.controls['notes'].value === '') this.form.controls['notes'].setValue(null);
       this.executeUpdate();
     } else {
       this.status = 'error';
@@ -63,7 +64,7 @@ export class EditFormComponent implements OnInit {
 
   delete() {
     this.status = 'loading';
-    if(confirm('Are you sure you want to delete this item? This cannot be reverted.')){
+    if (confirm('Are you sure you want to delete this item? This cannot be reverted.')) {
       this.executeDelete();
     } else {
       this.status = 'init';
@@ -79,10 +80,10 @@ export class EditFormComponent implements OnInit {
   }
 
   addArrayEl(array: FormArray, flag: boolean = false, flag2: boolean = false) {
-    if(flag){
+    if (flag) {
       array.push(this.fb.control([''], [Validators.required, Validators.maxLength(64), Validators.pattern(/[\ぁ-んァ-ン]/)]));
-      if(flag2){
-        this.pronunciation.push({pronunciation: '', isNew: true});
+      if (flag2) {
+        this.pronunciation.push({ pronunciation: '', isNew: true });
       }
     } else {
       array.push(this.fb.control('', [Validators.required, Validators.maxLength(64)]));
@@ -91,21 +92,21 @@ export class EditFormComponent implements OnInit {
 
   removeArrayEl(array: FormArray, i: number) {
     array.removeAt(i);
-    if(this.pronunciation.length > this.pronunciationFormArray.length) this.pronunciation.splice(i, 1);
+    if (this.pronunciation.length > this.pronunciationFormArray.length) this.pronunciation.splice(i, 1);
   }
 
   validateArrayLength(array: FormArray) {
     return array.controls.length > 0;
   }
 
-  patchArrays(){
-    for(let i = 0; i < this.data.item.meaning.length; i++){
-      if(i > 0) this.addArrayEl(this.meaningFormArray);
+  patchArrays() {
+    for (let i = 0; i < this.data.item.meaning.length; i++) {
+      if (i > 0) this.addArrayEl(this.meaningFormArray);
       this.meaningFormArray.controls[i].patchValue(this.data.item.meaning[i]);
     }
 
-    for(let i = 0; i < this.data.item.pronunciation.length; i++){
-      if(i > 0) this.addArrayEl(this.pronunciationFormArray, true);
+    for (let i = 0; i < this.data.item.pronunciation.length; i++) {
+      if (i > 0) this.addArrayEl(this.pronunciationFormArray, true);
       this.pronunciationFormArray.controls[i].patchValue(this.data.item.pronunciation[i]);
     }
   }
@@ -123,7 +124,7 @@ export class EditFormComponent implements OnInit {
   }
 
   executeUpdate() {
-    if(this.type === 'kanji') {
+    if (this.type === 'kanji') {
       this.dataService.updateKanji(this.form.value, this.data.item._id).subscribe({
         next: (data) => {
           this.status = 'success';
@@ -149,7 +150,7 @@ export class EditFormComponent implements OnInit {
   }
 
   executeDelete() {
-    if(this.type === 'kanji') {
+    if (this.type === 'kanji') {
       this.dataService.deleteKanji(this.data.item._id).subscribe({
         next: (data) => {
           this.status = 'success';

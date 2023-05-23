@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
 
   onNavCheckClick() {
     let nav = document.querySelector('.nav');
-    if(nav) nav.classList.toggle('nav-expanded');
+    if (nav) nav.classList.toggle('nav-expanded');
   }
 
   goToHome() {
