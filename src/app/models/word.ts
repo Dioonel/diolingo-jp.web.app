@@ -7,9 +7,9 @@ export interface Word {
   created_at: Date;
 }
 
-export interface WordCreateDTO extends Omit<Word, 'id' | 'created_at'> { }
+export interface WordCreateDTO extends Omit<Word, '_id' | 'created_at'> { }
 
-export interface WordUpdateDTO extends Omit<Word, 'id' | 'created_at'> { }
+export interface WordUpdateDTO extends Omit<Word, '_id' | 'created_at'> { }
 
 export interface WordFilter {
   word?: string;

@@ -13,7 +13,7 @@ fdescribe('DataService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule ],
+      imports: [HttpClientTestingModule],
       providers: [
         DataService,
       ]
@@ -34,7 +34,7 @@ fdescribe('DataService', () => {
     const mockResponse: LoginData = { token: 'token_jwt_123', user: { username: 'test', password: 'test123' } };
     const user: LoginUser = { username: 'test', password: 'test123' };
 
-    service.login({...user}).subscribe((response: LoginData) => {
+    service.login({ ...user }).subscribe((response: LoginData) => {
       expect(response).toEqual(mockResponse);
       doneFn();
     });
@@ -46,10 +46,10 @@ fdescribe('DataService', () => {
   });
 
   it('should create kanji', (doneFn) => {
-    const mockResponse: Kanji = { id: 1, kanji: '日', meaning: ['Day', 'Sun'], pronunciation: ['にち', 'び'], notes: '', created_at: new Date() };
+    const mockResponse: Kanji = { _id: '1', kanji: '日', meaning: ['Day', 'Sun'], pronunciation: ['にち', 'び'], notes: '', created_at: new Date() };
     const kanji: KanjiCreateDTO = { kanji: '日', meaning: ['Day', 'Sun'], pronunciation: ['にち', 'び'], notes: '' };
 
-    service.createKanji({...kanji}).subscribe((response: Kanji) => {
+    service.createKanji({ ...kanji }).subscribe((response: Kanji) => {
       expect(response).toEqual(mockResponse);
       doneFn();
     });
@@ -61,10 +61,10 @@ fdescribe('DataService', () => {
   });
 
   it('should create word', (doneFn) => {
-    const mockResponse: Word = { id: 1, word: '漢字', meaning: ['Kanji', 'Word'], pronunciation: ['かんじ'], notes: '', created_at: new Date() };
+    const mockResponse: Word = { _id: '1', word: '漢字', meaning: ['Kanji', 'Word'], pronunciation: ['かんじ'], notes: '', created_at: new Date() };
     const word: WordCreateDTO = { word: '漢字', meaning: ['Kanji', 'Word'], pronunciation: ['かんじ'], notes: '' };
 
-    service.createWord({...word}).subscribe((response: Word) => {
+    service.createWord({ ...word }).subscribe((response: Word) => {
       expect(response).toEqual(mockResponse);
       doneFn();
     });

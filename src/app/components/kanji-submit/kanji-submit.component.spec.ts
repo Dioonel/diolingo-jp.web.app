@@ -3,6 +3,7 @@ import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DebugElement } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { KanjiSubmitComponent } from './kanji-submit.component';
 import { DataService } from './../../../app/services/data.service';
@@ -23,12 +24,13 @@ fdescribe('KanjiSubmitComponent', () => {
         ReactiveFormsModule,
         RouterTestingModule,
         HttpClientTestingModule,
+        FontAwesomeModule,
       ],
       providers: [
         { provide: DataService, useValue: spy },                                      // spy step 3
       ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -631,7 +633,7 @@ fdescribe('KanjiSubmitComponent', () => {
           expect(component.form.valid).toBeTruthy();
 
           service.createKanji.and.returnValue(mockObservable({
-            id: 1,
+            _id: '1',
             kanji: '日',
             meaning: ['Day', 'Sun'],
             pronunciation: ['にち', 'がつ'],
@@ -639,7 +641,7 @@ fdescribe('KanjiSubmitComponent', () => {
             created_at: new Date()
           }));
 
-          clickElement(fixture, '.submit');
+          clickElement(fixture, '#submit');
           fixture.detectChanges();
 
           expect(service.createKanji).toHaveBeenCalled();
@@ -655,7 +657,7 @@ fdescribe('KanjiSubmitComponent', () => {
           expect(component.form.valid).toBeTruthy();
 
           service.createKanji.and.returnValue(mockObservable({
-            id: 2,
+            _id: '1',
             kanji: '日',
             meaning: ['Day'],
             pronunciation: ['にち'],
@@ -663,7 +665,7 @@ fdescribe('KanjiSubmitComponent', () => {
             created_at: new Date()
           }));
 
-          clickElement(fixture, '.submit');
+          clickElement(fixture, '#submit');
           fixture.detectChanges();
 
           expect(service.createKanji).toHaveBeenCalled();
@@ -685,7 +687,7 @@ fdescribe('KanjiSubmitComponent', () => {
             notes: '',
           }))
 
-          clickElement(fixture, '.submit');
+          clickElement(fixture, '#submit');
           fixture.detectChanges();
 
           expect(component.status).toEqual('loading');
@@ -713,14 +715,14 @@ fdescribe('KanjiSubmitComponent', () => {
           setInputValue(fixture, '#pronunciation1', 'がつ');
           setInputValue(fixture, '#notes', 'Hello my notes uwu');
           fixture.detectChanges();
-          clickElement(fixture, '.reset');
+          clickElement(fixture, '#reset');
           fixture.detectChanges();
 
           expect(component.form.invalid).toBeTruthy();
           expect(component.form.value).toEqual({
             kanji: null,
-            meaning: [null],
-            pronunciation: [null],
+            meaning: [''],
+            pronunciation: [''],
             notes: null
           });
 

@@ -77,11 +77,11 @@
     <br />
 
     <div class="btns-div">
-      <button class="reset-btn" type="button" (click)="resetForm(); status = 'init'">
+      <button class="reset-btn" id="reset" type="button" (click)="resetForm(); status = 'init'">
         <fa-icon [icon]="faTrash" size="xl"></fa-icon>
         Reset
       </button>
-      <button class="submit-btn" type="submit" (click)="markFormGroupTouched()">
+      <button class="submit-btn" id="submit" type="submit" (click)="markFormGroupTouched()">
         <fa-icon [icon]="faSave" size="xl"></fa-icon>
         Submit
       </button>
