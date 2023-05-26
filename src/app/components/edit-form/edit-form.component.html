@@ -1,5 +1,5 @@
 <form [formGroup]="form" class="edit-mode" (ngSubmit)="update()">
-  <h1 class="title"> Edit {{ data.type }} </h1>
+  <h1 class="title" id="title"> Edit {{ data.type }} </h1>
   <div class="form-group">
     <label class="subtitle" [for]="type">{{ (type === 'kanji') ? 'Kanji' : 'Word' }}:</label><br />
     <input type="text" [formControlName]="type" class="form-control" [id]="type">
@@ -87,18 +87,18 @@
   </div>
 
   <div class="btns-div">
-    <button type="button" class="cancel-btn" (click)="cancel()" [disabled]="status === 'loading'">
+    <button type="button" class="cancel-btn" id="cancel" (click)="cancel()" [disabled]="status === 'loading'">
       <fa-icon [icon]="faBackward" size="xl"></fa-icon>Cancel
     </button>
 
-    <button type="button" class="delete-btn" (click)="delete()" [disabled]="status === 'loading'">
+    <button type="button" class="delete-btn" id="delete" (click)="delete()" [disabled]="status === 'loading'">
       <fa-icon [icon]="faTrash" size="xl"></fa-icon>Delete
     </button>
 
-    <button type="submit" class="submit-btn" (click)="markFormGroupTouched()" [disabled]="status === 'loading'">
+    <button type="submit" class="submit-btn" id="submit" (click)="markFormGroupTouched()" [disabled]="status === 'loading'">
       <fa-icon [icon]="faSave" size="xl"></fa-icon>Save
     </button>
   </div>
 
-  <p class="error error-general" *ngIf="status === 'error'">{{ errorInfo }}</p>
+  <p class="error error-general" id="error-general" *ngIf="status === 'error'">{{ errorInfo }}</p>
 </form>

@@ -9,7 +9,7 @@ import { KanjiSubmitComponent } from './kanji-submit.component';
 import { DataService } from './../../../app/services/data.service';
 import { query, getText, setInputValue, clickElement, mockObservable, asyncError } from './../../../testing/helpers';
 
-fdescribe('KanjiSubmitComponent', () => {
+describe('KanjiSubmitComponent', () => {
   let component: KanjiSubmitComponent;
   let fixture: ComponentFixture<KanjiSubmitComponent>;
   let de: DebugElement;
@@ -698,6 +698,22 @@ fdescribe('KanjiSubmitComponent', () => {
           expect(service.createKanji).toHaveBeenCalled();
           expect(component.status).toEqual('error');
         }));
+
+        it('should be invalid', () => {
+          setInputValue(fixture, '#kanji', '');
+          setInputValue(fixture, '#meaning0', 'Day');
+          setInputValue(fixture, '#pronunciation0', 'にち');
+          setInputValue(fixture, '#notes', '');
+          fixture.detectChanges();
+
+          expect(component.form.invalid).toBeTruthy();
+
+          clickElement(fixture, '#submit');
+          fixture.detectChanges();
+
+          expect(service.createKanji).not.toHaveBeenCalled();
+          expect(component.status).toEqual('error');
+        });
 
       });
 

@@ -6,9 +6,9 @@ import { DialogModule } from '@angular/cdk/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { queryAll } from './../../../testing/helpers';
+import { queryAll, clickEvent } from './../../../testing/helpers';
 
-fdescribe('GridComponent', () => {
+describe('GridComponent', () => {
   let component: GridComponent;
   let fixture: ComponentFixture<GridComponent>;
 
@@ -103,5 +103,19 @@ fdescribe('GridComponent', () => {
 
     const gridItems = queryAll(fixture, '.grid-item');
     expect(gridItems.length).toBe(0);
+  });
+
+  it('should switch', () => {
+    component.items = [{ _id: '1', kanji: '一', meaning: ['one'], pronunciation: ['いち'] }];
+    fixture.detectChanges();
+    clickEvent(fixture, '#switch button');
+    fixture.detectChanges();
+    expect(component.switch).toBe('japanese');
+    clickEvent(fixture, '#switch button');
+    fixture.detectChanges();
+    expect(component.switch).toBe('meaning');
+    clickEvent(fixture, '#switch button');
+    fixture.detectChanges();
+    expect(component.switch).toBe('all');
   });
 });
