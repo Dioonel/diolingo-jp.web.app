@@ -1,0 +1,34 @@
+<div class="container" *ngIf="status == 'init'">
+  <div class="game">
+    <h1 class="game-title">Guess</h1>
+    <p class="game-info">You will have to guess the kanji or word from a meaning, and vice versa.</p>
+    <img class="game-img" src="assets/images/guess.png">
+    <button class="game-btn" (click)="status = 'guess'">Play now</button>
+  </div>
+
+  <div class="game">
+    <h1 class="game-title">Pairs</h1>
+    <p class="game-info">You will have to make pairs of japanese words with their meanings.</p>
+    <img class="game-img" src="assets/images/pairs.png">
+    <button class="game-btn" disabled>Unavailable</button>
+  </div>
+</div>
+
+<div class="container container-guess" *ngIf="status == 'guess'">
+  <div class="guess-div">
+    <h1 class="game-title">Guess</h1>
+    <span></span>
+    <h2 class="game-subtitle">Select game length:</h2>
+    <div class="guess-length">
+      <button class="guess-length-btn">Short (5)</button>
+      <button class="guess-length-btn">Standard (10)</button>
+      <button class="guess-length-btn">Long (15)</button>
+      <button class="guess-length-btn">Very Long (20)</button>
+    </div>
+  </div>
+  <button class="return-btn" (click)="status = 'init'">Return</button>
+</div>
+
+<div class="container" *ngIf="status == 'pairs'">
+
+</div>

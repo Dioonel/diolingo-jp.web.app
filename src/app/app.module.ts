@@ -25,6 +25,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { EditFormComponent } from './components/edit-form/edit-form.component';
 import { SearchComponent } from './components/search/search.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { PlayComponent } from './components/play/play.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     EditFormComponent,
     SearchComponent,
     SpinnerComponent,
+    PlayComponent,
   ],
   imports: [
     BrowserModule,
