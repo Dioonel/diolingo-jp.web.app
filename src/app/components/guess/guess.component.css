@@ -188,6 +188,18 @@
   cursor: pointer;
 }
 
+.hint fa-icon {
+  color: yellow;
+}
+
+.hint-element {
+  font-family: 'Inter';
+  font-size: 2em;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
 @media screen and (max-width: 600px) {
   .guess-input {
     flex-direction: column;

@@ -23,9 +23,14 @@
 <div class="container" *ngIf="status === 'playing'">
   <h1 class="title">Guess:</h1>
   <p class="guess-element">{{ currentItem.guessMode === 'japanese' ? currentItem.meaning : (currentItem.kanji || currentItem.word) }}</p>
+  <p class="hint-element" *ngIf="hint">{{ currentItem.pronunciation }}</p>
   <div class="guess-input">
     <input type="text" [(ngModel)]="userInput" (keyup.enter)="checkAnswer()" [placeholder]="currentItem.guessMode === 'meaning' ? 'Meaning...' : translate() + '...'">
     <button (click)="checkAnswer()" [disabled]="userInput.trim().length === 0">Check</button>
+    <button class="hint" (click)="hint = true">
+      <fa-icon [icon]="faLightbulb" size="1x"></fa-icon>
+      Hint
+    </button>
   </div>
 </div>
 

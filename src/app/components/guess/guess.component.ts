@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 import { DataService } from './../../../app/services/data.service';
 import { Generic, Guess } from './../../../app/models/generic';
@@ -15,7 +16,10 @@ export class GuessComponent implements OnInit {
   currentItem!: Guess;
   currentIndex: number = 0;
   userInput: string = '';
+  hint: boolean = false;
   score: number = 0;
+
+  faLightbulb = faLightbulb;
 
   constructor(private dataService: DataService) { }
 
@@ -73,6 +77,7 @@ export class GuessComponent implements OnInit {
   continue() {
     this.currentIndex++;
     this.userInput = '';
+    this.hint = false;
     if(this.currentIndex < this.items.length) {
       this.currentItem = this.items[this.currentIndex];
       this.status = 'playing';
