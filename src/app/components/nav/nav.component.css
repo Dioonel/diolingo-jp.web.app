@@ -32,6 +32,10 @@
   cursor: pointer;
 }
 
+.nav > .nav-links > a > fa-icon {
+  margin-right: 10px;
+}
+
 .nav>.nav-links:first-child {
   float: left;
 }
@@ -79,6 +83,11 @@
     display: block;
     width: 100%;
   }
+
+  .nav > .nav-links > a > fa-icon {
+    margin-right: 15px;
+  }
+
 
   .nav>#nav-check:not(:checked)~.nav-links {
     height: 0px;

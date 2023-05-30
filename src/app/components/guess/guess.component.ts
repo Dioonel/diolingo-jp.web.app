@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import { faLightbulb, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 import { DataService } from './../../../app/services/data.service';
 import { Generic, Guess } from './../../../app/models/generic';
@@ -20,6 +20,7 @@ export class GuessComponent implements OnInit {
   score: number = 0;
 
   faLightbulb = faLightbulb;
+  faPlay = faPlay;
 
   constructor(private dataService: DataService) { }
 
@@ -57,7 +58,13 @@ export class GuessComponent implements OnInit {
 
   checkAnswer() {
     if(this.currentItem.guessMode === 'meaning') {
-      if(this.currentItem.meaning.includes(this.userInput.trim())) {
+      let found = false;
+      this.currentItem.meaning.forEach((meaning: string) => {
+        if(!found) {
+          if(meaning.toLowerCase().trim() == this.userInput.toLowerCase().trim()) found = true;
+        }
+      });
+      if(found) {
         this.status = 'success';
         this.score++;
       }

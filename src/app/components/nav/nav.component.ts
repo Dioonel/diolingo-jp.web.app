@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faHouse, faPlay, faKey, faMagicWandSparkles, faA } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-nav',
@@ -8,6 +9,12 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
   navExpanded = false;
+
+  faHouse = faHouse;
+  faKey = faKey;
+  faMagicWandSparkles = faMagicWandSparkles;
+  faA = faA;
+  faPlay = faPlay;
 
   constructor(private router: Router) { }
 
@@ -46,6 +53,11 @@ export class NavComponent implements OnInit {
 
   goToLogin() {
     this.router.navigateByUrl('/login');
+    document.getElementById('nav-check')?.click();
+  }
+
+  goToPlay() {
+    this.router.navigateByUrl('/play');
     document.getElementById('nav-check')?.click();
   }
 }

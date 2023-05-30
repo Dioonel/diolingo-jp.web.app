@@ -17,7 +17,10 @@
       <option value="20">Very Long (20)</option>
     </select>
   </div>
-  <button class="play-btn" (click)="startGame()">Start</button>
+  <button class="play-btn" (click)="startGame()">
+    <fa-icon [icon]="faPlay" size="1x"></fa-icon>
+    Start
+  </button>
 </div>
 
 <div class="container" *ngIf="status === 'playing'">
@@ -43,7 +46,7 @@
 <div class="container" *ngIf="status === 'success'">
   <h1 class="correct-title">Correct!</h1>
   <p class="guess-element">{{ currentItem.guessMode === 'japanese' ? currentItem.meaning : (currentItem.kanji || currentItem.word) }}</p>
-  <p class="correct-answer">{{ userInput.trim() }}</p>
+  <p class="correct-answer">{{ currentItem.guessMode === 'meaning' ? currentItem.meaning :  (currentItem.kanji || currentItem.word) }}</p>
   <button class="continue" (click)="continue()">Continue</button>
 </div>
 

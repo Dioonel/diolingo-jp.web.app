@@ -10,11 +10,27 @@
   </div>
 
   <div class="nav-links">
-    <a (click)="goToHome()">Home</a>
-    <a (click)="goToHiragana()">Hiragana</a>
-    <a (click)="goToKatakana()">Katakana</a>
-    <a (click)="goToKanji()">Kanji</a>
-    <a (click)="goToWords()">Words</a>
-    <a (click)="goToLogin()">Login</a>
+    <a (click)="goToHome()">
+      <fa-icon [icon]="faHouse"></fa-icon>
+      Home
+    </a>
+    <a (click)="goToPlay()">
+      <fa-icon [icon]="faPlay"></fa-icon>
+      Play
+    </a>
+    <!-- <a (click)="goToHiragana()">Hiragana</a>
+    <a (click)="goToKatakana()">Katakana</a> -->
+    <a (click)="goToKanji()">
+      <fa-icon [icon]="faMagicWandSparkles"></fa-icon>
+      Kanji
+    </a>
+    <a (click)="goToWords()">
+      <fa-icon [icon]="faA"></fa-icon>
+      Words
+    </a>
+    <a (click)="goToLogin()">
+      <fa-icon [icon]="faKey"></fa-icon>
+      Login
+    </a>
   </div>
 </div>
