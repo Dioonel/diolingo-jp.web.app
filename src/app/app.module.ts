@@ -26,6 +26,7 @@ import { EditFormComponent } from './components/edit-form/edit-form.component';
 import { SearchComponent } from './components/search/search.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PlayComponent } from './components/play/play.component';
+import { GuessComponent } from './components/guess/guess.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { PlayComponent } from './components/play/play.component';
     SearchComponent,
     SpinnerComponent,
     PlayComponent,
+    GuessComponent,
   ],
   imports: [
     BrowserModule,

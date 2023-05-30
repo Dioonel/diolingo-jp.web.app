@@ -1,0 +1,51 @@
+<div class="container" *ngIf="status === 'loading'">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="container" *ngIf="status === 'menu'">
+  <h1 class="title">Guess</h1>
+  <div class="tutorial">
+    <p class="label">How to play:</p>
+    <p class="description">You will have to write the meaning or japanese form of the element asked.</p>
+  </div>
+  <div class="select-length">
+    <p class="label">Game length:</p>
+    <select [(ngModel)]="gameLength">
+      <option value="5">Short (5)</option>
+      <option selected value="10">Standard (10)</option>
+      <option value="15">Long (15)</option>
+      <option value="20">Very Long (20)</option>
+    </select>
+  </div>
+  <button class="play-btn" (click)="startGame()">Start</button>
+</div>
+
+<div class="container" *ngIf="status === 'playing'">
+  <h1 class="title">Guess:</h1>
+  <p class="guess-element">{{ currentItem.guessMode === 'japanese' ? currentItem.meaning : (currentItem.kanji || currentItem.word) }}</p>
+  <div class="guess-input">
+    <input type="text" [(ngModel)]="userInput" (keyup.enter)="checkAnswer()" [placeholder]="currentItem.guessMode === 'meaning' ? 'Meaning...' : translate() + '...'">
+    <button (click)="checkAnswer()" [disabled]="userInput.trim().length === 0">Check</button>
+  </div>
+</div>
+
+<div class="container" *ngIf="status === 'finished'">
+  <h1 class="title">Finished!</h1>
+  <p class="score">Score: {{ score }}/{{ items.length }}</p>
+  <button class="play-btn" (click)="playAgain()">Play again</button>
+</div>
+
+<div class="container" *ngIf="status === 'success'">
+  <h1 class="correct-title">Correct!</h1>
+  <p class="guess-element">{{ currentItem.guessMode === 'japanese' ? currentItem.meaning : (currentItem.kanji || currentItem.word) }}</p>
+  <p class="correct-answer">{{ userInput.trim() }}</p>
+  <button class="continue" (click)="continue()">Continue</button>
+</div>
+
+<div class="container" *ngIf="status === 'fail'">
+  <h1 class="wrong-title">Wrong!</h1>
+  <p class="guess-element">{{ currentItem.guessMode === 'japanese' ? currentItem.meaning : (currentItem.kanji || currentItem.word) }}</p>
+  <p class="wrong-answer">Your answer: {{ userInput.trim() }}</p>
+  <p class="correct-answer">Correct answer: {{ currentItem.guessMode === 'japanese' ? currentItem.kanji || currentItem.word : currentItem.meaning }}</p>
+  <button class="continue" (click)="continue()">Continue</button>
+</div>

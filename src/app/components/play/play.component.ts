@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./play.component.css']
 })
 export class PlayComponent implements OnInit {
-  status: 'init' | 'guess' | 'pairs' = 'init';
 
   constructor() { }
 

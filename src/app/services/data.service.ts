@@ -5,6 +5,7 @@ import { BehaviorSubject, tap } from 'rxjs';
 import { LoginUser, LoginData } from './../models/user';
 import { Kanji, KanjiCreateDTO, KanjiFilter } from '../models/kanji';
 import { Word, WordCreateDTO, WordFilter } from '../models/word';
+import { Generic } from '../models/generic';
 
 @Injectable({
   providedIn: 'root'
@@ -111,5 +112,9 @@ export class DataService {
 
   deleteWord(id: string) {
     return this.http.delete(`${this.url}/words/${id}`);
+  }
+
+  playGuess(quantity: number) {
+    return this.http.post<Generic[]>(`${this.url}/play/guess`, { quantity });
   }
 }

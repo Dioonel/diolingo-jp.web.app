@@ -13,11 +13,6 @@
   text-align: center;
 }
 
-.container-guess {
-  flex-direction: column;
-  gap: 30px;
-}
-
 .game {
   display: flex;
   flex-direction: column;
@@ -83,64 +78,12 @@
   cursor: not-allowed;
 }
 
-.guess-div, .pairs-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  font-family: 'Inter';
-  color: #fff;
-  border: 2px solid #fff;
-  border-radius: 5px;
-  padding: 25px;
-}
-
-.guess-length {
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.guess-length-btn, .return-btn {
-  font-size: 1.6em;
-  font-family: 'Inter';
-  color: #fff;
-  text-decoration: none;
-  padding: 10px 4px;
-  border-radius: 5px;
-  border: 2px solid #fff;
-  text-align: center;
-  background-color: transparent;
-}
-
-.guess-length-btn {
-  flex: 49%;
-  width: 80%;
-}
-
-.guess-length-btn:hover, .return-btn:hover {
-  background-color: #fff;
-  color: #000;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.return-btn {
-  width: 280px;
-}
 
 @media screen and (max-width: 768px) {
   .container {
     flex-direction: column;
-    gap: 50px;
-    padding: 10px 10px 10px 0px;
-  }
-
-  .container-guess {
-    flex-direction: column;
-    gap: 30px;
+    gap: 60px;
+    padding: 40px 10px 20px 0px;
   }
 
   .game {
@@ -148,14 +91,4 @@
   }
 }
 
-@media screen and (max-width: 460px) {
-  .guess-length {
-    flex-direction: column;
-  }
-
-  .guess-length-btn {
-    flex: 100%;
-    width: 290px;
-  }
-}
 
