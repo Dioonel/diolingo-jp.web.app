@@ -9,6 +9,7 @@ import { WordComponent } from './components/word/word.component';
 import { LoginComponent } from './components/login/login.component';
 import { PlayComponent } from './components/play/play.component';
 import { GuessComponent } from './components/guess/guess.component';
+import { PairsComponent } from './components/pairs/pairs.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'play', component: PlayComponent },
   { path: 'play/guess', component: GuessComponent },
+  { path: 'play/pairs', component: PairsComponent },
 ];
 
 @NgModule({

@@ -1,0 +1,56 @@
+<div class="container" *ngIf="status === 'loading'">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="container" *ngIf="status === 'menu'">
+  <h1 class="title">Pairs</h1>
+  <div class="tutorial">
+    <p class="label">How to play:</p>
+    <p class="description">Match the correct pairs of vocabulary.</p>
+  </div>
+  <div class="select-length">
+    <p class="label">Game length:</p>
+    <select [(ngModel)]="gameLength">
+      <option value="10">Short (10)</option>
+      <option selected value="20">Standard (20)</option>
+      <option value="30">Long (30)</option>
+      <option value="40">Very Long (40)</option>
+    </select>
+  </div>
+  <button class="play-btn" (click)="startGame()">
+    <fa-icon [icon]="faPlay" size="1x"></fa-icon>
+    Start
+  </button>
+</div>
+
+<div class="container" *ngIf="status === 'playing' || status === 'continue'">
+  <h1 class="title">Pairs:</h1>
+  <div class="pairs-container">
+    <div class="meaning-container">
+      <div class="meaning" *ngFor="let item of currentItems; let i = index">
+        <input type="radio" name="meaning" (change)="change(i + 1, 'meaning')" [disabled]="successPositionsM.includes(i + 1) || failedPositionsM.includes(i + 1)">
+        <div class="visible-item" [class.success]="successPositionsM.includes(i + 1)" [class.failed]="failedPositionsM.includes(i + 1)">
+          <p class="meaning-text" *ngFor="let meaning of findItemByPosition(i + 1, 'meaning')?.meaning">
+            <!-- {{ findItemByPosition(i + 1, 'meaning')?.meaning }} -->
+            {{ meaning }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="japanese-container">
+      <div class="japanese" *ngFor="let item of currentItems; let i = index">
+        <input type="radio" name="japanese" (change)="change(i + 1, 'japanese')" [disabled]="successPositionsJ.includes(i + 1) || failedPositionsJ.includes(i + 1)">
+        <div class="visible-item" [class.success]="successPositionsJ.includes(i + 1)" [class.failed]="failedPositionsJ.includes(i + 1)">
+          <p class="japanese-text">{{ findItemByPosition(i + 1, 'japanese')?.kanji || findItemByPosition(i + 1, 'japanese')?.word }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="continue" type="button" *ngIf="status === 'continue'" (click)="continue()">Continue</button>
+</div>
+
+<div class="container" *ngIf="status === 'finished'">
+  <h1 class="title">Finished!</h1>
+  <p class="score">Score: {{ score }}/{{ items.length }}</p>
+  <button class="play-btn" (click)="playAgain()">Play again</button>
+</div>

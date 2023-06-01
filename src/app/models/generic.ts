@@ -11,3 +11,8 @@ export interface Generic {
 export interface Guess extends Generic {
   guessMode: 'japanese' | 'meaning';
 }
+
+export interface Pairs extends Generic {
+  meaningPosition?: number;
+  japanesePosition?: number;
+}

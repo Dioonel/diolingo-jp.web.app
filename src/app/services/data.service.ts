@@ -117,4 +117,8 @@ export class DataService {
   playGuess(quantity: number) {
     return this.http.post<Generic[]>(`${this.url}/play/guess`, { quantity });
   }
+
+  playPairs(quantity: number) {
+    return this.http.post<Generic[]>(`${this.url}/play/pairs`, { quantity });
+  }
 }
