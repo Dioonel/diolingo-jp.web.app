@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { faLightbulb, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 import { DataService } from './../../../app/services/data.service';
@@ -96,5 +96,14 @@ export class GuessComponent implements OnInit {
 
   playAgain() {
     location.reload();
+  }
+
+  @HostListener('document:keyup.enter')
+  onDocumentKeydownEnter() {
+    if(this.status === 'playing' && this.userInput.trim() !== '') {
+      this.checkAnswer();
+    } else if(this.status === 'success' || this.status === 'fail') {
+      this.continue();
+    }
   }
 }
