@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./play.component.css']
 })
 export class PlayComponent implements OnInit {
+  loaded = false;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.loaded = true;
   }
 
 }
