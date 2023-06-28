@@ -12,3 +12,5 @@ Right now this app is only for my **personal use**, the words and kanjis are pub
 - Improve styling. 🚧 **Currently WIP** 🛠️
 - User system.
 - Create unit tests for the whole app. 🚧 **Currently WIP** 🛠️
+- Responsive katakana and hiragana (maybe grid instead of image)
+- Improve UX in forms
