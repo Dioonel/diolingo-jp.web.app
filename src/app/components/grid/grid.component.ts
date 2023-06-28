@@ -37,7 +37,7 @@ export class GridComponent implements OnInit {
     this.dialog.open(DialogComponent,
       {
         minHeight: '300px',
-        minWidth: '340px',
+        minWidth: '300px',
         data: {
           item: item,
           type: type

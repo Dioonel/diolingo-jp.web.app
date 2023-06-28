@@ -5,11 +5,10 @@
   align-items: center;
   gap: 40px;
   height: calc(100vh - 60px);
-  background-color: rgba(32, 33, 36, 255);
+  background-color: #202124;
 }
 
 .title {
-  font-family: 'Inter';
   font-size: 4em;
   font-weight: 400;
   color: #fff;
@@ -26,7 +25,6 @@
 }
 
 .label, .description {
-  font-family: 'Inter';
   font-size: 1.8em;
   font-weight: 300;
   letter-spacing: 0.5px;
@@ -48,7 +46,6 @@
 }
 
 .select-length select {
-  font-family: 'Inter';
   font-size: 1.6em;
   font-weight: 300;
   letter-spacing: 0.5px;
@@ -59,6 +56,10 @@
   border: 2px solid #fff;
   border-radius: 5px;
   padding: 5px 10px;
+}
+
+.select-length select::-ms-expand {
+  right: 10px;
 }
 
 .select-length select:focus {
@@ -77,7 +78,6 @@
 
 .play-btn, .guess-input button {
   font-size: 2.6em;
-  font-family: 'Inter';
   color: #fff;
   text-decoration: none;
   padding: 10px 20px;
@@ -94,7 +94,6 @@
 }
 
 .guess-element {
-  font-family: 'Inter';
   font-size: 4em;
   font-weight: 300;
   letter-spacing: 0.5px;
@@ -108,7 +107,6 @@
 }
 
 .guess-input input {
-  font-family: 'Inter';
   font-size: 1.8em;
   font-weight: 300;
   letter-spacing: 0.5px;
@@ -137,7 +135,6 @@
 }
 
 .correct-title, .wrong-title {
-  font-family: 'Inter';
   font-size: 4em;
   font-weight: 300;
   letter-spacing: 0.5px;
@@ -149,7 +146,6 @@
 }
 
 .correct-answer, .wrong-answer {
-  font-family: 'Inter';
   font-size: 2em;
   font-weight: 300;
   letter-spacing: 0.5px;
@@ -161,7 +157,6 @@
 }
 
 .score {
-  font-family: 'Inter';
   font-size: 2em;
   font-weight: 300;
   letter-spacing: 0.5px;
@@ -169,7 +164,6 @@
 }
 
 .continue {
-  font-family: 'Inter';
   font-size: 2em;
   font-weight: 300;
   letter-spacing: 0.5px;
@@ -193,7 +187,6 @@
 }
 
 .hint-element {
-  font-family: 'Inter';
   font-size: 2em;
   font-weight: 300;
   letter-spacing: 0.5px;
