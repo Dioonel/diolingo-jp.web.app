@@ -1,5 +1,53 @@
 <div class="container">
-  <img class="chart" src="assets/images/katakana-chart-asset.webp">
-  <img class="chart-sec" src="assets/images/katakana-dakuten-chart-asset.webp">
-  <img class="chart-ter" src="assets/images/katakana-combinations-chart-asset.webp">
+  <h2>Katakana Chart</h2>
+  <section class="section_basic">
+    <div class="chart">
+      <div class="chart-kanas" *ngFor="let groups of katakanas">
+        <div *ngFor="let katakana of groups"
+          [ngClass]="(katakana.kana === '') ? 'empty' : ''"
+        >
+          <span>{{ katakana.kana }}</span>
+          <span>{{ katakana.latin }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section_dakuten">
+    <div class="handakuten">
+      <h3>Handakuten</h3>
+      <div class="chart">
+        <div class="chart-kanas">
+          <div *ngFor="let katakana of handakuten">
+            <span>{{ katakana.kana }}</span>
+            <span>{{ katakana.latin }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dakuten">
+      <h3>Dakuten</h3>
+      <div class="chart">
+        <div class="chart-kanas" *ngFor="let groups of dakuten">
+          <div *ngFor="let katakana of groups">
+            <span>{{ katakana.kana }}</span>
+            <span>{{ katakana.latin }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section_combinations">
+    <h3>Combinations</h3>
+    <div class="chart">
+      <div class="chart-kanas" *ngFor="let groups of combinations">
+        <div *ngFor="let katakana of groups">
+          <span>{{ katakana.kana }}</span>
+          <span>{{ katakana.latin }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
