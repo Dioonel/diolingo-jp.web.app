@@ -1,6 +1,8 @@
 Front-end for a personal project that I'll use to save notes, vocabulary and help me study Japanese overall.
 The API I'm using is also mine, here's the repo: https://github.com/Dioonel/Japanese-Backend
 
+Thx to [Alexis Jauge](https://github.com/VanDeFlame) for the contributions.
+
 **Important note:**
 Right now this app is only for my **personal use**, the words and kanjis are public, but POST, PUT and DELETE operations require an **admin access**. In the future, I might expand this app with a complete user system to make it usable for anyone else.
 
@@ -12,5 +14,5 @@ Right now this app is only for my **personal use**, the words and kanjis are pub
 - Improve styling. 🚧 **Currently WIP** 🛠️
 - User system.
 - Create unit tests for the whole app. 🚧 **Currently WIP** 🛠️
-- ~~Responsive katakana and hiragana (maybe grid instead of image)~~
-- Improve UX in forms
+- ~~Responsive katakana and hiragana (maybe grid instead of image).~~
+- Improve UX in forms.
