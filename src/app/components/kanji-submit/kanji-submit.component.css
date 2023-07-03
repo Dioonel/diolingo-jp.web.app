@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
-  font-family: 'Inter';
   gap: 15px;
 }
 
@@ -35,9 +34,8 @@ label {
 }
 
 .form-control {
-  font-family: 'Inter';
   font-size: 1.8em;
-  border: 1px solid rgba(32, 33, 36, 255);
+  border: 1px solid #202124;
   border-radius: 4px;
   padding: 5px;
   margin-top: 5px;
@@ -65,8 +63,7 @@ label {
 }
 
 .submit-btn, .reset-btn {
-  font-family: 'Inter';
-  color: rgba(32, 33, 36, 255);
+  color: #202124;
   font-size: 1.8em;
   background-color: transparent;
   border: none;
@@ -82,7 +79,7 @@ label {
 
 .submit-btn:hover, .reset-btn:hover {
   cursor: pointer;
-  background-color: aqua;
+  background-color: #0005;
   border-radius: 4px;
 }
 
@@ -115,6 +112,7 @@ label {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
 }
 
 .return-a {

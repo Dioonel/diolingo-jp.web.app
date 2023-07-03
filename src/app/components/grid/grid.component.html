@@ -1,6 +1,7 @@
 <div class="container">
   <app-search></app-search>
-  <div class="switch-container">
+  <div *ngIf="items.length === 0" class="no-results">No results</div>
+  <div *ngIf="items.length > 0" class="switch-container">
     <div class="switch" id="random">
       <button type="button" (click)="randomize()">
         <fa-icon [icon]="faDiceSix" size="2x"></fa-icon>

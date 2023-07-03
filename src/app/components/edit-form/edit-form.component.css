@@ -7,14 +7,12 @@
 }
 
 .subtitle {
-  font-family: 'Inter';
   font-size: 1.8em;
 }
 
 .form-control {
-  font-family: 'Inter';
   font-size: 1.8em;
-  border: 1px solid rgba(32, 33, 36, 255);
+  border: 1px solid #202124;
   border-radius: 4px;
   padding: 5px;
   margin-top: 5px;
@@ -30,7 +28,6 @@
 }
 
 .pronunciation-non-editable p {
-  font-family: 'Inter';
   font-size: 1.8em;
   height: 33px;
   margin-top: 5px;
@@ -46,6 +43,10 @@
   margin-top: 5px;
   border-radius: 4px;
   height: 33px;
+}
+
+.btn-remove {
+  margin-left: 5px;
 }
 
 .btn-remove:hover {
@@ -64,8 +65,7 @@
 }
 
 .submit-btn, .cancel-btn, .delete-btn {
-  font-family: 'Inter';
-  color: rgba(32, 33, 36, 255);
+  color: #202124;
   font-size: 1.8em;
   background-color: transparent;
   border: none;
@@ -81,7 +81,7 @@
 
 .submit-btn:hover, .cancel-btn:hover {
   cursor: pointer;
-  background-color: aqua;
+  background-color: #0005;
   border-radius: 4px;
 }
 

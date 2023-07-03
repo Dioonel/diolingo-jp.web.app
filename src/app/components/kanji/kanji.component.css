@@ -1,9 +1,9 @@
 .wrapper {
-  width: 100vw;
+  width: 100%;
   min-height: calc(100vh - 60px);
   max-height: 100%;
-  padding: 55px 10px 10px 10px;
-  background-color: rgba(32, 33, 36, 255);
+  padding: 55px 10px 10px;
+  background-color: #202124;
   overflow-x: hidden;
   text-align: center;
 }
@@ -32,7 +32,6 @@
   gap: 20px;
   align-items: center;
   font-size: 2.4em;
-  font-family: 'Inter';
   color: #fff;
   text-decoration: none;
   padding: 10px 20px;
@@ -63,11 +62,11 @@
 .load-more {
   margin: 20px auto;
   font-size: 2.6em;
-  font-family: 'Inter';
   color: #fff;
   text-decoration: none;
   padding: 10px 0px;
-  width: 30%;
+  width: 100%;
+  max-width: 280px;
   border-radius: 5px;
   border: 2px solid #fff;
   text-align: center;
@@ -79,22 +78,4 @@
   color: #000;
   transition: 0.3s;
   cursor: pointer;
-}
-
-@media screen and (max-width: 1024px) {
-  .load-more {
-    width: 40%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .load-more {
-    width: 50%;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .load-more {
-    width: 70%;
-  }
 }
