@@ -13,6 +13,7 @@ import { LoginUser } from './../../models/user';
 export class LoginComponent implements OnInit {
   form!: FormGroup;
   status: 'init' | 'loading' | 'error' | 'success' = 'init';
+  passwordVisible = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private dataService: DataService) {
     this.form = this.formBuilder.group({
@@ -48,5 +49,9 @@ export class LoginComponent implements OnInit {
     Object.keys(this.form.controls).forEach(key => {
       this.form.controls[key].markAsDirty();
     });
+  }
+
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
   }
 }
