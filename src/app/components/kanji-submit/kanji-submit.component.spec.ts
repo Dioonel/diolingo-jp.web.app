@@ -6,6 +6,7 @@ import { DebugElement } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { KanjiSubmitComponent } from './kanji-submit.component';
+import { SpinnerComponent } from './../spinner/spinner.component';
 import { DataService } from './../../../app/services/data.service';
 import { query, getText, setInputValue, clickElement, mockObservable, asyncError } from './../../../testing/helpers';
 
@@ -19,7 +20,7 @@ describe('KanjiSubmitComponent', () => {
     const spy = jasmine.createSpyObj('DataService', ['createKanji']);                  // spy step 2
 
     await TestBed.configureTestingModule({
-      declarations: [KanjiSubmitComponent],
+      declarations: [KanjiSubmitComponent, SpinnerComponent],
       imports: [
         ReactiveFormsModule,
         RouterTestingModule,

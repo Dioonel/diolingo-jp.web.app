@@ -6,6 +6,7 @@ import { DebugElement } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { WordSubmitComponent } from './word-submit.component';
+import { SpinnerComponent } from './../spinner/spinner.component';
 import { DataService } from './../../../app/services/data.service';
 import { query, getText, setInputValue, clickElement, mockObservable, asyncError } from './../../../testing/helpers';
 
@@ -19,7 +20,7 @@ describe('WordSubmitComponent', () => {
     const spy = jasmine.createSpyObj('DataService', ['createWord']);                  // spy step 2
 
     await TestBed.configureTestingModule({
-      declarations: [WordSubmitComponent],
+      declarations: [WordSubmitComponent, SpinnerComponent],
       imports: [
         ReactiveFormsModule,
         RouterTestingModule,

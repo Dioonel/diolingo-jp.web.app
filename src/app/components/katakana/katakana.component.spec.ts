@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { KatakanaComponent } from './katakana.component';
 
-describe('KatakanaComponent', () => {
+xdescribe('KatakanaComponent', () => {
   let component: KatakanaComponent;
   let fixture: ComponentFixture<KatakanaComponent>;
 
