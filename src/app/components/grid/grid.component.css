@@ -98,6 +98,6 @@
   text-align: center;
 }
 
-::ng-deep .mat-tooltip {
+::ng-deep .mat-mdc-tooltip {
   font-size: 1.2em;
 }

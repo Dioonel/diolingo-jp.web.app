@@ -5,7 +5,7 @@ import { SearchComponent } from '../search/search.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { queryAll, clickEvent } from './../../../testing/helpers';
 
