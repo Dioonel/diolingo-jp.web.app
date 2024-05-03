@@ -1,15 +1,18 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Word } from './../../../app/models/word';
 
 import { DataService } from './../../../app/services/data.service';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
-  selector: 'app-word-submit',
-  templateUrl: './word-submit.component.html',
-  styleUrls: ['./word-submit.component.css']
+    selector: 'app-word-submit',
+    templateUrl: './word-submit.component.html',
+    styleUrls: ['./word-submit.component.css'],
+    standalone: true,
+    imports: [ReactiveFormsModule, FaIconComponent]
 })
 export class WordSubmitComponent implements OnInit {
   @Output() newWord = new EventEmitter<Word>();

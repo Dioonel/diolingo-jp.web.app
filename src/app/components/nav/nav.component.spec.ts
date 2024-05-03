@@ -9,9 +9,8 @@ describe('NavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavComponent ],
-      imports: [ FontAwesomeModule ]
-    })
+    imports: [FontAwesomeModule, NavComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(NavComponent);

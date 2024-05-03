@@ -8,8 +8,8 @@ describe('HiraganaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HiraganaComponent ]
-    })
+    imports: [HiraganaComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(HiraganaComponent);

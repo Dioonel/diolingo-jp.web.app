@@ -15,16 +15,16 @@ describe('GridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GridComponent, SearchComponent],
-      imports: [
+    imports: [
         DialogModule,
         RouterTestingModule,
         FontAwesomeModule,
         FormsModule,
         ReactiveFormsModule,
-        MatTooltipModule
-      ]
-    })
+        MatTooltipModule,
+        GridComponent, SearchComponent
+    ]
+})
       .compileComponents();
   });
 

@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { NgModel, FormControl, Validators } from '@angular/forms';
+import { NgModel, FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { faMagnifyingGlass, faRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.css'],
+    standalone: true,
+    imports: [ReactiveFormsModule, FormsModule, FaIconComponent]
 })
 export class SearchComponent implements OnInit {
   pageType!: 'kanji' | 'word';

@@ -3,11 +3,16 @@ import { faLightbulb, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 import { DataService } from './../../../app/services/data.service';
 import { Generic, Guess } from './../../../app/models/generic';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
-  selector: 'app-guess',
-  templateUrl: './guess.component.html',
-  styleUrls: ['./guess.component.css']
+    selector: 'app-guess',
+    templateUrl: './guess.component.html',
+    styleUrls: ['./guess.component.css'],
+    standalone: true,
+    imports: [SpinnerComponent, ReactiveFormsModule, FormsModule, FaIconComponent]
 })
 export class GuessComponent implements OnInit {
   status: 'menu' | 'loading' | 'playing' | 'success' | 'fail' | 'finished' = 'menu';

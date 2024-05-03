@@ -5,11 +5,18 @@ import { Subscription } from 'rxjs';
 
 import { DataService } from './../../services/data.service';
 import { Kanji } from './../../models/kanji';
+import { GridComponent } from '../grid/grid.component';
+import { KanjiSubmitComponent } from '../kanji-submit/kanji-submit.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
-  selector: 'app-kanji',
-  templateUrl: './kanji.component.html',
-  styleUrls: ['./kanji.component.css']
+    selector: 'app-kanji',
+    templateUrl: './kanji.component.html',
+    styleUrls: ['./kanji.component.css'],
+    standalone: true,
+    imports: [SpinnerComponent, CdkAccordion, CdkAccordionItem, FaIconComponent, KanjiSubmitComponent, GridComponent]
 })
 export class KanjiComponent implements OnInit {
   status: 'init' | 'loading' | 'success' | 'error' = 'init';

@@ -8,8 +8,8 @@ xdescribe('KanjiComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ KanjiComponent ]
-    })
+    imports: [KanjiComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(KanjiComponent);

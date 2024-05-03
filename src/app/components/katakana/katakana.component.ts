@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Kana } from 'src/app/models/kana';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-katakana',
-  templateUrl: './katakana.component.html',
-  styleUrls: ['./katakana.component.css']
+    selector: 'app-katakana',
+    templateUrl: './katakana.component.html',
+    styleUrls: ['./katakana.component.css'],
+    standalone: true,
+    imports: [NgClass]
 })
 export class KatakanaComponent implements OnInit {
   katakanas: Kana[][] = [

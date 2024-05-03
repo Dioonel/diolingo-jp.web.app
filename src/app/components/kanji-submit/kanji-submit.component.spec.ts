@@ -20,17 +20,17 @@ describe('KanjiSubmitComponent', () => {
     const spy = jasmine.createSpyObj('DataService', ['createKanji']);                  // spy step 2
 
     await TestBed.configureTestingModule({
-      declarations: [KanjiSubmitComponent, SpinnerComponent],
-      imports: [
+    imports: [
         ReactiveFormsModule,
         RouterTestingModule,
         HttpClientTestingModule,
         FontAwesomeModule,
-      ],
-      providers: [
-        { provide: DataService, useValue: spy },                                      // spy step 3
-      ],
-    })
+        KanjiSubmitComponent, SpinnerComponent,
+    ],
+    providers: [
+        { provide: DataService, useValue: spy }, // spy step 3
+    ],
+})
       .compileComponents();
   });
 

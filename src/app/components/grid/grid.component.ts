@@ -3,11 +3,16 @@ import { Router } from '@angular/router';
 import { faPencil, faA, faAsterisk, faWandMagicSparkles, faDiceSix } from '@fortawesome/free-solid-svg-icons';
 import { Dialog } from '@angular/cdk/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { MatTooltip } from '@angular/material/tooltip';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
-  selector: 'app-grid',
-  templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.css']
+    selector: 'app-grid',
+    templateUrl: './grid.component.html',
+    styleUrls: ['./grid.component.css'],
+    standalone: true,
+    imports: [SearchComponent, MatTooltip, FaIconComponent]
 })
 export class GridComponent implements OnInit {
   @Input() items: any[] = [];

@@ -1,12 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl, AbstractControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';
 import { DataService } from './../../services/data.service';
 import { faX, faSave, faBackward, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
-  selector: 'app-edit-form',
-  templateUrl: './edit-form.component.html',
-  styleUrls: ['./edit-form.component.css']
+    selector: 'app-edit-form',
+    templateUrl: './edit-form.component.html',
+    styleUrls: ['./edit-form.component.css'],
+    standalone: true,
+    imports: [ReactiveFormsModule, FaIconComponent]
 })
 export class EditFormComponent implements OnInit {
   @Output() toggle = new EventEmitter<any>();

@@ -31,41 +31,39 @@ import { GuessComponent } from './components/guess/guess.component';
 import { PairsComponent } from './components/pairs/pairs.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HiraganaComponent,
-    KatakanaComponent,
-    KanjiComponent,
-    KanjiSubmitComponent,
-    LoginComponent,
-    WordSubmitComponent,
-    GridComponent,
-    WordComponent,
-    NavComponent,
-    DialogComponent,
-    EditFormComponent,
-    SearchComponent,
-    SpinnerComponent,
-    PlayComponent,
-    GuessComponent,
-    PairsComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    FontAwesomeModule,
-    DialogModule,
-    CdkAccordionModule,
-    MatProgressSpinnerModule,
-    MatTooltipModule
-  ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true
-  }],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        FontAwesomeModule,
+        DialogModule,
+        CdkAccordionModule,
+        MatProgressSpinnerModule,
+        MatTooltipModule,
+        HomeComponent,
+        HiraganaComponent,
+        KatakanaComponent,
+        KanjiComponent,
+        KanjiSubmitComponent,
+        LoginComponent,
+        WordSubmitComponent,
+        GridComponent,
+        WordComponent,
+        NavComponent,
+        DialogComponent,
+        EditFormComponent,
+        SearchComponent,
+        SpinnerComponent,
+        PlayComponent,
+        GuessComponent,
+        PairsComponent
+    ],
+    providers: [{
+            provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true
+        }],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

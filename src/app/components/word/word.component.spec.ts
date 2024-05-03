@@ -8,8 +8,8 @@ xdescribe('WordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WordComponent ]
-    })
+    imports: [WordComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(WordComponent);

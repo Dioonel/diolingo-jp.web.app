@@ -21,17 +21,17 @@ describe('EditFormComponent', () => {
     const spy = jasmine.createSpyObj('DataService', ['updateKanji', 'updateWord', 'deleteKanji', 'deleteWord']);
 
     await TestBed.configureTestingModule({
-      declarations: [EditFormComponent],
-      imports: [
+    imports: [
         ReactiveFormsModule,
         RouterTestingModule,
         HttpClientTestingModule,
-        FontAwesomeModule
-      ],
-      providers: [
+        FontAwesomeModule,
+        EditFormComponent
+    ],
+    providers: [
         { provide: DataService, useValue: spy },
-      ]
-    })
+    ]
+})
       .compileComponents();
   });
 

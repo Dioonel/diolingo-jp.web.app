@@ -8,8 +8,8 @@ xdescribe('PlayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlayComponent ]
-    })
+    imports: [PlayComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(PlayComponent);

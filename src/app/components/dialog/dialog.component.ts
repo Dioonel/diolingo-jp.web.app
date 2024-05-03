@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { DataService } from './../../services/data.service';
+import { EditFormComponent } from '../edit-form/edit-form.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 interface DataGeneric {
   item: any;
@@ -12,9 +14,11 @@ interface DataGeneric {
 }
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+    selector: 'app-dialog',
+    templateUrl: './dialog.component.html',
+    styleUrls: ['./dialog.component.css'],
+    standalone: true,
+    imports: [FaIconComponent, EditFormComponent]
 })
 export class DialogComponent implements OnInit, OnDestroy {
   data: DataGeneric;
