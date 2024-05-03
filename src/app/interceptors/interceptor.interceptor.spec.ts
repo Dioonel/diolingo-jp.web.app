@@ -5,11 +5,11 @@ import { SpinnerComponent } from '../components/spinner/spinner.component';
 
 describe('InterceptorInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [SpinnerComponent],
+    imports: [SpinnerComponent],
     providers: [
-      MyInterceptor
-      ]
-  }));
+        MyInterceptor
+    ]
+}));
 
   it('should be created', () => {
     const interceptor: MyInterceptor = TestBed.inject(MyInterceptor);

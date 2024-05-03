@@ -8,8 +8,8 @@ xdescribe('GuessComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GuessComponent ]
-    })
+    imports: [GuessComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(GuessComponent);

@@ -1,34 +1,43 @@
 <div class="dialog">
-
   <!-- Close button -->
   <button class="close" (click)="closeDialog()">
     <fa-icon [icon]="faX" size="xl"></fa-icon>
   </button>
 
   <!-- Details mode -->
-  <div *ngIf="!editToggle" class="detail-mode">
+  @if (!editToggle) {
+  <div class="detail-mode">
     <p class="main-value">{{ data.item[data.type.toLowerCase()] }}</p>
     <p class="pronunciation-container">
       <!-- Pronuncations: -->
-      <span class="pronunciation" *ngFor="let pr of data.item.pronunciation; let i = index">
+      @for (pr of data.item.pronunciation; track pr; let i = $index) {
+      <span class="pronunciation">
         {{ pr }}
       </span>
+      }
     </p>
     <p class="meaning-container">
-      <span class="meaning" *ngFor="let mean of data.item.meaning; let i = index">
+      @for (mean of data.item.meaning; track mean; let i = $index) {
+      <span class="meaning">
         {{ mean }}{{ i == data.item.meaning.length - 1 ? '' : ', ' }}
       </span>
+      }
     </p>
-    <p *ngIf="data.item?.notes?.trim()" class="notes">{{ data.item.notes.trim() }} </p>
+    @if (data.item?.notes?.trim()) {
+    <p class="notes">{{ data.item.notes.trim() }} </p>
+    }
   </div>
+  }
 
   <!-- Edit mode  -->
-  <div *ngIf="editToggle">
+  @if (editToggle) {
+  <div>
     <app-edit-form [data]="data" (toggle)="toggleBack($event)"></app-edit-form>
   </div>
-
-  <!-- Edit button toggle -->
-  <button *ngIf="!editToggle" type="button" class="toggle-btn" (click)="editToggle = true">
-    <fa-icon [icon]="faEdit" size="xl"></fa-icon>Edit
-  </button>
+  } @else {
+    <!-- Edit button toggle -->
+    <button type="button" class="toggle-btn" (click)="editToggle = true">
+      <fa-icon [icon]="faEdit" size="xl"></fa-icon>Edit
+    </button>
+  }
 </div>

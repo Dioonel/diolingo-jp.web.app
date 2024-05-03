@@ -19,17 +19,17 @@ describe('LoginComponent', () => {
     const spy = jasmine.createSpyObj('DataService', ['login']);                  // spy step 2
 
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
-      imports: [
+    imports: [
         ReactiveFormsModule,
         RouterTestingModule,
         HttpClientTestingModule,
-        FontAwesomeModule
-      ],
-      providers: [
-        { provide: DataService, useValue: spy }                                  // spy step 3
-      ]
-    })
+        FontAwesomeModule,
+        LoginComponent
+    ],
+    providers: [
+        { provide: DataService, useValue: spy } // spy step 3
+    ]
+})
     .compileComponents();
   });
 

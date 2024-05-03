@@ -3,11 +3,16 @@ import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 import { DataService } from './../../../app/services/data.service';
 import { Generic, Pairs } from './../../../app/models/generic';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
-  selector: 'app-pairs',
-  templateUrl: './pairs.component.html',
-  styleUrls: ['./pairs.component.css']
+    selector: 'app-pairs',
+    templateUrl: './pairs.component.html',
+    styleUrls: ['./pairs.component.css'],
+    standalone: true,
+    imports: [SpinnerComponent, ReactiveFormsModule, FormsModule, FaIconComponent]
 })
 export class PairsComponent implements OnInit {
   status: 'menu' | 'loading' | 'playing' | 'continue' | 'finished' = 'menu';

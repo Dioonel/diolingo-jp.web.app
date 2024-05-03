@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Kana } from 'src/app/models/kana';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-hiragana',
-  templateUrl: './hiragana.component.html',
-  styleUrls: ['./hiragana.component.css']
+    selector: 'app-hiragana',
+    templateUrl: './hiragana.component.html',
+    styleUrls: ['./hiragana.component.css'],
+    standalone: true,
+    imports: [NgClass]
 })
 export class HiraganaComponent implements OnInit {
   hiraganas: Kana[][] = [

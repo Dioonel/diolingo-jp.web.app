@@ -6,18 +6,22 @@
       <label for="kanji">Kanji</label>
       <input type="text" formControlName="kanji" class="form-control" id="kanji" placeholder="e.g. 日"
         autocomplete="off">
-      <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('required', 'kanji')"
-        id="kanji-required-error">This field is required *</p>
-      <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('pattern', 'kanji')"
-        id="kanji-pattern-error">This field must be a kanji *</p>
-      <p class="error" *ngIf="form.controls['kanji'].dirty && form.hasError('maxlength', 'kanji')"
-        id="kanji-length-error">Single kanjis only *</p>
+      @if (form.controls['kanji'].dirty && form.hasError('required', 'kanji')) {
+      <p class="error" id="kanji-required-error">This field is required *</p>
+      }
+      @if (form.controls['kanji'].dirty && form.hasError('pattern', 'kanji')) {
+      <p class="error" id="kanji-pattern-error">This field must be a kanji *</p>
+      }
+      @if (form.controls['kanji'].dirty && form.hasError('maxlength', 'kanji')) {
+      <p class="error" id="kanji-length-error">Single kanjis only *</p>
+      }
     </div>
 
     <div class="form-group">
       <label for="meaning">Meaning</label>
       <div formArrayName="meaning">
-        <div *ngFor="let meaningControl of meaningFormArray.controls; let i = index;">
+        @for (meaningControl of meaningFormArray.controls; track meaningControl; let i = $index) {
+        <div>
           <div class="input-btn-div">
             <input type="text" class="form-control" [formControlName]="i" [id]="'meaning' + i" placeholder="e.g. Day"
               autocomplete="off">
@@ -26,13 +30,20 @@
               X
             </button>
           </div>
-          <div *ngIf="meaningControl.invalid && meaningControl.dirty">
-            <p class="error" [id]="'meaning-required-error' + i" *ngIf="meaningControl.errors?.['required']">Meaning is
+          @if (meaningControl.invalid && meaningControl.dirty) {
+          <div>
+            @if (meaningControl.errors?.['required']) {
+            <p class="error" [id]="'meaning-required-error' + i">Meaning is
               required *</p>
-            <p class="error" [id]="'meaning-length-error' + i" *ngIf="meaningControl.errors?.['maxlength']">Meaning is
+            }
+            @if (meaningControl.errors?.['maxlength']) {
+            <p class="error" [id]="'meaning-length-error' + i">Meaning is
               too long *</p>
+            }
           </div>
+          }
         </div>
+        }
         <button type="button" class="btn btn-add" id="meaning-add" (click)="addArrayEl(meaningFormArray)">
           Add
         </button>
@@ -42,7 +53,8 @@
     <div class="form-group">
       <label for="pronunciation">Pronunciation</label>
       <div formArrayName="pronunciation">
-        <div *ngFor="let pronunciationControl of pronunciationFormArray.controls; let i = index;">
+        @for (pronunciationControl of pronunciationFormArray.controls; track pronunciationControl; let i = $index) {
+        <div>
           <div class="input-btn-div">
             <input type="text" class="form-control" [formControlName]="i" [id]="'pronunciation' + i"
               placeholder="e.g. にち" autocomplete="off">
@@ -52,15 +64,23 @@
               X
             </button>
           </div>
-          <div *ngIf="pronunciationControl.invalid && pronunciationControl.dirty">
-            <p class="error" [id]="'pronunciation-required-error' + i"
-              *ngIf="pronunciationControl.errors?.['required']">Pronunciation is required *</p>
-            <p class="error" [id]="'pronunciation-length-error' + i" *ngIf="pronunciationControl.errors?.['maxlength']">
+          @if (pronunciationControl.invalid && pronunciationControl.dirty) {
+          <div>
+            @if (pronunciationControl.errors?.['required']) {
+            <p class="error" [id]="'pronunciation-required-error' + i">Pronunciation is required *</p>
+            }
+            @if (pronunciationControl.errors?.['maxlength']) {
+            <p class="error" [id]="'pronunciation-length-error' + i">
               Pronunciation is too long *</p>
-            <p class="error" [id]="'pronunciation-pattern-error' + i" *ngIf="pronunciationControl.errors?.['pattern']">
+            }
+            @if (pronunciationControl.errors?.['pattern']) {
+            <p class="error" [id]="'pronunciation-pattern-error' + i">
               Must be in hiragana / katakana *</p>
+            }
           </div>
+          }
         </div>
+        }
         <button type="button" class="btn btn-add" id="pronunciation-add"
           (click)="addArrayEl(pronunciationFormArray, true)">
           Add
@@ -86,9 +106,12 @@
         Submit
       </button>
     </div>
-
   </form>
 
-  <p class="success-general" *ngIf="status === 'success'">Kanji submitted!</p>
-  <p class="error-general" *ngIf="status === 'error'">{{ errorInfo }}</p>
+  @if (status === 'success') {
+  <p class="success-general">Kanji submitted!</p>
+  }
+  @if (status === 'error') {
+  <p class="error-general">{{ errorInfo }}</p>
+  }
 </div>

@@ -9,9 +9,8 @@ describe('SpinnerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpinnerComponent ],
-      imports: [MatProgressSpinnerModule]
-    })
+    imports: [MatProgressSpinnerModule, SpinnerComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(SpinnerComponent);

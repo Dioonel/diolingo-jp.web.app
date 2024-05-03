@@ -8,8 +8,8 @@ xdescribe('KatakanaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ KatakanaComponent ]
-    })
+    imports: [KatakanaComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(KatakanaComponent);

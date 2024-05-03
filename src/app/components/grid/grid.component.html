@@ -1,38 +1,55 @@
 <div class="container">
   <app-search></app-search>
-  <div *ngIf="items.length === 0" class="no-results">No results</div>
-  <div *ngIf="items.length > 0" class="switch-container">
-    <div class="switch" id="random">
-      <button [matTooltip]="'Random sort'" [matTooltipPosition]="'above'" type="button" (click)="randomize()">
-        <fa-icon [icon]="faDiceSix" size="2x"></fa-icon>
-      </button>
-    </div>
-    <div class="switch" id="switch">
-      <button [matTooltip]="'Change format'" [matTooltipPosition]="'above'" *ngIf="switch === 'all'" type="button" (click)="doSwitch('japanese')">
-        <fa-icon [icon]="faWandMagicSparkles" size="2x"></fa-icon>
-      </button>
-      <button [matTooltip]="'Change format'" [matTooltipPosition]="'above'" *ngIf="switch === 'japanese'" type="button" (click)="doSwitch('meaning')">
-        <fa-icon [icon]="faA" size="2x"></fa-icon>
-      </button>
-      <button [matTooltip]="'Change format'" [matTooltipPosition]="'above'" *ngIf="switch === 'meaning'" type="button" (click)="doSwitch('all')">
-        <fa-icon [icon]="faAsterisk" size="2x"></fa-icon>
-      </button>
-    </div>
+  @if (items.length <= 0) { <div class="no-results">No results
+</div>
+} @else {
+<div class="switch-container">
+  <div class="switch" id="random">
+    <button [matTooltip]="'Random sort'" [matTooltipPosition]="'above'" type="button" (click)="randomize()">
+      <fa-icon [icon]="faDiceSix" size="2x"></fa-icon>
+    </button>
   </div>
-  <div class="grid-container">
-    <div class="grid-item" *ngFor="let item of items" (click)="openDialog(item)">
-      <div *ngIf="switch === 'all'">
-        <div class="value">{{ item?.kanji || item?.word }}</div>
-        <div class="meaning">{{ item.meaning.join(', ') }}</div>
-        <div class="pronunciation">{{ item.pronunciation.join(', ') }}</div>
-      </div>
-      <div *ngIf="switch === 'japanese'" class="custom-element">
-        <div class="value">{{ item?.kanji || item?.word }}</div>
-        <div class="pronunciation">{{ item.pronunciation.join(', ') }}</div>
-      </div>
-      <div *ngIf="switch === 'meaning'" class="custom-element">
-        <div class="meaning">{{ item.meaning.join(', ') }}</div>
-      </div>
-    </div>
+  <div class="switch" id="switch">
+    @if (switch === 'all') {
+    <button [matTooltip]="'Change format'" [matTooltipPosition]="'above'" type="button" (click)="doSwitch('japanese')">
+      <fa-icon [icon]="faWandMagicSparkles" size="2x"></fa-icon>
+    </button>
+    }
+    @if (switch === 'japanese') {
+    <button [matTooltip]="'Change format'" [matTooltipPosition]="'above'" type="button" (click)="doSwitch('meaning')">
+      <fa-icon [icon]="faA" size="2x"></fa-icon>
+    </button>
+    }
+    @if (switch === 'meaning') {
+    <button [matTooltip]="'Change format'" [matTooltipPosition]="'above'" type="button" (click)="doSwitch('all')">
+      <fa-icon [icon]="faAsterisk" size="2x"></fa-icon>
+    </button>
+    }
   </div>
+</div>
+}
+<div class="grid-container">
+  @for (item of items; track item) {
+  <div class="grid-item" (click)="openDialog(item)">
+    @if (switch === 'all') {
+    <div>
+      <div class="value">{{ item?.kanji || item?.word }}</div>
+      <div class="meaning">{{ item.meaning.join(', ') }}</div>
+      <div class="pronunciation">{{ item.pronunciation.join(', ') }}</div>
+    </div>
+    }
+    @if (switch === 'japanese') {
+    <div class="custom-element">
+      <div class="value">{{ item?.kanji || item?.word }}</div>
+      <div class="pronunciation">{{ item.pronunciation.join(', ') }}</div>
+    </div>
+    }
+    @if (switch === 'meaning') {
+    <div class="custom-element">
+      <div class="meaning">{{ item.meaning.join(', ') }}</div>
+    </div>
+    }
+  </div>
+  }
+</div>
 </div>

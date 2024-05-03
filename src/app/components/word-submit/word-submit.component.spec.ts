@@ -20,17 +20,17 @@ describe('WordSubmitComponent', () => {
     const spy = jasmine.createSpyObj('DataService', ['createWord']);                  // spy step 2
 
     await TestBed.configureTestingModule({
-      declarations: [WordSubmitComponent, SpinnerComponent],
-      imports: [
+    imports: [
         ReactiveFormsModule,
         RouterTestingModule,
         HttpClientTestingModule,
-        FontAwesomeModule
-      ],
-      providers: [
-        { provide: DataService, useValue: spy },                                      // spy step 3
-      ],
-    })
+        FontAwesomeModule,
+        WordSubmitComponent, SpinnerComponent
+    ],
+    providers: [
+        { provide: DataService, useValue: spy }, // spy step 3
+    ],
+})
       .compileComponents();
   });
 

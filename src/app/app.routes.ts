@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { HiraganaComponent } from './components/hiragana/hiragana.component';
@@ -11,7 +10,7 @@ import { PlayComponent } from './components/play/play.component';
 import { GuessComponent } from './components/guess/guess.component';
 import { PairsComponent } from './components/pairs/pairs.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'hiragana', component: HiraganaComponent },
   { path: 'katakana', component: KatakanaComponent },
@@ -22,9 +21,3 @@ const routes: Routes = [
   { path: 'play/guess', component: GuessComponent },
   { path: 'play/pairs', component: PairsComponent },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
