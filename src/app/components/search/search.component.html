@@ -7,8 +7,10 @@
         <option value="meaning">Meaning</option>
       </select>
 
-      <input type="text" class="input-search" name="input-search" *ngIf="filterDic[filterType]"
-        [formControl]="filterDic[filterType]" autocomplete="off" placeholder="Search...">
+      @if (filterDic[filterType]) {
+      <input type="text" class="input-search" name="input-search" [formControl]="filterDic[filterType]"
+        autocomplete="off" placeholder="Search...">
+      }
       <button class="submit-btn" type="submit" (click)="markAsTouched()">
         <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
         <span class="device-only">Search</span>
@@ -19,25 +21,55 @@
       </button>
     </form>
 
-    <div *ngIf="filterKanji.dirty && filterKanji.invalid" class="error-div">
-      <span class="error" *ngIf="filterKanji.hasError('required')">Kanji can't be empty *</span>
-      <span class="error" *ngIf="filterKanji.hasError('pattern')">Input is not a kanji *</span>
-      <span class="error" *ngIf="filterKanji.hasError('maxlength')">Single kanjis only *</span>
+    @if (filterKanji.dirty && filterKanji.invalid) {
+    <div class="error-div">
+      @if (filterKanji.hasError('required')) {
+      <span class="error">Kanji can't be empty *</span>
+      }
+      @if (filterKanji.hasError('pattern')) {
+      <span class="error">Input is not a kanji *</span>
+      }
+      @if (filterKanji.hasError('maxlength')) {
+      <span class="error">Single kanjis only *</span>
+      }
     </div>
-    <div *ngIf="filterWord.dirty && filterWord.invalid" class="error-div">
-      <span class="error" *ngIf="filterWord.hasError('required')">Word can't be empty *</span>
-      <span class="error" *ngIf="filterWord.hasError('pattern')">Input is not in japanese *</span>
-      <span class="error" *ngIf="filterWord.hasError('maxlength')">Word is too long *</span>
+    }
+    @if (filterWord.dirty && filterWord.invalid) {
+    <div class="error-div">
+      @if (filterWord.hasError('required')) {
+      <span class="error">Word can't be empty *</span>
+      }
+      @if (filterWord.hasError('pattern')) {
+      <span class="error">Input is not in japanese *</span>
+      }
+      @if (filterWord.hasError('maxlength')) {
+      <span class="error">Word is too long *</span>
+      }
     </div>
-    <div *ngIf="filterPronunciation.dirty && filterPronunciation.invalid" class="error-div">
-      <span class="error" *ngIf="filterPronunciation.hasError('required')">Pronunciation can't be empty *</span>
-      <span class="error" *ngIf="filterPronunciation.hasError('pattern')">Pronunciation must be in hiragana/katakana
+    }
+    @if (filterPronunciation.dirty && filterPronunciation.invalid) {
+    <div class="error-div">
+      @if (filterPronunciation.hasError('required')) {
+      <span class="error">Pronunciation can't be empty *</span>
+      }
+      @if (filterPronunciation.hasError('pattern')) {
+      <span class="error">Pronunciation must be in hiragana/katakana
         *</span>
-      <span class="error" *ngIf="filterPronunciation.hasError('maxlength')">Pronunciation is too long *</span>
+      }
+      @if (filterPronunciation.hasError('maxlength')) {
+      <span class="error">Pronunciation is too long *</span>
+      }
     </div>
-    <div *ngIf="filterMeaning.dirty && filterMeaning.invalid" class="error-div">
-      <span class="error" *ngIf="filterMeaning.hasError('required')">Meaning can't be empty *</span>
-      <span class="error" *ngIf="filterMeaning.hasError('maxlength')">Meaning is too long *</span>
+    }
+    @if (filterMeaning.dirty && filterMeaning.invalid) {
+    <div class="error-div">
+      @if (filterMeaning.hasError('required')) {
+      <span class="error">Meaning can't be empty *</span>
+      }
+      @if (filterMeaning.hasError('maxlength')) {
+      <span class="error">Meaning is too long *</span>
+      }
     </div>
+    }
   </div>
 </div>

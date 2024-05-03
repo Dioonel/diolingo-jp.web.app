@@ -1,8 +1,11 @@
-<div class="container" *ngIf="status === 'loading'">
+@if (status === 'loading') {
+<div class="container">
   <app-spinner></app-spinner>
 </div>
+}
 
-<div class="container" *ngIf="status === 'menu'">
+@if (status === 'menu') {
+<div class="container">
   <h1 class="title">Pairs</h1>
   <div class="tutorial">
     <p class="label">How to play:</p>
@@ -22,35 +25,52 @@
     Start
   </button>
 </div>
+}
 
-<div class="container" *ngIf="status === 'playing' || status === 'continue'">
+@if (status === 'playing' || status === 'continue') {
+<div class="container">
   <h1 class="title">Pairs:</h1>
   <div class="pairs-container">
     <div class="meaning-container">
-      <div class="meaning" *ngFor="let item of currentItems; let i = index">
-        <input type="radio" name="meaning" (change)="change(i + 1, 'meaning')" [disabled]="successPositionsM.includes(i + 1) || failedPositionsM.includes(i + 1)">
-        <div class="visible-item" [class.success]="successPositionsM.includes(i + 1)" [class.failed]="failedPositionsM.includes(i + 1)">
-          <p class="meaning-text" *ngFor="let meaning of findItemByPosition(i + 1, 'meaning')?.meaning">
-            <!-- {{ findItemByPosition(i + 1, 'meaning')?.meaning }} -->
+      @for (item of currentItems; track item; let i = $index) {
+      <div class="meaning">
+        <input type="radio" name="meaning" (change)="change(i + 1, 'meaning')"
+          [disabled]="successPositionsM.includes(i + 1) || failedPositionsM.includes(i + 1)">
+        <div class="visible-item" [class.success]="successPositionsM.includes(i + 1)"
+          [class.failed]="failedPositionsM.includes(i + 1)">
+          @for (meaning of findItemByPosition(i + 1, 'meaning')?.meaning; track meaning) {
+          <p class="meaning-text">
             {{ meaning }}
           </p>
+          }
         </div>
       </div>
+      }
     </div>
     <div class="japanese-container">
-      <div class="japanese" *ngFor="let item of currentItems; let i = index">
-        <input type="radio" name="japanese" (change)="change(i + 1, 'japanese')" [disabled]="successPositionsJ.includes(i + 1) || failedPositionsJ.includes(i + 1)">
-        <div class="visible-item" [class.success]="successPositionsJ.includes(i + 1)" [class.failed]="failedPositionsJ.includes(i + 1)">
-          <p class="japanese-text">{{ findItemByPosition(i + 1, 'japanese')?.kanji || findItemByPosition(i + 1, 'japanese')?.word }}</p>
+      @for (item of currentItems; track item; let i = $index) {
+      <div class="japanese">
+        <input type="radio" name="japanese" (change)="change(i + 1, 'japanese')"
+          [disabled]="successPositionsJ.includes(i + 1) || failedPositionsJ.includes(i + 1)">
+        <div class="visible-item" [class.success]="successPositionsJ.includes(i + 1)"
+          [class.failed]="failedPositionsJ.includes(i + 1)">
+          <p class="japanese-text">{{ findItemByPosition(i + 1, 'japanese')?.kanji || findItemByPosition(i + 1,
+            'japanese')?.word }}</p>
         </div>
       </div>
+      }
     </div>
   </div>
-  <button class="continue" type="button" *ngIf="status === 'continue'" (click)="continue()">Continue</button>
+  @if (status === 'continue') {
+  <button class="continue" type="button" (click)="continue()">Continue</button>
+  }
 </div>
+}
 
-<div class="container" *ngIf="status === 'finished'">
+@if (status === 'finished') {
+<div class="container">
   <h1 class="title">Finished!</h1>
   <p class="score">Score: {{ score }}/{{ items.length }}</p>
   <button class="play-btn" (click)="playAgain()">Play again</button>
 </div>
+}

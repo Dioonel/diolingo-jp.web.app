@@ -1,9 +1,12 @@
 <div class="wrapper">
-  <div *ngIf="status == 'loading'" class="spinner-div">
+  @if (status == 'loading') {
+  <div class="spinner-div">
     <app-spinner></app-spinner>
   </div>
+  }
 
-  <div *ngIf="status == 'success'">
+  @if (status == 'success') {
+  <div>
     <cdk-accordion>
       <cdk-accordion-item #accordionMenu="cdkAccordionItem">
         <button class="accordion-btn" type="button" (click)="accordionMenu.toggle()">Create a new kanji
@@ -17,8 +20,11 @@
     </cdk-accordion>
     <div class="main-div">
       <app-grid [items]="kanji" (clickDialog)="accordionMenu.expanded ? accordionMenu.close() : null"></app-grid>
-      <button *ngIf="kanji.length % limit === 0 && !noMore" type="button" class="load-more" (click)="loadMore()"
-        [disabled]="loadMoreStatus === 'loading'">Load more...</button>
+      @if (kanji.length % limit === 0 && !noMore) {
+      <button type="button" class="load-more" (click)="loadMore()" [disabled]="loadMoreStatus === 'loading'">Load
+        more...</button>
+      }
     </div>
   </div>
+  }
 </div>

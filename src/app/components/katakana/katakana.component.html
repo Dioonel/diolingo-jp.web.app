@@ -2,14 +2,16 @@
   <h2>Katakana Chart</h2>
   <section class="section_basic">
     <div class="chart">
-      <div class="chart-kanas" *ngFor="let groups of katakanas">
-        <div *ngFor="let katakana of groups"
-          [ngClass]="(katakana.kana === '') ? 'empty' : ''"
-        >
+      @for (groups of katakanas; track groups) {
+      <div class="chart-kanas">
+        @for (katakana of groups; track katakana) {
+        <div [ngClass]="(katakana.kana === '') ? 'empty' : ''">
           <span>{{ katakana.kana }}</span>
           <span>{{ katakana.latin }}</span>
         </div>
+        }
       </div>
+      }
     </div>
   </section>
 
@@ -18,10 +20,12 @@
       <h3>Handakuten</h3>
       <div class="chart">
         <div class="chart-kanas">
-          <div *ngFor="let katakana of handakuten">
+          @for (katakana of handakuten; track katakana) {
+          <div>
             <span>{{ katakana.kana }}</span>
             <span>{{ katakana.latin }}</span>
           </div>
+          }
         </div>
       </div>
     </div>
@@ -29,12 +33,16 @@
     <div class="dakuten">
       <h3>Dakuten</h3>
       <div class="chart">
-        <div class="chart-kanas" *ngFor="let groups of dakuten">
-          <div *ngFor="let katakana of groups">
+        @for (groups of dakuten; track groups) {
+        <div class="chart-kanas">
+          @for (katakana of groups; track katakana) {
+          <div>
             <span>{{ katakana.kana }}</span>
             <span>{{ katakana.latin }}</span>
           </div>
+          }
         </div>
+        }
       </div>
     </div>
   </section>
@@ -42,12 +50,16 @@
   <section class="section_combinations">
     <h3>Combinations</h3>
     <div class="chart">
-      <div class="chart-kanas" *ngFor="let groups of combinations">
-        <div *ngFor="let katakana of groups">
+      @for (groups of combinations; track groups) {
+      <div class="chart-kanas">
+        @for (katakana of groups; track katakana) {
+        <div>
           <span>{{ katakana.kana }}</span>
           <span>{{ katakana.latin }}</span>
         </div>
+        }
       </div>
+      }
     </div>
   </section>
 </div>
