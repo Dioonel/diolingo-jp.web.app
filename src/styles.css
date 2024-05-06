@@ -1,5 +1,5 @@
 @import '@angular/cdk/overlay-prebuilt.css';
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
 
 * {
   box-sizing: border-box;
