@@ -1,19 +1,15 @@
 <div class="container">
-  @if (loaded) {
-  <div class="game">
+  <div class="game hidden" id="game1">
     <h1 class="game-title">Guess</h1>
     <p class="game-info">You will have to guess the kanji or word from a meaning, and vice versa.</p>
-    <img class="game-img" src="assets/images/guess.webp">
+    <img class="game-img" src="assets/images/guess.webp" (load)="displayDivs()">
     <a class="game-btn" routerLink="guess">Play now</a>
   </div>
-  }
 
-  @if (loaded) {
-  <div class="game">
+  <div class="game hidden" id="game2">
     <h1 class="game-title">Pairs</h1>
     <p class="game-info">You will have to make pairs of japanese words with their meanings.</p>
     <img class="game-img" src="assets/images/pairs.webp">
     <button class="game-btn" routerLink="pairs">Play now</button>
   </div>
-  }
 </div>

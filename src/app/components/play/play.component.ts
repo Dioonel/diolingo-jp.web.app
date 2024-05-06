@@ -9,12 +9,13 @@ import { RouterLink } from '@angular/router';
     imports: [RouterLink]
 })
 export class PlayComponent implements OnInit {
-  loaded = false;
-
   constructor() { }
 
   ngOnInit(): void {
-    this.loaded = true;
   }
 
+  displayDivs() {
+    document.getElementById('game1')?.classList.remove('hidden');
+    document.getElementById('game2')?.classList.remove('hidden');
+  }
 }

@@ -25,8 +25,13 @@
   width: 40%;
   min-width: 300px;
   max-width: 460px;
+  min-height: 469px;
   padding: 25px;
   background-color: #212121;
+}
+
+.hidden {
+  display: none;
 }
 
 .game-title {
