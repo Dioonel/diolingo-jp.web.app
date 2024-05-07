@@ -1,8 +1,26 @@
 <div class="container">
   <h1 class="title">Stats</h1>
   <mat-tab-group class="tabs-container">
-    <mat-tab label="Overall">Overall 100%</mat-tab>
-    <mat-tab label="Guess">Guess</mat-tab>
-    <mat-tab label="Pairs">Pairs</mat-tab>
+    <mat-tab label="Overall">
+      <div class="chart-container">
+        <h1>Overall</h1>
+        <canvas id="overall"></canvas>
+        <p><span class="bold">Current Streak:</span> 4 days.</p>
+        <p><span class="bold">Longest Streak:</span> 19 days.</p>
+        <p><span class="bold">Total Time Training:</span> 174,9 hours.</p>
+      </div>
+    </mat-tab>
+    <mat-tab label="Guess">
+      <div class="chart-container">
+        <h1>Guess</h1>
+        <canvas id="guess"></canvas>
+      </div>
+    </mat-tab>
+    <mat-tab label="Pairs">
+      <div class="chart-container">
+        <h1>Pairs</h1>
+        <canvas id="pairs"></canvas>
+      </div>
+    </mat-tab>
   </mat-tab-group>
 </div>

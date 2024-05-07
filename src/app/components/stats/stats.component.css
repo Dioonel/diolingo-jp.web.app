@@ -17,3 +17,25 @@
   width: 400px;
   min-width: 360px;
 }
+
+.chart-container h1 {
+  color: #fff;
+  font-size: 3em;
+  margin: 20px 0px 10px 0px;
+  text-align: center;
+}
+
+.chart-container canvas {
+  margin-bottom: 20px;
+}
+
+.chart-container p {
+  color: #fff;
+  font-size: 1.5em;
+  margin: 0px 0px 20px 0px;
+  text-align: center;
+}
+
+.chart-container p .bold {
+  font-weight: bold;
+}
