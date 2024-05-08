@@ -30,7 +30,7 @@ export const MockOverall: OverallStats = {
 export const MockGuess: GuessStats = {
   history: [
     {
-      correct_amount: 16,
+      correct_amount: 19,
       incorrect_amount: 4,
       date: '2024-02-01'
     },
@@ -56,9 +56,14 @@ export const MockGuess: GuessStats = {
     },
     {
       correct_amount: 5,
-      incorrect_amount: 0,
+      incorrect_amount: 1,
       date: '2020-02-06'
-    }
+    },
+    {
+      correct_amount: 33,
+      incorrect_amount: 5,
+      date: '2020-02-07'
+    },
   ],
   overall: {
     total_correct: 49,
@@ -97,6 +102,11 @@ export const MockPairs: PairsStats = {
       correct_amount: 3,
       incorrect_amount: 0,
       date: '2020-02-06'
+    },
+    {
+      correct_amount: 15,
+      incorrect_amount: 3,
+      date: '2020-02-07'
     }
   ],
   overall: {
