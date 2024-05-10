@@ -4,24 +4,27 @@
   flex-direction: column;
   align-items: center;
   background-color: #202124;
-  padding-top: 40px;
-}
-
-.title {
-  color: #fff;
-  font-size: 4em;
-  margin-bottom: 30px;
+  padding: 20px 0px;
 }
 
 .tabs-container {
-  width: 400px;
+  width: 800px;
   min-width: 360px;
+  padding: 0px 10px;
+}
+
+.chart-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
 }
 
 .chart-container h1 {
   color: #fff;
   font-size: 3em;
-  margin: 20px 0px 10px 0px;
+  margin: 20px 0px 14px 0px;
   text-align: center;
 }
 
@@ -29,13 +32,55 @@
   margin-bottom: 20px;
 }
 
+.chart-container .pie {
+  max-width: 300px;
+  max-height: 380px;
+}
+
 .chart-container p {
   color: #fff;
-  font-size: 1.5em;
-  margin: 0px 0px 20px 0px;
+  font-size: 1.6em;
+  margin-bottom: 18px;
   text-align: center;
 }
 
 .chart-container p .bold {
   font-weight: bold;
+}
+
+mat-select {
+  width: 200px;
+  background-color: #3c4042;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  margin-bottom: 25px;
+}
+
+mat-select:focus {
+  border: 2px solid #bbb;
+}
+
+::ng-deep .mdc-tab--active .mdc-tab__text-label {
+  color: #f09aff !important;
+}
+
+::ng-deep .mdc-tab__text-label {
+  color: #bbb !important;
+}
+
+::ng-deep .mat-mdc-option-active .mdc-list-item__primary-text{
+  color: #f09aff !important;
+}
+
+::ng-deep .mat-mdc-select-trigger {
+  padding: 10px !important;
+}
+
+@media (width <= 440px) {
+  .container {
+    padding-top: 0px;
+  }
+  .chart-container canvas {
+    margin-bottom: 10px;
+  }
 }

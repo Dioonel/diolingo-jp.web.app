@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
 import { format } from 'date-fns';
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
@@ -7,26 +8,28 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(ChartDataLabels);
 Chart.defaults.font.family = 'Roboto';
 
-import { MockOverall, MockGuess, MockPairs, GuessStats, PairsStats } from './../../models/stats';
+import { MockOverall, MockGuess, MockPairs } from './../../models/stats';
 
 @Component({
   selector: 'app-stats',
   standalone: true,
-  imports: [MatTabsModule],
+  imports: [MatTabsModule, MatSelectModule],
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.css'
 })
 export class StatsComponent implements OnInit, AfterViewInit {
-  overallCreated = false;
-  guessCreated = false;
-  pairsCreated = false;
+  timeFilter: 7 | 14 | 28 = 7
+  overallChart: any;
+  guessBarChart: any;
+  guessPieChart: any;
+  pairsBarChart: any;
+  pairsPieChart: any;
 
   overallPieOptions = {
     responsive: true,
     plugins: {
       legend: {
         labels: {
-          padding: 20,
           font: {
             size: 16
           },
@@ -65,6 +68,7 @@ export class StatsComponent implements OnInit, AfterViewInit {
         stacked: true,
         ticks: {
           color: '#bbb',
+          maxTicksLimit: 7,
           font: {
             size: 14
           }
@@ -76,7 +80,8 @@ export class StatsComponent implements OnInit, AfterViewInit {
       x: {
         stacked: true,
         ticks: {
-          color: '#bbb'
+          color: '#bbb',
+          maxTicksLimit: 10,
         },
         grid: {
           color: '#3c4042'
@@ -91,7 +96,7 @@ export class StatsComponent implements OnInit, AfterViewInit {
         labels: {
           color: '#bbb',
           font: {
-            size: 15
+            size: 16
           }
         },
         // Disables legend interaction
@@ -113,7 +118,6 @@ export class StatsComponent implements OnInit, AfterViewInit {
     plugins: {
       legend: {
         labels: {
-          padding: 20,
           font: {
             size: 16
           },
@@ -149,7 +153,6 @@ export class StatsComponent implements OnInit, AfterViewInit {
     plugins: {
       legend: {
         labels: {
-          padding: 20,
           font: {
             size: 16
           },
@@ -186,11 +189,10 @@ export class StatsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.renderOverall();
-    this.overallCreated = true;
   }
 
   renderOverall() {
-    new Chart('overall', {
+    this.overallChart = new Chart('overall', {
       type: 'pie',
       data: {
         labels: ['Correct', 'Incorrect'],
@@ -212,18 +214,18 @@ export class StatsComponent implements OnInit, AfterViewInit {
   }
 
   renderGuess() {
-    new Chart('guess', {
+    this.guessBarChart = new Chart('guess', {
       type: 'bar',
       data: {
-        labels: MockGuess.history.map((date) => format(new Date(date.date), 'MMM dd')),
+        labels: MockGuess.history.slice(MockGuess.history.length - this.timeFilter, MockGuess.history.length).map((date) => format(new Date(date.date), 'MMM dd')),
         datasets: [{
           label: 'Correct',
-          data: MockGuess.history.map((entry) => entry.correct_amount),
+          data: MockGuess.history.slice(MockGuess.history.length - this.timeFilter, MockGuess.history.length).map((entry) => entry.correct_amount),
           backgroundColor: '#63AAE3',
         },
         {
           label: 'Incorrect',
-          data: MockGuess.history.map((entry) => entry.incorrect_amount),
+          data: MockGuess.history.slice(MockGuess.history.length - this.timeFilter, MockGuess.history.length).map((entry) => entry.incorrect_amount),
           backgroundColor: '#E15554',
         }]
       },
@@ -232,42 +234,42 @@ export class StatsComponent implements OnInit, AfterViewInit {
       }
     });
 
-    new Chart('guess-overall', {
-      type: 'pie',
-      data: {
-        labels: ['Correct', 'Incorrect'],
-        datasets: [{
-          label: '# Answers',
-          data: [MockGuess.overall.total_correct, MockGuess.overall.total_incorrect],
-          backgroundColor: [
-            '#63AAE3',
-            '#E15554'
-          ],
-          borderColor: '',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        ...this.guessPieOptions,
-      }
-    });
-
-    this.guessCreated = true;
+    if(!this.guessPieChart?.ctx) {
+      this.guessPieChart = new Chart('guess-overall', {
+        type: 'pie',
+        data: {
+          labels: ['Correct', 'Incorrect'],
+          datasets: [{
+            label: '# Answers',
+            data: [MockGuess.overall.total_correct, MockGuess.overall.total_incorrect],
+            backgroundColor: [
+              '#63AAE3',
+              '#E15554'
+            ],
+            borderColor: '',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          ...this.guessPieOptions,
+        }
+      });
+    }
   }
 
   renderPairs() {
-    new Chart('pairs', {
+    this.pairsBarChart = new Chart('pairs', {
       type: 'bar',
       data: {
-        labels: MockPairs.history.map((date) => format(new Date(date.date), 'MMM dd')),
+        labels: MockPairs.history.slice(MockPairs.history.length - this.timeFilter, MockPairs.history.length).map((date) => format(new Date(date.date), 'MMM dd')),
         datasets: [{
           label: 'Correct',
-          data: MockPairs.history.map((entry) => entry.correct_amount),
+          data: MockPairs.history.slice(MockPairs.history.length - this.timeFilter, MockPairs.history.length).map((entry) => entry.correct_amount),
           backgroundColor: '#63AAE3',
         },
         {
           label: 'Incorrect',
-          data: MockPairs.history.map((entry) => entry.incorrect_amount),
+          data: MockPairs.history.slice(MockPairs.history.length - this.timeFilter, MockPairs.history.length).map((entry) => entry.incorrect_amount),
           backgroundColor: '#E15554',
         }]
       },
@@ -276,40 +278,46 @@ export class StatsComponent implements OnInit, AfterViewInit {
       }
     });
 
-    new Chart('pairs-overall', {
-      type: 'pie',
-      data: {
-        labels: ['Correct', 'Incorrect'],
-        datasets: [{
-          label: '# Answers',
-          data: [MockPairs.overall.total_correct, MockPairs.overall.total_incorrect],
-          backgroundColor: [
-            '#63AAE3',
-            '#E15554'
-          ],
-          borderColor: '',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        ...this.pairsPieOptions,
-      }
-    });
-
-    this.pairsCreated = true;
+    if(!this.pairsPieChart?.ctx) {
+      this.pairsPieChart = new Chart('pairs-overall', {
+        type: 'pie',
+        data: {
+          labels: ['Correct', 'Incorrect'],
+          datasets: [{
+            label: '# Answers',
+            data: [MockPairs.overall.total_correct, MockPairs.overall.total_incorrect],
+            backgroundColor: [
+              '#63AAE3',
+              '#E15554'
+            ],
+            borderColor: '',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          ...this.pairsPieOptions,
+        }
+      });
+    }
   }
 
   render(event: any) {
     switch(event.index) {
       case 0 || '0':
-        (this.overallCreated) ? null : this.renderOverall();
+        (this.overallChart?.ctx) ? null : this.renderOverall();
         break;
       case 1 || '1':
-        (this.guessCreated) ? null : this.renderGuess();
+        (this.guessBarChart?.ctx) ? null : this.renderGuess();
         break;
       case 2 || '2':
-        (this.pairsCreated) ? null : this.renderPairs();
+        (this.pairsBarChart?.ctx) ? null : this.renderPairs();
         break;
     }
+  }
+
+  executeFilter(tabIndex: number) {
+    if(this.guessBarChart?.ctx && this.guessPieChart?.ctx) this.guessBarChart.destroy();
+    if(this.pairsBarChart?.ctx && this.pairsPieChart?.ctx) this.pairsBarChart.destroy();
+    this.render({ index: tabIndex });
   }
 }
