@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
-import { format } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -217,7 +217,7 @@ export class StatsComponent implements OnInit, AfterViewInit {
     this.guessBarChart = new Chart('guess', {
       type: 'bar',
       data: {
-        labels: MockGuess.history.slice(MockGuess.history.length - this.timeFilter, MockGuess.history.length).map((date) => format(new Date(date.date), 'MMM dd')),
+        labels: MockGuess.history.slice(MockGuess.history.length - this.timeFilter, MockGuess.history.length).map((date) => formatInTimeZone(date.date, 'America/Buenos_Aires', 'MMM dd')),
         datasets: [{
           label: 'Correct',
           data: MockGuess.history.slice(MockGuess.history.length - this.timeFilter, MockGuess.history.length).map((entry) => entry.correct_amount),
@@ -261,7 +261,7 @@ export class StatsComponent implements OnInit, AfterViewInit {
     this.pairsBarChart = new Chart('pairs', {
       type: 'bar',
       data: {
-        labels: MockPairs.history.slice(MockPairs.history.length - this.timeFilter, MockPairs.history.length).map((date) => format(new Date(date.date), 'MMM dd')),
+        labels: MockPairs.history.slice(MockPairs.history.length - this.timeFilter, MockPairs.history.length).map((date) => formatInTimeZone(date.date, 'America/Buenos_Aires', 'MMM dd')),
         datasets: [{
           label: 'Correct',
           data: MockPairs.history.slice(MockPairs.history.length - this.timeFilter, MockPairs.history.length).map((entry) => entry.correct_amount),
