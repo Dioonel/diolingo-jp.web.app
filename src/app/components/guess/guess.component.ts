@@ -1,11 +1,13 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { faLightbulb, faPlay } from '@fortawesome/free-solid-svg-icons';
-
-import { DataService } from './../../../app/services/data.service';
-import { Generic, Guess } from './../../../app/models/generic';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { SpinnerComponent } from '../spinner/spinner.component';
+import { faLightbulb, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+
+import { DataService } from './../../services/data.service';
+import { TimerService } from './../../services/timer.service';
+import { Generic, Guess } from './../../../app/models/generic';
+import { Score } from './../../models/score';
+import { SpinnerComponent } from './../spinner/spinner.component';
 
 @Component({
     selector: 'app-guess',
@@ -16,6 +18,8 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 })
 export class GuessComponent implements OnInit {
   status: 'menu' | 'loading' | 'playing' | 'success' | 'fail' | 'finished' = 'menu';
+  submittingScore: boolean = false;
+  submitMsg: string = '';
   gameLength: '5' | '10' | '15' | '20' = '10';
   items: Guess[] = [];
   currentItem!: Guess;
@@ -27,10 +31,9 @@ export class GuessComponent implements OnInit {
   faLightbulb = faLightbulb;
   faPlay = faPlay;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private timer: TimerService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   startGame() {
     this.status = 'loading';
@@ -38,6 +41,7 @@ export class GuessComponent implements OnInit {
       this.items = this.modifyItems(data);
       this.currentItem = this.items[this.currentIndex];
       this.status = 'playing';
+      this.timer.start();
     });
   }
 
@@ -84,6 +88,7 @@ export class GuessComponent implements OnInit {
         this.status = 'fail';
       }
     }
+    this.timer.pause();
   }
 
   continue() {
@@ -93,9 +98,36 @@ export class GuessComponent implements OnInit {
     if(this.currentIndex < this.items.length) {
       this.currentItem = this.items[this.currentIndex];
       this.status = 'playing';
+      this.timer.continue();
     }
     else {
       this.status = 'finished';
+      this.submittingScore = true;
+      const score: Score = {
+        score: {
+          total_correct: this.score,
+          total_incorrect: this.items.length - this.score,
+          time: this.timer.getFinalTime(),
+        },
+        type: 'guess'
+      }
+      this.dataService.submitScore(score).subscribe({
+        next: (data) => {
+          if(data?.message == 'Score submitted!') {
+            this.submittingScore = false;
+            this.submitMsg = 'Score submitted!';
+          }
+        },
+        error: (err) => {
+          // check if error is 401
+          if(err.status === 401) {
+            this.submitMsg = 'You must be logged in to submit a score!';
+          } else {
+            this.submitMsg = 'An error occurred while submitting your score. Please try again later.';
+          }
+          this.submittingScore = false;
+        }
+      });
     }
   }
 

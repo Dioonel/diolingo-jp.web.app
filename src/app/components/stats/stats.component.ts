@@ -192,7 +192,6 @@ export class StatsComponent implements OnInit {
     this.dataService.getStats().subscribe({
       next: (stats: Stats) => {
         this.stats = stats;
-        console.log(this.stats);
         this.renderOverall();
       }
     });

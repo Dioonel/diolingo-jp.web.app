@@ -9,13 +9,14 @@ import { Kanji, KanjiCreateDTO, KanjiFilter } from './../models/kanji';
 import { Word, WordCreateDTO, WordFilter } from './../models/word';
 import { Generic } from './../models/generic';
 import { Stats, History } from './../models/stats';
+import { Score } from './../models/score';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  // private url = 'https://powerful-mesa-42995.herokuapp.com';
-  private url = 'http://localhost:3000';
+  private url = 'https://powerful-mesa-42995.herokuapp.com';
+  //private url = 'http://localhost:3000';
   private shouldUpdateKanji = new BehaviorSubject<boolean>(false);
   private shouldUpdateWords = new BehaviorSubject<boolean>(false);
 
@@ -124,6 +125,10 @@ export class DataService {
 
   playPairs(quantity: number) {
     return this.http.post<Generic[]>(`${this.url}/play/pairs`, { quantity });
+  }
+
+  submitScore(score: Score) {
+    return this.http.post<any>(`${this.url}/play/submit-score`, score);
   }
 
   getStats() {

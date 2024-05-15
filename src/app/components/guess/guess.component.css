@@ -145,6 +145,14 @@
   color: red;
 }
 
+.informative {
+  font-size: 2em;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  color: #81bcff;
+  text-align: center;
+}
+
 .correct-answer, .wrong-answer {
   font-size: 2em;
   font-weight: 300;

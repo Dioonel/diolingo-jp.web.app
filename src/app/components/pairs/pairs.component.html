@@ -71,6 +71,11 @@
 <div class="container">
   <h1 class="title">Finished!</h1>
   <p class="score">Score: {{ score }}/{{ items.length }}</p>
+  @if(submittingScore) {
+    <p class="informative">Submitting score... Please wait a second...</p>
+  } @else {
+    <p class="informative">{{ submitMsg }}</p>
+  }
   <button class="play-btn" (click)="playAgain()">Play again</button>
 </div>
 }
