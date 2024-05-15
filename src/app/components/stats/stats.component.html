@@ -5,9 +5,7 @@
       <div class="chart-container">
         <h1>Overall stats</h1>
         <canvas id="overall" class="pie"></canvas>
-        <p><span class="bold">Current Streak:</span> 4 days.</p>
-        <p><span class="bold">Longest Streak:</span> 19 days.</p>
-        <p><span class="bold">Total Time Training:</span> 174,9 hours.</p>
+        <p><span class="bold">Total Time Training:</span> {{ stats.overall.total_time }}.</p>
       </div>
     </mat-tab>
 
@@ -22,8 +20,8 @@
         <canvas id="guess" class="bar"></canvas>
         <h1>All time accuracy:</h1>
         <canvas id="guess-overall" class="pie"></canvas>
-        <p><span class="bold">Total Time:</span> 15,6 hours.</p>
-        <p><span class="bold">Average Time:</span> 37 seconds per guess.</p>
+        <p><span class="bold">Total Time:</span> {{ stats.guess.overall.total_time }}.</p>
+        <p><span class="bold">Average Time:</span> {{ stats.guess.overall.average_time }} seconds per guess.</p>
       </div>
     </mat-tab>
 
@@ -38,8 +36,8 @@
         <canvas id="pairs" class="bar"></canvas>
         <h1>All time accuracy:</h1>
         <canvas id="pairs-overall" class="pie"></canvas>
-        <p><span class="bold">Total Time:</span> 9,3 hours.</p>
-        <p><span class="bold">Average Time:</span> 22 seconds per pair.</p>
+        <p><span class="bold">Total Time:</span> {{ stats.pairs.overall.total_time }}.</p>
+        <p><span class="bold">Average Time:</span> {{ stats.pairs.overall.average_time }} seconds per pair.</p>
       </div>
     </mat-tab>
 

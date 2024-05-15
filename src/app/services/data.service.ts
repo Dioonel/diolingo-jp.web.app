@@ -11,7 +11,8 @@ import { Generic } from '../models/generic';
   providedIn: 'root'
 })
 export class DataService {
-  private url = 'https://powerful-mesa-42995.herokuapp.com';
+  // private url = 'https://powerful-mesa-42995.herokuapp.com';
+  private url = 'http://localhost:3000';
   private shouldUpdateKanji = new BehaviorSubject<boolean>(false);
   private shouldUpdateWords = new BehaviorSubject<boolean>(false);
 
