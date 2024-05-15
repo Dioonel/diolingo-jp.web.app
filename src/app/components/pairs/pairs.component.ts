@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
-
-import { DataService } from './../../../app/services/data.service';
-import { Generic, Pairs } from './../../../app/models/generic';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+
+import { DataService } from './../../services/data.service';
+import { TimerService } from './../../services/timer.service';
+import { Generic, Pairs } from './../../models/generic';
+import { Score } from './../../models/score';
 import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
@@ -16,6 +18,8 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 })
 export class PairsComponent implements OnInit {
   status: 'menu' | 'loading' | 'playing' | 'continue' | 'finished' = 'menu';
+  submittingScore: boolean = false;
+  submitMsg: string = '';
   gameLength: '10' | '20' | '30' | '40' = '20';
   items: Generic[] = [];
   currentItems: Pairs[] = [];
@@ -32,7 +36,7 @@ export class PairsComponent implements OnInit {
 
   faPlay = faPlay;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private timer: TimerService) {}
 
   ngOnInit(): void {
   }
@@ -45,8 +49,7 @@ export class PairsComponent implements OnInit {
       this.japanesePositions = this.shuffleArray(this.japanesePositions);
       this.updateCurrentItems();
       this.status = 'playing';
-      console.log(this.items);
-      console.log(this.currentItems);
+      this.timer.start();
     });
   }
 
@@ -87,7 +90,6 @@ export class PairsComponent implements OnInit {
     else this.selectedJapanese = this.findItemByPosition(position, type)?._id || '';
 
     if(this.selectedMeaning && this.selectedJapanese) {
-      console.log(this.selectedMeaning, this.selectedJapanese);
       if(this.selectedMeaning === this.selectedJapanese) {
         this.score++;
         this.successPositionsM.push(this.findItemById(this.selectedMeaning)?.meaningPosition);
@@ -106,6 +108,7 @@ export class PairsComponent implements OnInit {
     }
     if(this.successPositionsJ.length + this.failedPositionsJ.length === 5) {
       this.status = 'continue';
+      this.timer.pause();
     }
   }
 
@@ -115,8 +118,35 @@ export class PairsComponent implements OnInit {
       this.japanesePositions = this.shuffleArray(this.japanesePositions);
       this.updateCurrentItems();
       this.status = 'playing';
+      this.timer.continue();
     } else {
       this.status = 'finished';
+      this.submittingScore = true;
+      const score: Score = {
+        score: {
+          total_correct: this.score,
+          total_incorrect: this.items.length - this.score,
+          time: this.timer.getFinalTime(),
+        },
+        type: 'pairs'
+      }
+      this.dataService.submitScore(score).subscribe({
+        next: (data) => {
+          if(data?.message == 'Score submitted!') {
+            this.submittingScore = false;
+            this.submitMsg = 'Score submitted!';
+          }
+        },
+        error: (err) => {
+          // check if error is 401
+          if(err.status === 401) {
+            this.submitMsg = 'You must be logged in to submit a score!';
+          } else {
+            this.submitMsg = 'An error occurred while submitting your score. Please try again later.';
+          }
+          this.submittingScore = false;
+        }
+      });
     }
     this.successPositionsM = [];
     this.successPositionsJ = [];

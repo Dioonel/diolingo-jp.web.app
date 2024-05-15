@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, tap } from 'rxjs';
+import { formatInTimeZone } from 'date-fns-tz';
+import { subDays } from 'date-fns';
 
 import { LoginUser, LoginData } from './../models/user';
-import { Kanji, KanjiCreateDTO, KanjiFilter } from '../models/kanji';
-import { Word, WordCreateDTO, WordFilter } from '../models/word';
-import { Generic } from '../models/generic';
+import { Kanji, KanjiCreateDTO, KanjiFilter } from './../models/kanji';
+import { Word, WordCreateDTO, WordFilter } from './../models/word';
+import { Generic } from './../models/generic';
+import { Stats, History } from './../models/stats';
+import { Score } from './../models/score';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   private url = 'https://powerful-mesa-42995.herokuapp.com';
+  //private url = 'http://localhost:3000';
   private shouldUpdateKanji = new BehaviorSubject<boolean>(false);
   private shouldUpdateWords = new BehaviorSubject<boolean>(false);
 
@@ -120,5 +125,35 @@ export class DataService {
 
   playPairs(quantity: number) {
     return this.http.post<Generic[]>(`${this.url}/play/pairs`, { quantity });
+  }
+
+  submitScore(score: Score) {
+    return this.http.post<any>(`${this.url}/play/submit-score`, score);
+  }
+
+  getStats() {
+    return this.http.get<Stats>(`${this.url}/stats`)
+    .pipe(
+      tap((stats: Stats) => {
+        if(stats.guess.history.length < 28) stats.guess.history = this.fillHistory(stats.guess.history);
+        if(stats.pairs.history.length < 28) stats.pairs.history = this.fillHistory(stats.pairs.history);
+        return stats;
+      })
+    )
+  }
+
+  fillHistory(history: History[]): History[] {
+    history.reverse();
+    const dates = history.map((entry) => entry.date);
+    let checkDate = formatInTimeZone(new Date(), 'America/Buenos_Aires', 'yyyy-MM-dd');
+    for(let i = 0; i < 28; i++) {
+      if(!dates.includes(checkDate)) {
+        history.splice(i, 0, { total_correct: 0, total_incorrect: 0, date: checkDate });
+      }
+      if(history.length === 28) break;
+      checkDate = formatInTimeZone(subDays(checkDate, 0), 'America/Buenos_Aires', 'yyyy-MM-dd');
+    }
+    history.reverse();
+    return history;
   }
 }
