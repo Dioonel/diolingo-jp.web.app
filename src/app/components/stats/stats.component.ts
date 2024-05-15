@@ -9,11 +9,12 @@ Chart.register(ChartDataLabels);
 Chart.defaults.font.family = 'Roboto';
 
 import { MockOverall, MockGuess, MockPairs, Stats } from './../../models/stats';
+import { TimePipe } from 'src/app/pipes/time.pipe';
 
 @Component({
   selector: 'app-stats',
   standalone: true,
-  imports: [MatTabsModule, MatSelectModule],
+  imports: [MatTabsModule, MatSelectModule, TimePipe],
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.css'
 })

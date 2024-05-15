@@ -5,7 +5,7 @@
       <div class="chart-container">
         <h1>Overall stats</h1>
         <canvas id="overall" class="pie"></canvas>
-        <p><span class="bold">Total Time Training:</span> {{ stats.overall.total_time }}.</p>
+        <p><span class="bold">Total Time Training:</span> {{ stats.overall.total_time | time }}.</p>
       </div>
     </mat-tab>
 
@@ -20,7 +20,7 @@
         <canvas id="guess" class="bar"></canvas>
         <h1>All time accuracy:</h1>
         <canvas id="guess-overall" class="pie"></canvas>
-        <p><span class="bold">Total Time:</span> {{ stats.guess.overall.total_time }}.</p>
+        <p><span class="bold">Total Time:</span> {{ stats.guess.overall.total_time | time }}.</p>
         <p><span class="bold">Average Time:</span> {{ stats.guess.overall.average_time }} seconds per guess.</p>
       </div>
     </mat-tab>
@@ -36,7 +36,7 @@
         <canvas id="pairs" class="bar"></canvas>
         <h1>All time accuracy:</h1>
         <canvas id="pairs-overall" class="pie"></canvas>
-        <p><span class="bold">Total Time:</span> {{ stats.pairs.overall.total_time }}.</p>
+        <p><span class="bold">Total Time:</span> {{ stats.pairs.overall.total_time | time }}.</p>
         <p><span class="bold">Average Time:</span> {{ stats.pairs.overall.average_time }} seconds per pair.</p>
       </div>
     </mat-tab>

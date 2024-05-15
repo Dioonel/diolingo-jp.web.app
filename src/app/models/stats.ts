@@ -38,7 +38,7 @@ interface OverallWithAvg extends OverallStats {
 export const MockOverall: OverallStats = {
   total_correct: 97,
   total_incorrect: 21,
-  total_time: 593
+  total_time: 7860
 };
 
 export const MockGuess: GuessStats = {
