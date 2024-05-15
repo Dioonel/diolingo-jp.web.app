@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { formatInTimeZone } from 'date-fns-tz';
@@ -8,8 +8,9 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(ChartDataLabels);
 Chart.defaults.font.family = 'Roboto';
 
-import { MockOverall, MockGuess, MockPairs, Stats } from './../../models/stats';
-import { TimePipe } from 'src/app/pipes/time.pipe';
+import { DataService } from './../../services/data.service';
+import { Stats } from './../../models/stats';
+import { TimePipe } from './../../pipes/time.pipe';
 
 @Component({
   selector: 'app-stats',
@@ -18,7 +19,7 @@ import { TimePipe } from 'src/app/pipes/time.pipe';
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.css'
 })
-export class StatsComponent implements OnInit, AfterViewInit {
+export class StatsComponent implements OnInit {
   stats!: Stats;
   timeFilter: 7 | 14 | 28 = 7
   overallChart: any;
@@ -56,7 +57,7 @@ export class StatsComponent implements OnInit, AfterViewInit {
         textShadowColor: '#000',
         textShadowBlur: 5,
         formatter: (value: any) => {
-          return (value * 100 / (MockOverall.total_correct + MockOverall.total_incorrect)).toFixed(2) + '%';
+          return (value * 100 / (this.stats.overall.total_correct + this.stats.overall.total_incorrect)).toFixed(2) + '%';
         }
       }
     }
@@ -144,7 +145,7 @@ export class StatsComponent implements OnInit, AfterViewInit {
         textShadowColor: '#000',
         textShadowBlur: 5,
         formatter: (value: any) => {
-          return (value * 100 / (MockGuess.overall.total_correct + MockGuess.overall.total_incorrect)).toFixed(2) + '%';
+          return (value * 100 / (this.stats.guess.overall.total_correct + this.stats.guess.overall.total_incorrect)).toFixed(2) + '%';
         }
       }
     }
@@ -179,37 +180,33 @@ export class StatsComponent implements OnInit, AfterViewInit {
         textShadowColor: '#000',
         textShadowBlur: 5,
         formatter: (value: any) => {
-          return (value * 100 / (MockPairs.overall.total_correct + MockPairs.overall.total_incorrect)).toFixed(2) + '%';
+          return (value * 100 / (this.stats.pairs.overall.total_correct + this.stats.pairs.overall.total_incorrect)).toFixed(2) + '%';
         }
       }
     }
   }
 
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.stats = {
-      _id: '1',
-      user_id: '123123',
-      overall: MockOverall,
-      guess: MockGuess,
-      pairs: MockPairs,
-      last_checked: '2024-02-01'
-    }
-  }
-
-  ngAfterViewInit() {
-    this.renderOverall();
+    this.dataService.getStats().subscribe({
+      next: (stats: Stats) => {
+        this.stats = stats;
+        console.log(this.stats);
+        this.renderOverall();
+      }
+    });
   }
 
   renderOverall() {
+    const data = this.stats.overall;
     this.overallChart = new Chart('overall', {
       type: 'pie',
       data: {
         labels: ['Correct', 'Incorrect'],
         datasets: [{
           label: '# Answers',
-          data: [MockOverall.total_correct, MockOverall.total_incorrect],
+          data: [data.total_correct, data.total_incorrect],
           backgroundColor: [
             '#63AAE3',
             '#E15554'
@@ -225,18 +222,19 @@ export class StatsComponent implements OnInit, AfterViewInit {
   }
 
   renderGuess() {
+    const data = this.stats.guess;
     this.guessBarChart = new Chart('guess', {
       type: 'bar',
       data: {
-        labels: MockGuess.history.slice(MockGuess.history.length - this.timeFilter, MockGuess.history.length).map((date) => formatInTimeZone(date.date, 'America/Buenos_Aires', 'MMM dd')),
+        labels: data.history.slice(data.history.length - this.timeFilter, data.history.length).map((date) => formatInTimeZone(date.date, 'America/Buenos_Aires', 'MMM dd')),
         datasets: [{
           label: 'Correct',
-          data: MockGuess.history.slice(MockGuess.history.length - this.timeFilter, MockGuess.history.length).map((entry) => entry.total_correct),
+          data: data.history.slice(data.history.length - this.timeFilter, data.history.length).map((entry) => entry.total_correct),
           backgroundColor: '#63AAE3',
         },
         {
           label: 'Incorrect',
-          data: MockGuess.history.slice(MockGuess.history.length - this.timeFilter, MockGuess.history.length).map((entry) => entry.total_incorrect),
+          data: data.history.slice(data.history.length - this.timeFilter, data.history.length).map((entry) => entry.total_incorrect),
           backgroundColor: '#E15554',
         }]
       },
@@ -252,7 +250,7 @@ export class StatsComponent implements OnInit, AfterViewInit {
           labels: ['Correct', 'Incorrect'],
           datasets: [{
             label: '# Answers',
-            data: [MockGuess.overall.total_correct, MockGuess.overall.total_incorrect],
+            data: [data.overall.total_correct, data.overall.total_incorrect],
             backgroundColor: [
               '#63AAE3',
               '#E15554'
@@ -269,18 +267,19 @@ export class StatsComponent implements OnInit, AfterViewInit {
   }
 
   renderPairs() {
+    const data = this.stats.pairs;
     this.pairsBarChart = new Chart('pairs', {
       type: 'bar',
       data: {
-        labels: MockPairs.history.slice(MockPairs.history.length - this.timeFilter, MockPairs.history.length).map((date) => formatInTimeZone(date.date, 'America/Buenos_Aires', 'MMM dd')),
+        labels: data.history.slice(data.history.length - this.timeFilter, data.history.length).map((date) => formatInTimeZone(date.date, 'America/Buenos_Aires', 'MMM dd')),
         datasets: [{
           label: 'Correct',
-          data: MockPairs.history.slice(MockPairs.history.length - this.timeFilter, MockPairs.history.length).map((entry) => entry.total_correct),
+          data: data.history.slice(data.history.length - this.timeFilter, data.history.length).map((entry) => entry.total_correct),
           backgroundColor: '#63AAE3',
         },
         {
           label: 'Incorrect',
-          data: MockPairs.history.slice(MockPairs.history.length - this.timeFilter, MockPairs.history.length).map((entry) => entry.total_incorrect),
+          data: data.history.slice(data.history.length - this.timeFilter, data.history.length).map((entry) => entry.total_incorrect),
           backgroundColor: '#E15554',
         }]
       },
@@ -296,7 +295,7 @@ export class StatsComponent implements OnInit, AfterViewInit {
           labels: ['Correct', 'Incorrect'],
           datasets: [{
             label: '# Answers',
-            data: [MockPairs.overall.total_correct, MockPairs.overall.total_incorrect],
+            data: [data.overall.total_correct, data.overall.total_incorrect],
             backgroundColor: [
               '#63AAE3',
               '#E15554'
