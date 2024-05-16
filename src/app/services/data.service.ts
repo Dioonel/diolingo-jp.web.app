@@ -145,13 +145,13 @@ export class DataService {
   fillHistory(history: History[]): History[] {
     history.reverse();
     const dates = history.map((entry) => entry.date);
-    let checkDate = formatInTimeZone(new Date(), 'America/Buenos_Aires', 'yyyy-MM-dd');
+    let checkDate = formatInTimeZone(new Date(), 'Etc/UTC', 'yyyy-MM-dd');
     for(let i = 0; i < 28; i++) {
       if(!dates.includes(checkDate)) {
         history.splice(i, 0, { total_correct: 0, total_incorrect: 0, date: checkDate });
       }
       if(history.length === 28) break;
-      checkDate = formatInTimeZone(subDays(checkDate, 0), 'America/Buenos_Aires', 'yyyy-MM-dd');
+      checkDate = formatInTimeZone(subDays(checkDate, 1), 'Etc/UTC', 'yyyy-MM-dd');
     }
     history.reverse();
     return history;

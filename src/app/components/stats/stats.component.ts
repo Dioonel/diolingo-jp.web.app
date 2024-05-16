@@ -225,7 +225,7 @@ export class StatsComponent implements OnInit {
     this.guessBarChart = new Chart('guess', {
       type: 'bar',
       data: {
-        labels: data.history.slice(data.history.length - this.timeFilter, data.history.length).map((date) => formatInTimeZone(date.date, 'America/Buenos_Aires', 'MMM dd')),
+        labels: data.history.slice(data.history.length - this.timeFilter, data.history.length).map((date) => formatInTimeZone(date.date, 'Etc/UTC', 'MMM dd')),
         datasets: [{
           label: 'Correct',
           data: data.history.slice(data.history.length - this.timeFilter, data.history.length).map((entry) => entry.total_correct),
@@ -270,7 +270,7 @@ export class StatsComponent implements OnInit {
     this.pairsBarChart = new Chart('pairs', {
       type: 'bar',
       data: {
-        labels: data.history.slice(data.history.length - this.timeFilter, data.history.length).map((date) => formatInTimeZone(date.date, 'America/Buenos_Aires', 'MMM dd')),
+        labels: data.history.slice(data.history.length - this.timeFilter, data.history.length).map((date) => formatInTimeZone(date.date, 'Etc/UTC', 'MMM dd')),
         datasets: [{
           label: 'Correct',
           data: data.history.slice(data.history.length - this.timeFilter, data.history.length).map((entry) => entry.total_correct),
