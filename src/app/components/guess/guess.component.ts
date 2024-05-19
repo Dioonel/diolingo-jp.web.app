@@ -33,7 +33,9 @@ export class GuessComponent implements OnInit {
 
   constructor(private dataService: DataService, private timer: TimerService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.timer.reset();
+  }
 
   startGame() {
     this.status = 'loading';
@@ -102,12 +104,13 @@ export class GuessComponent implements OnInit {
     }
     else {
       this.status = 'finished';
+      this.timer.pause();
       this.submittingScore = true;
       const score: Score = {
         score: {
           total_correct: this.score,
           total_incorrect: this.items.length - this.score,
-          time: this.timer.getFinalTime(),
+          time: this.timer.getTime(),
         },
         type: 'guess'
       }

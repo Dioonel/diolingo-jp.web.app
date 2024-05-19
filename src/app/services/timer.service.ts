@@ -1,56 +1,51 @@
 import { Injectable } from '@angular/core';
+import { differenceInSeconds } from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimerService {
-  startTime!: number | undefined;
-  pauseTime!: number | undefined;
-  scoreTime!: number;
+  private startTime: Date | null = null;
+  private accumulatedTime = 0;
+  private isRunning = false;
 
-  constructor() {
-    this.scoreTime = 0;
-  }
+  constructor() {}
 
-  start() {
-    if (this.startTime === undefined) {
-      this.startTime = Date.now();
-    } else {
-      console.log("Timer is already running.");
+  start(): void {
+    if (!this.isRunning) {
+      this.startTime = new Date();
+      this.isRunning = true;
     }
   }
 
-  pause() {
-    if (this.startTime !== undefined) {
-      this.pauseTime = Date.now();
-      this.scoreTime += this.pauseTime - this.startTime;                      // This is the time that has passed since the timer was started
-      this.startTime = undefined;
-    } else {
-      console.log("Timer is already paused.");
+  pause(): void {
+    if (this.isRunning && this.startTime) {
+      const currentTime = new Date();
+      this.accumulatedTime += differenceInSeconds(currentTime, this.startTime);
+      this.startTime = null;
+      this.isRunning = false;
     }
   }
 
-  continue() {
-    if (this.startTime === undefined) {
-      this.startTime = Date.now();
-      this.pauseTime = undefined;
-    } else {
-      console.log("Timer is already running.");
+  continue(): void {
+    if (!this.isRunning) {
+      this.startTime = new Date();
+      this.isRunning = true;
     }
   }
 
-  reset() {
-    this.startTime = undefined;
-    this.pauseTime = undefined;
-    this.scoreTime = 0;
+  getTime(): number {
+    if (this.isRunning && this.startTime) {
+      const currentTime = new Date();
+      return this.accumulatedTime + differenceInSeconds(currentTime, this.startTime);
+    } else {
+      return this.accumulatedTime;
+    }
   }
 
-  getFinalTime() {
-    if(this.scoreTime === 0) {
-      return 0;
-    } else {
-      const seconds = Math.round(this.scoreTime / 1000);
-      return seconds;
-    }
+  reset(): void {
+    this.startTime = null;
+    this.accumulatedTime = 0;
+    this.isRunning = false;
   }
 }
