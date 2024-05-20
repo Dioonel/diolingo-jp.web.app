@@ -37,43 +37,12 @@
   font-size: 1.4em;
 }
 
-.select-length {
+.select-options {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-}
-
-.select-length select {
-  font-size: 1.6em;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-  line-height: 20px;
-  text-align: left;
-  color: #fff;
-  background-color: #212121;
-  border: 2px solid #fff;
-  border-radius: 5px;
-  padding: 5px 10px;
-}
-
-.select-length select::-ms-expand {
-  right: 10px;
-}
-
-.select-length select:focus {
-  outline: none;
-}
-
-.select-length select option:hover {
-  background-color: #fff;
-  color: #212121;
-}
-
-.select-length select option:checked {
-  background-color: #fff;
-  color: #212121;
+  gap: 25px;
 }
 
 .play-btn, .guess-input button {
@@ -199,6 +168,26 @@
   font-weight: 300;
   letter-spacing: 0.5px;
   color: #fff;
+}
+
+mat-select {
+  width: 180px;
+  background-color: #3c4042;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  margin-top: 8px;
+}
+
+mat-select:focus {
+  border: 2px solid #bbb;
+}
+
+::ng-deep .mat-mdc-option-active .mdc-list-item__primary-text{
+  color: #f09aff !important;
+}
+
+::ng-deep .mat-mdc-select-trigger {
+  padding: 10px !important;
 }
 
 @media screen and (max-width: 600px) {

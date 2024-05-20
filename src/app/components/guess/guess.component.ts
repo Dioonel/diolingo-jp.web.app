@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 import { faLightbulb, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
@@ -14,10 +15,11 @@ import { SpinnerComponent } from './../spinner/spinner.component';
     templateUrl: './guess.component.html',
     styleUrls: ['./guess.component.css'],
     standalone: true,
-    imports: [SpinnerComponent, ReactiveFormsModule, FormsModule, FaIconComponent]
+    imports: [SpinnerComponent, ReactiveFormsModule, FormsModule, MatSelectModule, FaIconComponent]
 })
 export class GuessComponent implements OnInit {
   status: 'menu' | 'loading' | 'playing' | 'success' | 'fail' | 'finished' = 'menu';
+  gamemode: 'mixed' | 'japanese' | 'meaning' = 'mixed';
   submittingScore: boolean = false;
   submitMsg: string = '';
   gameLength: '5' | '10' | '15' | '20' = '10';
@@ -48,14 +50,25 @@ export class GuessComponent implements OnInit {
   }
 
   modifyItems(array: Generic[]) {
-    let newArray: Guess[] = array.map((item: any) => {
-      item = {
-        ...item,
-        guessMode: this.randomBoolean() ? 'japanese' : 'meaning'
-      }
-      return item;
-    });
-    return newArray;
+    if(this.gamemode === 'mixed') {
+      let newArray: Guess[] = array.map((item: any) => {
+        item = {
+          ...item,
+          guessMode: this.randomBoolean() ? 'japanese' : 'meaning'
+        }
+        return item;
+      });
+      return newArray;
+    } else {
+      let newArray: Guess[] = array.map((item: any) => {
+        item = {
+          ...item,
+          guessMode: this.gamemode
+        }
+        return item;
+      });
+      return newArray;
+    }
   }
 
   randomBoolean() {

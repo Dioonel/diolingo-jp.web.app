@@ -11,14 +11,24 @@
     <p class="label">How to play:</p>
     <p class="description">You will have to write the meaning or japanese form of the element asked.</p>
   </div>
-  <div class="select-length">
-    <p class="label">Game length:</p>
-    <select [(ngModel)]="gameLength">
-      <option value="5">Short (5)</option>
-      <option selected value="10">Standard (10)</option>
-      <option value="15">Long (15)</option>
-      <option value="20">Very Long (20)</option>
-    </select>
+  <div class="select-options">
+    <div>
+      <p class="label">Game mode:</p>
+      <mat-select [(ngModel)]="gamemode">
+        <mat-option [value]="'mixed'">Mixed</mat-option>
+        <mat-option [value]="'japanese'">Japanese</mat-option>
+        <mat-option [value]="'meaning'">Meaning</mat-option>
+      </mat-select>
+    </div>
+    <div>
+      <p class="label">Game length:</p>
+      <mat-select [(ngModel)]="gameLength">
+        <mat-option value="5">Short (5)</mat-option>
+        <mat-option selected value="10">Standard (10)</mat-option>
+        <mat-option value="15">Long (15)</mat-option>
+        <mat-option value="20">Very Long (20)</mat-option>
+      </mat-select>
+    </div>
   </div>
   <button class="play-btn" (click)="startGame()">
     <fa-icon [icon]="faPlay" size="1x"></fa-icon>

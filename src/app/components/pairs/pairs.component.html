@@ -11,14 +11,16 @@
     <p class="label">How to play:</p>
     <p class="description">Match the correct pairs of vocabulary.</p>
   </div>
-  <div class="select-length">
-    <p class="label">Game length:</p>
-    <select [(ngModel)]="gameLength">
-      <option value="10">Short (10)</option>
-      <option selected value="20">Standard (20)</option>
-      <option value="30">Long (30)</option>
-      <option value="40">Very Long (40)</option>
-    </select>
+  <div class="select-options">
+    <div>
+      <p class="label">Game length:</p>
+      <mat-select [(ngModel)]="gameLength">
+        <mat-option value="10">Short (10)</mat-option>
+        <mat-option selected value="20">Standard (20)</mat-option>
+        <mat-option value="30">Long (30)</mat-option>
+        <mat-option value="40">Very Long (40)</mat-option>
+      </mat-select>
+    </div>
   </div>
   <button class="play-btn" (click)="startGame()">
     <fa-icon [icon]="faPlay" size="1x"></fa-icon>

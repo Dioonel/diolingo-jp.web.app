@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
@@ -14,7 +15,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
     templateUrl: './pairs.component.html',
     styleUrls: ['./pairs.component.css'],
     standalone: true,
-    imports: [SpinnerComponent, ReactiveFormsModule, FormsModule, FaIconComponent]
+    imports: [SpinnerComponent, ReactiveFormsModule, FormsModule, MatSelectModule, FaIconComponent]
 })
 export class PairsComponent implements OnInit {
   status: 'menu' | 'loading' | 'playing' | 'continue' | 'finished' = 'menu';
