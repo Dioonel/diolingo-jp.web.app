@@ -2,17 +2,19 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { faPencil, faA, faAsterisk, faWandMagicSparkles, faDiceSix } from '@fortawesome/free-solid-svg-icons';
 import { Dialog } from '@angular/cdk/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { MatTooltip } from '@angular/material/tooltip';
-import { SearchComponent } from '../search/search.component';
+
+import { DialogComponent } from './../dialog/dialog.component';
+import { SearchComponent } from './../search/search.component';
+import { FormatArrayPipe } from './../../pipes/format-array.pipe';
 
 @Component({
     selector: 'app-grid',
     templateUrl: './grid.component.html',
     styleUrls: ['./grid.component.css'],
     standalone: true,
-    imports: [SearchComponent, MatTooltip, FaIconComponent]
+    imports: [SearchComponent, MatTooltip, FaIconComponent, FormatArrayPipe]
 })
 export class GridComponent implements OnInit {
   @Input() items: any[] = [];

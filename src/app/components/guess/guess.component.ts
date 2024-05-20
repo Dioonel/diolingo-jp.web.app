@@ -9,13 +9,14 @@ import { TimerService } from './../../services/timer.service';
 import { Generic, Guess } from './../../../app/models/generic';
 import { Score } from './../../models/score';
 import { SpinnerComponent } from './../spinner/spinner.component';
+import { FormatArrayPipe } from './../../pipes/format-array.pipe';
 
 @Component({
     selector: 'app-guess',
     templateUrl: './guess.component.html',
     styleUrls: ['./guess.component.css'],
     standalone: true,
-    imports: [SpinnerComponent, ReactiveFormsModule, FormsModule, MatSelectModule, FaIconComponent]
+    imports: [SpinnerComponent, ReactiveFormsModule, FormsModule, MatSelectModule, FaIconComponent, FormatArrayPipe]
 })
 export class GuessComponent implements OnInit {
   status: 'menu' | 'loading' | 'playing' | 'success' | 'fail' | 'finished' = 'menu';
@@ -46,6 +47,9 @@ export class GuessComponent implements OnInit {
       this.currentItem = this.items[this.currentIndex];
       this.status = 'playing';
       this.timer.start();
+      setTimeout(() => {
+        document.getElementById('user-input')?.focus();
+      }, 0);
     });
   }
 
@@ -114,6 +118,9 @@ export class GuessComponent implements OnInit {
       this.currentItem = this.items[this.currentIndex];
       this.status = 'playing';
       this.timer.continue();
+      setTimeout(() => {
+        document.getElementById('user-input')?.focus();
+      }, 0);
     }
     else {
       this.status = 'finished';

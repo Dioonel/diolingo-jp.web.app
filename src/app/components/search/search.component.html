@@ -1,11 +1,11 @@
 <div class="container">
   <div class="filter-div">
     <form (ngSubmit)="filter()">
-      <select [(ngModel)]="filterType" name="select" (change)="resetPrevious()">
-        <option [value]="pageType" selected>{{ pageType == 'kanji' ? 'Kanji' : 'Word' }}</option>
-        <option value="pronunciation">Pronunciation</option>
-        <option value="meaning">Meaning</option>
-      </select>
+      <mat-select [(ngModel)]="filterType" name="select" (change)="resetPrevious()">
+        <mat-option [value]="pageType" selected>{{ pageType == 'kanji' ? 'Kanji' : 'Word' }}</mat-option>
+        <mat-option value="pronunciation">Pronunciation</mat-option>
+        <mat-option value="meaning">Meaning</mat-option>
+      </mat-select>
 
       @if (filterDic[filterType]) {
       <input type="text" class="input-search" name="input-search" [formControl]="filterDic[filterType]"

@@ -40,13 +40,13 @@
 @if (status === 'playing') {
 <div class="container">
   <h1 class="title">Guess:</h1>
-  <p class="guess-element">{{ currentItem.guessMode === 'japanese' ? currentItem.meaning : (currentItem.kanji ||
+  <p class="guess-element">{{ currentItem.guessMode === 'japanese' ? (currentItem.meaning | formatArray) : (currentItem.kanji ||
     currentItem.word) }}</p>
   @if (hint) {
-  <p class="hint-element">{{ currentItem.pronunciation }}</p>
+  <p class="hint-element">{{ currentItem.pronunciation | formatArray }}</p>
   }
   <div class="guess-input">
-    <input type="text" [(ngModel)]="userInput"
+    <input type="text" id="user-input" [(ngModel)]="userInput"
       [placeholder]="currentItem.guessMode === 'meaning' ? 'Meaning...' : translate() + '...'">
     <button (click)="checkAnswer()" [disabled]="userInput.trim().length === 0">Check</button>
     <button class="hint" (click)="hint = true">
@@ -73,9 +73,9 @@
 @if (status === 'success') {
 <div class="container">
   <h1 class="correct-title">Correct!</h1>
-  <p class="guess-element">{{ currentItem.guessMode === 'japanese' ? currentItem.meaning : (currentItem.kanji ||
+  <p class="guess-element">{{ currentItem.guessMode === 'japanese' ? (currentItem.meaning | formatArray) : (currentItem.kanji ||
     currentItem.word) }}</p>
-  <p class="correct-answer">{{ currentItem.guessMode === 'meaning' ? currentItem.meaning : (currentItem.kanji ||
+  <p class="correct-answer">{{ currentItem.guessMode === 'meaning' ? (currentItem.meaning | formatArray) : (currentItem.kanji ||
     currentItem.word) }}</p>
   <button class="continue" (click)="continue()">Continue</button>
 </div>
@@ -84,11 +84,11 @@
 @if (status === 'fail') {
 <div class="container">
   <h1 class="wrong-title">Wrong!</h1>
-  <p class="guess-element">{{ currentItem.guessMode === 'japanese' ? currentItem.meaning : (currentItem.kanji ||
+  <p class="guess-element">{{ currentItem.guessMode === 'japanese' ? (currentItem.meaning | formatArray) : (currentItem.kanji ||
     currentItem.word) }}</p>
   <p class="wrong-answer">Your answer: {{ userInput.trim() }}</p>
-  <p class="correct-answer">Correct answer: {{ currentItem.guessMode === 'japanese' ? currentItem.kanji ||
-    currentItem.word : currentItem.meaning }}</p>
+  <p class="correct-answer">Correct answer: {{ currentItem.guessMode === 'japanese' ? (currentItem.kanji ||
+    currentItem.word) : currentItem.meaning | formatArray}}</p>
   <button class="continue" (click)="continue()">Continue</button>
 </div>
 }

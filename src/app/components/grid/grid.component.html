@@ -34,19 +34,19 @@
     @if (switch === 'all') {
     <div>
       <div class="value">{{ item?.kanji || item?.word }}</div>
-      <div class="meaning">{{ item.meaning.join(', ') }}</div>
-      <div class="pronunciation">{{ item.pronunciation.join(', ') }}</div>
+      <div class="meaning">{{ item.meaning | formatArray }}</div>
+      <div class="pronunciation">{{ item.pronunciation | formatArray }}</div>
     </div>
     }
     @if (switch === 'japanese') {
     <div class="custom-element">
       <div class="value">{{ item?.kanji || item?.word }}</div>
-      <div class="pronunciation">{{ item.pronunciation.join(', ') }}</div>
+      <div class="pronunciation">{{ item.pronunciation | formatArray }}</div>
     </div>
     }
     @if (switch === 'meaning') {
     <div class="custom-element">
-      <div class="meaning">{{ item.meaning.join(', ') }}</div>
+      <div class="meaning">{{ item.meaning | formatArray }}</div>
     </div>
     }
   </div>
