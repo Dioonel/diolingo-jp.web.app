@@ -350,5 +350,45 @@ describe('DataService', () => {
     expect(req.request.method).toBe('DELETE');
     req.flush(null);
   });
+
+  it('should get stats', (doneFn) => {
+    const mockResponse = {
+      _id: '1',
+      user_id: '1',
+      overall: {
+        total_correct: 0,
+        total_incorrect: 0,
+        total_time: 0
+      },
+      guess: {
+        history: [],
+        overall: {
+          total_correct: 0,
+          total_incorrect: 0,
+          total_time: 0,
+          average_time: 0
+        }
+      },
+      pairs: {
+        history: [],
+        overall: {
+          total_correct: 0,
+          total_incorrect: 0,
+          total_time: 0,
+          average_time: 0
+        }
+      },
+      last_checked: '2021-07-01'
+    };
+
+    service.getStats().subscribe(response => {
+      expect(response).toEqual(mockResponse);
+      doneFn();
+    });
+
+    const req = httpController.expectOne(`${url}/stats`);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
+  });
 });
 

@@ -8,6 +8,8 @@ import { intervalToDuration } from 'date-fns';
 export class TimePipe implements PipeTransform {
 
   transform(value: number): string {
+    if(value === 0) return '0 seconds';
+
     const duration = intervalToDuration({ start: 0, end: value * 1000 });
     let formattedTime = '';
 
