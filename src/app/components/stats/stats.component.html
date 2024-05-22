@@ -1,52 +1,59 @@
-<div class="container">
-  <mat-tab-group class="tabs-container" (selectedTabChange)="render($event)">
+@if(loading) {
+  <div class="container">
+    <app-spinner></app-spinner>
+  </div>
+} @else {
+  <div class="container">
+    <mat-tab-group class="tabs-container" (selectedTabChange)="render($event)">
 
-      <mat-tab label="Overall">
-        <div class="chart-container">
-          <h1>Overall stats</h1>
-          <canvas id="overall" class="pie"></canvas>
-          @if(stats) {
-            <p><span class="bold">Total Time Training:</span> {{ stats.overall.total_time | time }}.</p>
-            <p>Keep playing daily to excercise your Japanese skills!</p>
-          }
-        </div>
-      </mat-tab>
+        <mat-tab label="Overall">
+          <div class="chart-container">
+            <h1>Overall stats</h1>
+            <canvas id="overall" class="pie"></canvas>
+            @if(stats) {
+              <p><span class="bold">Total Time Training:</span> {{ stats.overall.total_time | time }}.</p>
+              <p>Keep playing daily to excercise your Japanese skills!</p>
+            }
+          </div>
+        </mat-tab>
 
-      <mat-tab label="Guess">
-        <div class="chart-container">
-          <h1>Guess stats</h1>
-          <mat-select [(value)]="timeFilter" (selectionChange)="executeFilter(1)">
-            <mat-option [value]="7">7 days</mat-option>
-            <mat-option [value]="14">14 days</mat-option>
-            <mat-option [value]="28">28 days</mat-option>
-          </mat-select>
-          <canvas id="guess" class="bar"></canvas>
-          <h1>All time accuracy:</h1>
-          <canvas id="guess-overall" class="pie"></canvas>
-          @if(stats) {
-            <p><span class="bold">Total Time:</span> {{ stats.guess.overall.total_time | time }}.</p>
-            <p><span class="bold">Average Time:</span> {{ stats.guess.overall.average_time }} seconds per guess.</p>
-          }
-        </div>
-      </mat-tab>
+        <mat-tab label="Guess">
+          <div class="chart-container">
+            <h1>Guess stats</h1>
+            <mat-select [(value)]="timeFilter" (selectionChange)="executeFilter(1)">
+              <mat-option [value]="7">7 days</mat-option>
+              <mat-option [value]="14">14 days</mat-option>
+              <mat-option [value]="28">28 days</mat-option>
+            </mat-select>
+            <canvas id="guess" class="bar"></canvas>
+            <h1>All time accuracy:</h1>
+            <canvas id="guess-overall" class="pie"></canvas>
+            @if(stats) {
+              <p><span class="bold">Total Time:</span> {{ stats.guess.overall.total_time | time }}.</p>
+              <p><span class="bold">Average Time:</span> {{ stats.guess.overall.average_time }} seconds per guess.</p>
+            }
+          </div>
+        </mat-tab>
 
-      <mat-tab label="Pairs">
-        <div class="chart-container">
-          <h1>Pairs stats</h1>
-          <mat-select [(value)]="timeFilter" (selectionChange)="executeFilter(2)">
-            <mat-option [value]="7">7 days</mat-option>
-            <mat-option [value]="14">14 days</mat-option>
-            <mat-option [value]="28">28 days</mat-option>
-          </mat-select>
-          <canvas id="pairs" class="bar"></canvas>
-          <h1>All time accuracy:</h1>
-          <canvas id="pairs-overall" class="pie"></canvas>
-          @if (stats) {
-            <p><span class="bold">Total Time:</span> {{ stats.pairs.overall.total_time | time }}.</p>
-            <p><span class="bold">Average Time:</span> {{ stats.pairs.overall.average_time }} seconds per pair.</p>
-          }
-        </div>
-      </mat-tab>
+        <mat-tab label="Pairs">
+          <div class="chart-container">
+            <h1>Pairs stats</h1>
+            <mat-select [(value)]="timeFilter" (selectionChange)="executeFilter(2)">
+              <mat-option [value]="7">7 days</mat-option>
+              <mat-option [value]="14">14 days</mat-option>
+              <mat-option [value]="28">28 days</mat-option>
+            </mat-select>
+            <canvas id="pairs" class="bar"></canvas>
+            <h1>All time accuracy:</h1>
+            <canvas id="pairs-overall" class="pie"></canvas>
+            @if (stats) {
+              <p><span class="bold">Total Time:</span> {{ stats.pairs.overall.total_time | time }}.</p>
+              <p><span class="bold">Average Time:</span> {{ stats.pairs.overall.average_time }} seconds per pair.</p>
+            }
+          </div>
+        </mat-tab>
 
-  </mat-tab-group>
-</div>
+    </mat-tab-group>
+  </div>
+}
+

@@ -36,7 +36,6 @@ export class WordSubmitComponent implements OnInit {
       meaning: this.fb.array([this.fb.control('', [Validators.required, Validators.maxLength(64)])]),
       pronunciation: this.fb.array([this.fb.control('', [Validators.required, Validators.maxLength(64), Validators.pattern(/[\ぁ-んァ-ン]/)])]),
       notes: []
-      //category: ['other', Validators.required],
     });
   }
 

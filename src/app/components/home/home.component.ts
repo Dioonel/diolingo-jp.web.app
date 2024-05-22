@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
-import { DataService } from './../../services/data.service';
 
 @Component({
     selector: 'app-home',
@@ -10,14 +8,7 @@ import { DataService } from './../../services/data.service';
     standalone: true,
     imports: [RouterLink]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  constructor(private dataService: DataService) { }
-
-  ngOnInit(): void {
-    if (!localStorage.getItem('session')) {
-      this.dataService.awakeHeroku();
-      localStorage.setItem('session', 'true');
-    }
-  }
+  constructor() { }
 }

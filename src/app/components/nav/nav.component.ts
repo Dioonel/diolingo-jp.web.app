@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { faHouse, faPlay, faKey, faMagicWandSparkles, faA } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faPlay, faKey, faMagicWandSparkles, faA, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { formatInTimeZone } from 'date-fns-tz';
+
+import { DataService } from './../../services/data.service';
 
 @Component({
     selector: 'app-nav',
@@ -12,16 +15,37 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 })
 export class NavComponent implements OnInit {
   navExpanded = false;
+  loggedIn = false;
 
   faHouse = faHouse;
   faKey = faKey;
   faMagicWandSparkles = faMagicWandSparkles;
   faA = faA;
   faPlay = faPlay;
+  faSignOut = faSignOut;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit(): void {
+    let today = formatInTimeZone(new Date(), 'Etc/UTC', 'yyyy-MM-dd');
+    const token = localStorage.getItem('jwt');
+    const session = localStorage.getItem('session');
+    if(token && session === today) this.loggedIn = true;           // If there's token and session is today, user is logged in and checked
+    else {
+      if (token) {                                                 // If there's token but session is not today, check if token is valid
+        this.loggedIn = true;
+        this.dataService.checkLoggedIn().subscribe({
+          next: (status: boolean) => {
+            this.loggedIn = status;
+            localStorage.setItem('session', today);
+            if(!status) localStorage.removeItem('jwt');
+          },
+          error: (err: any) => {
+            this.loggedIn = false;
+          }
+        });
+      }
+    }
   }
 
   onNavCheckClick() {
@@ -44,16 +68,6 @@ export class NavComponent implements OnInit {
     document.getElementById('nav-check')?.click();
   }
 
-  goToHiragana() {
-    this.router.navigateByUrl('/hiragana');
-    document.getElementById('nav-check')?.click();
-  }
-
-  goToKatakana() {
-    this.router.navigateByUrl('/katakana');
-    document.getElementById('nav-check')?.click();
-  }
-
   goToLogin() {
     this.router.navigateByUrl('/login');
     document.getElementById('nav-check')?.click();
@@ -62,5 +76,13 @@ export class NavComponent implements OnInit {
   goToPlay() {
     this.router.navigateByUrl('/play');
     document.getElementById('nav-check')?.click();
+  }
+
+  logout() {
+    if(window.confirm('Are you sure you want to log out?')) {
+      localStorage.removeItem('jwt');
+      localStorage.removeItem('session');
+      location.reload();
+    }
   }
 }

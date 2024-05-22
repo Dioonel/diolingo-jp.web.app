@@ -5,10 +5,6 @@
   position: relative;
 }
 
-/* .nav > .nav-header {
-  display: inline;
-} */
-
 .nav>.nav-btn {
   display: none;
 }
@@ -42,6 +38,14 @@
 
 .nav>#nav-check {
   display: none;
+}
+
+.nav > .nav-links > .cyan {
+  color: #8ce3e3;
+}
+
+.nav > .nav-links > .red {
+  color: #ff9696;
 }
 
 @media (max-width:640px) {

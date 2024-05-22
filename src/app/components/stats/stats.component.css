@@ -7,6 +7,10 @@
   padding: 20px 0px;
 }
 
+app-spinner {
+  margin-top: 20px;
+}
+
 .tabs-container {
   width: 800px;
   min-width: 360px;

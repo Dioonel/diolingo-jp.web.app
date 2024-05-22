@@ -11,15 +11,17 @@ Chart.defaults.font.family = 'Roboto';
 import { DataService } from './../../services/data.service';
 import { Stats } from './../../models/stats';
 import { TimePipe } from './../../pipes/time.pipe';
+import { SpinnerComponent } from './../spinner/spinner.component';
 
 @Component({
   selector: 'app-stats',
   standalone: true,
-  imports: [MatTabsModule, MatSelectModule, TimePipe],
+  imports: [MatTabsModule, MatSelectModule, TimePipe, SpinnerComponent],
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.css'
 })
 export class StatsComponent implements OnInit {
+  loading = true;
   stats!: Stats;
   timeFilter: 7 | 14 | 28 = 7
   overallChart: any;
@@ -191,8 +193,11 @@ export class StatsComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.getStats().subscribe({
       next: (stats: Stats) => {
+        this.loading = false;
         this.stats = stats;
-        this.renderOverall();
+        setTimeout(() => {
+          this.renderOverall();
+        }, 0);
       }
     });
   }

@@ -25,10 +25,6 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  awakeHeroku() {
-    this.http.get(this.url);
-  }
-
   login(user: LoginUser) {
     return this.http.post<LoginData>(`${this.url}/auth/login`, user);
   }
@@ -155,5 +151,15 @@ export class DataService {
     }
     history.reverse();
     return history;
+  }
+
+  checkLoggedIn() {
+    return this.http.get(`${this.url}/auth/check`)
+    .pipe(
+      tap((response: any) => {
+        if(response?.authorize) return true;
+        else return false;
+      })
+    )
   }
 }

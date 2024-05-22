@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { NavComponent } from './../nav/nav.component';
 import { DataService } from './../../services/data.service';
 import { LoginUser } from './../../models/user';
 
@@ -37,7 +38,9 @@ export class LoginComponent implements OnInit {
         next: (data) => {
           this.status = 'success';
           localStorage.setItem('jwt', data.token);
-          this.router.navigate(['/']);
+          this.router.navigate(['/']).then(() => {
+            location.reload();
+          });
         },
         error: (error) => {
           console.log(error);

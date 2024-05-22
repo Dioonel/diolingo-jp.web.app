@@ -18,8 +18,6 @@
       <fa-icon [icon]="faPlay"></fa-icon>
       Play
     </a>
-    <!-- <a (click)="goToHiragana()">Hiragana</a>
-    <a (click)="goToKatakana()">Katakana</a> -->
     <a (click)="goToKanji()">
       <fa-icon [icon]="faMagicWandSparkles"></fa-icon>
       Kanji
@@ -28,9 +26,16 @@
       <fa-icon [icon]="faA"></fa-icon>
       Words
     </a>
-    <a (click)="goToLogin()">
-      <fa-icon [icon]="faKey"></fa-icon>
-      Login
-    </a>
+    @if(!loggedIn) {
+      <a (click)="goToLogin()" class="cyan">
+        <fa-icon [icon]="faKey"></fa-icon>
+        Login
+      </a>
+    } @else {
+      <a (click)="logout()" class="red">
+        <fa-icon [icon]="faSignOut"></fa-icon>
+        Logout
+      </a>
+    }
   </div>
 </div>
