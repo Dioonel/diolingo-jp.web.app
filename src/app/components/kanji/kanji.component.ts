@@ -19,7 +19,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
     imports: [SpinnerComponent, CdkAccordion, CdkAccordionItem, FaIconComponent, KanjiSubmitComponent, GridComponent]
 })
 export class KanjiComponent implements OnInit {
-  status: 'init' | 'loading' | 'success' | 'error' = 'init';
+  loading: boolean = true;
   loadMoreStatus: 'init' | 'loading' | 'success' | 'error' = 'init';
   suscription!: Subscription;
   kanji: Kanji[] = [];
@@ -38,7 +38,6 @@ export class KanjiComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.status = 'loading';
     this.loadMore();
 
     this.suscription = this.dataService.shouldUpdateKanji$.subscribe((shouldUpdate: boolean) => {
@@ -57,7 +56,7 @@ export class KanjiComponent implements OnInit {
       this.dataService.getKanji({ ...params, limit: this.limit, skip: this.skip }).subscribe(data => {
         this.loadMoreStatus = 'success';
         this.kanji.push(...data);
-        if (this.skip === 0) this.status = 'success';
+        if (this.skip === 0) this.loading = false;
         this.skip++;
         if (data.length < this.limit) this.noMore = true;
       });

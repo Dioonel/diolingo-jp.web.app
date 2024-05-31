@@ -38,10 +38,11 @@ export class NavComponent implements OnInit {
           next: (status: boolean) => {
             this.loggedIn = status;
             localStorage.setItem('session', today);
-            if(!status) localStorage.removeItem('jwt');
           },
           error: (err: any) => {
             this.loggedIn = false;
+            localStorage.removeItem('jwt');
+            localStorage.removeItem('session');
           }
         });
       }

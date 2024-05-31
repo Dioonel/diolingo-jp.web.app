@@ -1,11 +1,8 @@
-@if(loading) {
-  <div class="container">
+<div class="container">
+  @if(loading) {
     <app-spinner></app-spinner>
-  </div>
-} @else {
-  <div class="container">
+  } @else {
     <mat-tab-group class="tabs-container" (selectedTabChange)="render($event)">
-
         <mat-tab label="Overall">
           <div class="chart-container">
             <h1>Overall stats</h1>
@@ -52,8 +49,6 @@
             }
           </div>
         </mat-tab>
-
     </mat-tab-group>
-  </div>
-}
-
+  }
+</div>

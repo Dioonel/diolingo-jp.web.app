@@ -1,29 +1,27 @@
 <div class="wrapper">
-  @if (status == 'loading') {
-  <div class="spinner-div">
-    <app-spinner></app-spinner>
-  </div>
-  }
-
-  @if (status == 'success') {
-  <div>
-    <cdk-accordion>
-      <cdk-accordion-item #accordionMenu="cdkAccordionItem">
-        <button class="accordion-btn" type="button" (click)="accordionMenu.toggle()">Create a new word
-          <fa-icon [icon]="accordionMenu.expanded ? faAngleUp : faAngleDown" size="xl"></fa-icon>
-        </button>
-        <div class="form-container" [style.display]="accordionMenu.expanded ? '' : 'none'">
-          <app-word-submit></app-word-submit>
-        </div>
-      </cdk-accordion-item>
-    </cdk-accordion>
-    <div class="main-div">
-      <app-grid [items]="words" (clickDialog)="accordionMenu.expanded ? accordionMenu.close() : null"></app-grid>
-      @if (words.length % limit === 0 && !noMore) {
-      <button type="button" class="load-more" (click)="loadMore()" [disabled]="loadMoreStatus === 'loading'">Load
-        more...</button>
-      }
+  @defer (when !loading) {
+    <div>
+      <cdk-accordion>
+        <cdk-accordion-item #accordionMenu="cdkAccordionItem">
+          <button class="accordion-btn" type="button" (click)="accordionMenu.toggle()">Create a new word
+            <fa-icon [icon]="accordionMenu.expanded ? faAngleUp : faAngleDown" size="xl"></fa-icon>
+          </button>
+          <div class="form-container" [style.display]="accordionMenu.expanded ? '' : 'none'">
+            <app-word-submit></app-word-submit>
+          </div>
+        </cdk-accordion-item>
+      </cdk-accordion>
+      <div class="main-div">
+        <app-grid [items]="words" (clickDialog)="accordionMenu.expanded ? accordionMenu.close() : null"></app-grid>
+        @if (words.length % limit === 0 && !noMore) {
+        <button type="button" class="load-more" (click)="loadMore()" [disabled]="loadMoreStatus === 'loading'">Load
+          more...</button>
+        }
+      </div>
     </div>
-  </div>
+  } @placeholder {
+    <div class="spinner-div">
+      <app-spinner></app-spinner>
+    </div>
   }
 </div>
