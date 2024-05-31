@@ -4,12 +4,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DebugElement } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { of } from 'rxjs';
 
 import { EditFormComponent } from './edit-form.component';
-import { DataService } from './../../../app/services/data.service';
-import { query, getText, setInputValue, clickElement, mockObservable, asyncError } from './../../../testing/helpers';
-import { By } from '@angular/platform-browser';
+import { DataService } from '@services/data.service';
+import { query, getText, setInputValue, clickElement, mockObservable, asyncError } from '@testing/helpers';
 
 describe('EditFormComponent', () => {
   let component: EditFormComponent;

@@ -6,8 +6,8 @@ import { DebugElement } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { LoginComponent } from './login.component';
-import { DataService } from './../../../app/services/data.service';
-import { query, getText, setInputValue, clickElement, mockObservable, asyncError } from './../../../testing/helpers';
+import { DataService } from '@services/data.service';
+import { query, getText, setInputValue, clickElement, mockObservable, asyncError } from '@testing/helpers';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

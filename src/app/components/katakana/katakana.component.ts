@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Kana } from 'src/app/models/kana';
 import { NgClass } from '@angular/common';
+
+import { Kana } from '@models/kana';
 
 @Component({
     selector: 'app-katakana',

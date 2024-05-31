@@ -4,11 +4,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
-import { DataService } from './../../services/data.service';
-import { TimerService } from './../../services/timer.service';
-import { Generic, Pairs } from './../../models/generic';
-import { Score } from './../../models/score';
-import { SpinnerComponent } from '../spinner/spinner.component';
+import { DataService } from '@services/data.service';
+import { TimerService } from '@services/timer.service';
+import { Generic, Pairs } from '@models/generic';
+import { Score } from '@models/score';
+import { SpinnerComponent } from '@components/spinner/spinner.component';
 
 @Component({
     selector: 'app-pairs',

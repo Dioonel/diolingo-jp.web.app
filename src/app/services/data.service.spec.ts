@@ -2,9 +2,9 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { DataService } from './data.service';
-import { LoginUser, LoginData } from './../models/user';
-import { Kanji, KanjiCreateDTO, KanjiFilter } from '../models/kanji';
-import { Word, WordCreateDTO } from '../models/word';
+import { LoginUser, LoginData } from '@models/user';
+import { Kanji, KanjiCreateDTO, KanjiFilter } from '@models/kanji';
+import { Word, WordCreateDTO } from '@models/word';
 
 describe('DataService', () => {
   let service: DataService;

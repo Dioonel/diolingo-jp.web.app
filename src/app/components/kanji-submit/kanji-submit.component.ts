@@ -2,10 +2,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Kanji } from './../../../app/models/kanji';
-
-import { DataService } from './../../../app/services/data.service';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+
+import { DataService } from '@services/data.service';
+import { Kanji } from '@models/kanji';
 
 @Component({
     selector: 'app-kanji-submit',

@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { GridComponent } from './grid.component';
-import { SearchComponent } from '../search/search.component';
-import { DialogModule } from '@angular/cdk/dialog';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DialogModule } from '@angular/cdk/dialog';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { queryAll, clickEvent } from './../../../testing/helpers';
+import { GridComponent } from './grid.component';
+import { SearchComponent } from '@components/search/search.component';
+import { queryAll, clickEvent } from '@testing/helpers';
 
 describe('GridComponent', () => {
   let component: GridComponent;

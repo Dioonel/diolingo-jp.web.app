@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
-
-import { DataService } from './../../services/data.service';
-import { Kanji } from './../../models/kanji';
-import { GridComponent } from '../grid/grid.component';
-import { KanjiSubmitComponent } from '../kanji-submit/kanji-submit.component';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
-import { SpinnerComponent } from '../spinner/spinner.component';
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+
+import { DataService } from '@services/data.service';
+import { Kanji } from '@models/kanji';
+import { GridComponent } from '@components/grid/grid.component';
+import { KanjiSubmitComponent } from '@components/kanji-submit/kanji-submit.component';
+import { SpinnerComponent } from '@components/spinner/spinner.component';
 
 @Component({
     selector: 'app-kanji',

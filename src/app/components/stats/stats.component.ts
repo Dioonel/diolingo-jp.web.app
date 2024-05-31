@@ -8,10 +8,10 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(ChartDataLabels);
 Chart.defaults.font.family = 'Roboto';
 
-import { DataService } from './../../services/data.service';
-import { Stats } from './../../models/stats';
-import { TimePipe } from './../../pipes/time.pipe';
-import { SpinnerComponent } from './../spinner/spinner.component';
+import { DataService } from '@services/data.service';
+import { Stats } from '@models/stats';
+import { TimePipe } from '@pipes/time.pipe';
+import { SpinnerComponent } from '@components/spinner/spinner.component';
 
 @Component({
   selector: 'app-stats',

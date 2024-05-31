@@ -6,8 +6,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 
 import { StatsComponent } from './stats.component';
-import { DataService } from './../../services/data.service';
-import { mockObservable } from './../../../testing/helpers';
+import { DataService } from '@services/data.service';
+import { mockObservable } from '@testing/helpers';
 
 describe('StatsComponent', () => {
   let component: StatsComponent;

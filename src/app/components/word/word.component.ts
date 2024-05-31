@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Subscription } from 'rxjs';
 
-import { DataService } from './../../services/data.service';
-import { Word } from './../../models/word';
-import { GridComponent } from '../grid/grid.component';
-import { WordSubmitComponent } from '../word-submit/word-submit.component';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
-import { SpinnerComponent } from '../spinner/spinner.component';
+import { DataService } from '@services/data.service';
+import { Word } from '@models/word';
+import { GridComponent } from '@components/grid/grid.component';
+import { WordSubmitComponent } from '@components/word-submit/word-submit.component';
+import { SpinnerComponent } from '@components/spinner/spinner.component';
 
 @Component({
     selector: 'app-word',

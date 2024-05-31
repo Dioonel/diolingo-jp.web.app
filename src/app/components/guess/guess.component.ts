@@ -4,12 +4,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { faLightbulb, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
-import { DataService } from './../../services/data.service';
-import { TimerService } from './../../services/timer.service';
-import { Generic, Guess } from './../../../app/models/generic';
-import { Score } from './../../models/score';
-import { SpinnerComponent } from './../spinner/spinner.component';
-import { FormatArrayPipe } from './../../pipes/format-array.pipe';
+import { DataService } from '@services/data.service';
+import { TimerService } from '@services/timer.service';
+import { Generic, Guess } from '@models/generic';
+import { Score } from '@models/score';
+import { SpinnerComponent } from '@components/spinner/spinner.component';
+import { FormatArrayPipe } from '@pipes/format-array.pipe';
 
 @Component({
     selector: 'app-guess',

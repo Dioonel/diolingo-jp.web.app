@@ -1,12 +1,12 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
-import { faEdit, faSave, faX } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
-import { DataService } from './../../services/data.service';
-import { EditFormComponent } from '../edit-form/edit-form.component';
+import { faEdit, faSave, faX } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+
+import { DataService } from '@services/data.service';
+import { EditFormComponent } from '@components/edit-form/edit-form.component';
 
 interface DataGeneric {
   item: any;

@@ -1,25 +1,14 @@
 import { Routes } from '@angular/router';
 
-import { HomeComponent } from './components/home/home.component';
-import { HiraganaComponent } from './components/hiragana/hiragana.component';
-import { KatakanaComponent } from './components/katakana/katakana.component';
-import { KanjiComponent } from './components/kanji/kanji.component';
-import { WordComponent } from './components/word/word.component';
-import { LoginComponent } from './components/login/login.component';
-import { PlayComponent } from './components/play/play.component';
-import { GuessComponent } from './components/guess/guess.component';
-import { PairsComponent } from './components/pairs/pairs.component';
-import { StatsComponent } from './components/stats/stats.component';
-
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'hiragana', component: HiraganaComponent },
-  { path: 'katakana', component: KatakanaComponent },
-  { path: 'kanji', component: KanjiComponent },
-  { path: 'words', component: WordComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'play', component: PlayComponent },
-  { path: 'play/guess', component: GuessComponent },
-  { path: 'play/pairs', component: PairsComponent },
-  { path: 'stats', component: StatsComponent }
+  { path: '', loadComponent: () => import ('@components/home/home.component').then(m => m.HomeComponent) },
+  { path: 'hiragana', loadComponent: () => import ('@components/hiragana/hiragana.component').then(m => m.HiraganaComponent) },
+  { path: 'katakana', loadComponent: () => import ('@components/katakana/katakana.component').then(m => m.KatakanaComponent) },
+  { path: 'kanji', loadComponent: () => import ('@components/kanji/kanji.component').then(m => m.KanjiComponent) },
+  { path: 'words', loadComponent: () => import ('@components/word/word.component').then(m => m.WordComponent) },
+  { path: 'login', loadComponent: () => import ('@components/login/login.component').then(m => m.LoginComponent) },
+  { path: 'play', loadComponent: () => import ('@components/play/play.component').then(m => m.PlayComponent) },
+  { path: 'play/guess', loadComponent: () => import ('@components/guess/guess.component').then(m => m.GuessComponent) },
+  { path: 'play/pairs', loadComponent: () => import ('@components/pairs/pairs.component').then(m => m.PairsComponent) },
+  { path: 'stats', loadComponent: () => import ('@components/stats/stats.component').then(m => m.StatsComponent) }
 ];

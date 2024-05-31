@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { MyInterceptor } from './interceptor.interceptor';
-import { SpinnerComponent } from '../components/spinner/spinner.component';
+import { SpinnerComponent } from '@components/spinner/spinner.component';
 
 describe('InterceptorInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({

@@ -4,7 +4,7 @@ import { faHouse, faPlay, faKey, faMagicWandSparkles, faA, faSignOut } from '@fo
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { formatInTimeZone } from 'date-fns-tz';
 
-import { DataService } from './../../services/data.service';
+import { DataService } from '@services/data.service';
 
 @Component({
     selector: 'app-nav',

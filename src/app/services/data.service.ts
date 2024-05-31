@@ -4,12 +4,12 @@ import { BehaviorSubject, tap } from 'rxjs';
 import { formatInTimeZone } from 'date-fns-tz';
 import { subDays } from 'date-fns';
 
-import { LoginUser, LoginData } from './../models/user';
-import { Kanji, KanjiCreateDTO, KanjiFilter } from './../models/kanji';
-import { Word, WordCreateDTO, WordFilter } from './../models/word';
-import { Generic } from './../models/generic';
-import { Stats, History } from './../models/stats';
-import { Score } from './../models/score';
+import { LoginUser, LoginData } from '@models/user';
+import { Kanji, KanjiCreateDTO, KanjiFilter } from '@models/kanji';
+import { Word, WordCreateDTO, WordFilter } from '@models/word';
+import { Generic } from '@models/generic';
+import { Stats, History } from '@models/stats';
+import { Score } from '@models/score';
 
 @Injectable({
   providedIn: 'root'

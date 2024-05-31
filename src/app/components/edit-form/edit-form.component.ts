@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl, AbstractControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';
-import { DataService } from './../../services/data.service';
 import { faX, faSave, faBackward, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+
+import { DataService } from '@services/data.service';
 
 @Component({
     selector: 'app-edit-form',

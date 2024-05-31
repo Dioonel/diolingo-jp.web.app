@@ -5,9 +5,9 @@ import { Dialog } from '@angular/cdk/dialog';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { MatTooltip } from '@angular/material/tooltip';
 
-import { DialogComponent } from './../dialog/dialog.component';
-import { SearchComponent } from './../search/search.component';
-import { FormatArrayPipe } from './../../pipes/format-array.pipe';
+import { DialogComponent } from '@components/dialog/dialog.component';
+import { SearchComponent } from '@components/search/search.component';
+import { FormatArrayPipe } from '@pipes/format-array.pipe';
 
 @Component({
     selector: 'app-grid',
